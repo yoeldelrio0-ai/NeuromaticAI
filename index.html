@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neuromatic — AI-Powered Solutions for Service Businesses</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:          rgb(7, 10, 19);
+      --bg-spot:     rgb(46, 48, 63);
+      --primary:     rgb(92, 212, 212);
+      --primary-dim: rgba(92, 212, 212, 0.15);
+      --secondary:   rgb(37, 71, 79);
+      --tertiary:    rgb(55, 114, 255);
+      --gray:        rgb(119, 126, 144);
+      --card-from:   rgb(9, 12, 21);
+      --card-to:     rgb(20, 37, 37);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #fff;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse at 88% 120px, var(--bg-spot), transparent 52%),
+        radial-gradient(ellipse at 12% 80%, rgba(55,114,255,0.06), transparent 50%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Noise texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.5;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, .heading {
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(7, 10, 19, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.055);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: rgb(7,10,19);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo-icon img {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      object-position: center center;
+      mix-blend-mode: screen;
+      filter: brightness(1.2) saturate(1.4);
+      flex-shrink: 0;
+    }
+    .nav-logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.62);
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta {
+      padding: 8px 20px;
+      border-radius: 100px;
+      border: 1px solid rgba(92,212,212,0.35);
+      color: rgba(255,255,255,0.82) !important;
+      font-size: 0.875rem;
+      transition: border-color 0.18s ease, color 0.18s ease !important;
+    }
+    .nav-cta:hover {
+      border-color: var(--primary) !important;
+      color: var(--primary) !important;
+    }
+
+    /* BADGE */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: 100px;
+      border: 1px solid rgba(92,212,212,0.35);
+      background: rgba(92,212,212,0.04);
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      transition: background 0.18s ease, border-color 0.18s ease;
+    }
+    .badge:hover { background: rgba(92,212,212,0.08); border-color: rgba(92,212,212,0.55); }
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 6px rgba(92,212,212,0.8);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      padding: 88px 0 72px;
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      align-items: start;
+    }
+    .hero-h1 {
+      font-size: clamp(2.6rem, 4.5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      color: #fff;
+      margin: 0 0 20px;
+    }
+    .hero-sub {
+      color: rgba(255,255,255,0.52);
+      font-size: 0.97rem;
+      line-height: 1.72;
+      max-width: 480px;
+      margin: 0 0 52px;
+    }
+    .hero-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      max-width: 600px;
+    }
+
+    /* CARDS */
+    .card {
+      background: linear-gradient(140deg, var(--card-from), var(--card-to));
+      border: 1px solid rgba(92,212,212,0.18);
+      border-radius: 12px;
+      padding: 26px 22px;
+      box-shadow:
+        0 1px 0 rgba(92,212,212,0.06) inset,
+        0 8px 32px rgba(0,0,0,0.45),
+        0 2px 8px rgba(0,0,0,0.3);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .card:hover {
+      border-color: rgba(92,212,212,0.38);
+      transform: translateY(-2px);
+    }
+    .card-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: rgba(92,212,212,0.1);
+      border: 1px solid rgba(92,212,212,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+    .card h3 {
+      font-size: 0.93rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 7px;
+    }
+    .card p {
+      color: rgba(255,255,255,0.46);
+      font-size: 0.8rem;
+      line-height: 1.62;
+    }
+
+    /* HERO DECO — right side squiggle */
+    .hero-deco {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding-top: 16px;
+    }
+
+    /* SECTION: Automate */
+    .section-automate {
+      padding: 96px 0;
+      border-top: 1px solid rgba(255,255,255,0.045);
+    }
+    .automate-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .automate-h2 {
+      font-size: clamp(1.9rem, 3.2vw, 2.9rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: #fff;
+      margin: 0 0 22px;
+    }
+    .automate-body {
+      color: rgba(255,255,255,0.52);
+      font-size: 0.93rem;
+      line-height: 1.74;
+      margin: 0 0 18px;
+    }
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(92,212,212,0.28);
+      padding-bottom: 2px;
+      transition: border-color 0.18s ease, opacity 0.18s ease;
+    }
+    .text-link:hover { border-color: var(--primary); opacity: 0.85; }
+
+    /* Flow diagram */
+    .flow-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .flow-glow {
+      position: absolute;
+      inset: -30px;
+      background: radial-gradient(ellipse at center, rgba(92,212,212,0.07), transparent 68%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* TRUSTED BY */
+    .section-trusted {
+      padding: 52px 0;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.012);
+    }
+    .trusted-label {
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.75rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 34px;
+    }
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 52px;
+      flex-wrap: wrap;
+    }
+    .logo-item {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+      filter: grayscale(1) brightness(1.8);
+      opacity: 0.32;
+      letter-spacing: -0.02em;
+      transition: opacity 0.2s ease, filter 0.2s ease;
+      cursor: default;
+    }
+    .logo-item:hover { opacity: 0.72; filter: grayscale(0) brightness(1); }
+
+    /* CTA SECTION */
+    .section-cta {
+      padding: 120px 0;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .section-cta::before {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 420px;
+      background: radial-gradient(ellipse, rgba(92,212,212,0.07), transparent 68%);
+      pointer-events: none;
+    }
+    .section-cta::after {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(92,212,212,0.3), transparent);
+    }
+    .cta-h2 {
+      font-size: clamp(2rem, 3.8vw, 3.1rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: #fff;
+      max-width: 760px;
+      margin: 0 auto 22px;
+    }
+    .cta-sub {
+      color: rgba(255,255,255,0.48);
+      font-size: 0.97rem;
+      line-height: 1.7;
+      max-width: 460px;
+      margin: 0 auto 40px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 34px;
+      border-radius: 100px;
+      background: var(--primary);
+      color: rgb(7, 10, 19);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.93rem;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      box-shadow:
+        0 0 0 1px rgba(92,212,212,0.3),
+        0 4px 20px rgba(92,212,212,0.22),
+        0 8px 40px rgba(0,0,0,0.3);
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(0); opacity: 1; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.055);
+      padding: 64px 0 32px;
+      background: rgba(0,0,0,0.18);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 56px;
+      margin-bottom: 52px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      text-decoration: none;
+    }
+    .footer-logo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: rgb(7,10,19);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-logo-icon img {
+      width: 76px;
+      height: 76px;
+      object-fit: cover;
+      object-position: center center;
+      mix-blend-mode: screen;
+      filter: brightness(1.2) saturate(1.4);
+      flex-shrink: 0;
+    }
+    .footer-logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .footer-tagline {
+      color: rgba(255,255,255,0.38);
+      font-size: 0.83rem;
+      line-height: 1.66;
+      max-width: 270px;
+      margin-bottom: 30px;
+    }
+    .footer-col-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 18px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.48);
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+    .footer-links a:hover { color: var(--primary); }
+
+    /* Newsletter */
+    .newsletter-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 12px;
+    }
+    .newsletter-row {
+      display: flex;
+      gap: 8px;
+    }
+    .email-input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      font-size: 0.83rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.18s ease;
+    }
+    .email-input::placeholder { color: rgba(255,255,255,0.3); }
+    .email-input:focus { border-color: rgba(92,212,212,0.5); }
+    .btn-subscribe {
+      padding: 10px 18px;
+      border-radius: 8px;
+      background: var(--primary);
+      color: rgb(7, 10, 19);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.83rem;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.18s ease;
+    }
+    .btn-subscribe:hover { opacity: 0.85; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.055);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      color: rgba(255,255,255,0.22);
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══ -->
+  <nav>
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">
+          <div class="nav-logo-icon">
+            <img src="/Brand%20assets/ChatGPT%20Image%20Apr%201%2C%202026%2C%2005_03_06%20PM.png"
+                 alt="Neuromatic logo" />
+          </div>
+          <span class="nav-logo-text">Neuromatic</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Solutions</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#" class="nav-cta">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+
+        <!-- Left content -->
+        <div>
+          <div style="margin-bottom: 30px;">
+            <a href="#" class="badge">
+              <span class="badge-dot"></span>
+              Free Strategy Call Available &nbsp;→
+            </a>
+          </div>
+
+          <h1 class="hero-h1">
+            Neuromatic Builds&nbsp;Custom Solutions&nbsp;That&nbsp;Work&nbsp;24/7/365.
+          </h1>
+
+          <p class="hero-sub">
+            Neuromatic has helped dozens of service businesses scale faster
+            with expert copywriting, smart automations, and high-converting websites —
+            all built around your specific goals.
+          </p>
+
+          <!-- Three service cards -->
+          <div class="hero-cards">
+            <div class="card">
+              <div class="card-icon">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </div>
+              <h3>Expert Copywriting</h3>
+              <p>Words that convert, crafted specifically for your service business and audience.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <h3>Smart Automations</h3>
+              <p>Tap into powerful workflows that eliminate bottlenecks and reclaim your time.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v13H3zM8 21h8M12 16v5"/><path d="M7 8h.01M11 8h5M7 12h3M14 12h2"/></svg>
+              </div>
+              <h3>Custom Websites</h3>
+              <p>High-converting sites built for your business — with full analytics tracking and ongoing management included.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right deco -->
+        <div class="hero-deco">
+          <svg viewBox="0 0 380 500" width="380" height="500" fill="none" xmlns="http://www.w3.org/2000/svg"
+               style="margin-top:-20px; margin-right:-32px;">
+            <defs>
+              <radialGradient id="glowGrad" cx="52%" cy="38%" r="55%">
+                <stop offset="0%" stop-color="rgb(92,212,212)" stop-opacity="0.13"/>
+                <stop offset="100%" stop-color="rgb(92,212,212)" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Ambient glow blob -->
+            <ellipse cx="220" cy="220" rx="220" ry="210" fill="url(#glowGrad)"/>
+
+            <!-- Main large squiggle — bold S-curve -->
+            <path d="M 280 20
+                     C 360 70, 240 140, 300 210
+                     C 355 275, 245 340, 290 415
+                     C 310 460, 260 488, 265 510"
+                  stroke="rgb(92,212,212)" stroke-width="2.2" stroke-linecap="round"
+                  opacity="0.72" filter="url(#glow)"/>
+
+            <!-- Arrow pointing down at bottom -->
+            <path d="M 246 498 L 265 510 L 284 498"
+                  stroke="rgb(92,212,212)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                  opacity="0.72"/>
+
+            <!-- Secondary inner curve, offset left -->
+            <path d="M 215 50
+                     C 175 100, 230 155, 195 210
+                     C 162 262, 210 308, 180 368"
+                  stroke="rgb(92,212,212)" stroke-width="1.2" stroke-linecap="round"
+                  opacity="0.3"/>
+
+            <!-- Tertiary faint curve further left -->
+            <path d="M 155 80
+                     C 125 118, 160 162, 135 208
+                     C 112 250, 148 285, 130 330"
+                  stroke="rgb(92,212,212)" stroke-width="0.8" stroke-linecap="round"
+                  opacity="0.14"/>
+
+            <!-- Glowing dots on main curve -->
+            <circle cx="300" cy="210" r="4.5" fill="rgb(92,212,212)" opacity="0.85" filter="url(#glow)"/>
+            <circle cx="290" cy="415" r="3.5" fill="rgb(92,212,212)" opacity="0.6" filter="url(#glow)"/>
+            <circle cx="268" cy="120" r="2.5" fill="rgb(92,212,212)" opacity="0.4"/>
+
+            <!-- Horizontal tick marks -->
+            <line x1="100" y1="178" x2="178" y2="178" stroke="rgba(92,212,212,0.18)" stroke-width="1" stroke-dasharray="5 4"/>
+            <line x1="76"  y1="270" x2="160" y2="270" stroke="rgba(92,212,212,0.12)" stroke-width="1" stroke-dasharray="5 4"/>
+            <line x1="110" y1="355" x2="176" y2="355" stroke="rgba(92,212,212,0.10)" stroke-width="1" stroke-dasharray="5 4"/>
+
+            <!-- Corner bracket top-right -->
+            <path d="M 336 36 L 366 36 L 366 66"
+                  stroke="rgba(92,212,212,0.38)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Corner bracket mid-right -->
+            <path d="M 338 140 L 364 140 L 364 114"
+                  stroke="rgba(92,212,212,0.18)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AUTOMATE SECTION ═══ -->
+  <section class="section-automate">
+    <div class="container">
+      <div class="automate-grid">
+
+        <!-- Left text -->
+        <div>
+          <h2 class="automate-h2">
+            Automate Your Business in Weeks, Not Quarters.
+          </h2>
+          <p class="automate-body">
+            Since 2023, Neuromatic has helped service businesses launch and
+            scale AI-powered workflows that save real time and drive real revenue.
+          </p>
+          <p class="automate-body">
+            Neuromatic helps clients rapidly prototype and deploy solutions for
+            their most time-consuming tasks — then maintains them month-to-month
+            with dedicated consulting support.
+          </p>
+          <a href="#" class="text-link">Book a free consultation →</a>
+        </div>
+
+        <!-- Right: automation flow diagram -->
+        <div class="flow-wrap">
+          <div class="flow-glow"></div>
+          <svg viewBox="0 0 320 300" width="320" height="300" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;">
+            <defs>
+              <filter id="cardGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Node: New Client Lead -->
+            <rect x="95" y="10" width="130" height="44" rx="10"
+                  fill="rgb(9,12,21)" stroke="rgba(92,212,212,0.45)" stroke-width="1"/>
+            <text x="160" y="28" text-anchor="middle" fill="rgba(255,255,255,0.85)"
+                  font-size="10.5" font-family="Inter,sans-serif" font-weight="500">New Client</text>
+            <text x="160" y="44" text-anchor="middle" fill="rgba(255,255,255,0.85)"
+                  font-size="10.5" font-family="Inter,sans-serif" font-weight="500">Lead</text>
+
+            <!-- Connector -->
+            <line x1="160" y1="54" x2="160" y2="100" stroke="rgba(92,212,212,0.4)" stroke-width="1.2" stroke-dasharray="5 3.5"/>
+            <circle cx="160" cy="77" r="2.5" fill="rgb(92,212,212)" opacity="0.6"/>
+
+            <!-- Node: Auto Onboarding -->
+            <rect x="95" y="100" width="130" height="44" rx="10"
+                  fill="rgb(9,12,21)" stroke="rgba(92,212,212,0.45)" stroke-width="1"/>
+            <text x="160" y="118" text-anchor="middle" fill="rgba(255,255,255,0.85)"
+                  font-size="10.5" font-family="Inter,sans-serif" font-weight="500">Auto</text>
+            <text x="160" y="134" text-anchor="middle" fill="rgba(255,255,255,0.85)"
+                  font-size="10.5" font-family="Inter,sans-serif" font-weight="500">Onboarding</text>
+
+            <!-- Branch lines -->
+            <line x1="130" y1="144" x2="72" y2="196" stroke="rgba(92,212,212,0.28)" stroke-width="1.2" stroke-dasharray="5 3.5"/>
+            <line x1="190" y1="144" x2="248" y2="196" stroke="rgba(92,212,212,0.28)" stroke-width="1.2" stroke-dasharray="5 3.5"/>
+            <circle cx="101" cy="170" r="2" fill="rgb(92,212,212)" opacity="0.4"/>
+            <circle cx="219" cy="170" r="2" fill="rgb(92,212,212)" opacity="0.4"/>
+
+            <!-- Node: Email Sequence -->
+            <rect x="18" y="196" width="118" height="44" rx="10"
+                  fill="rgb(9,12,21)" stroke="rgba(37,71,79,0.7)" stroke-width="1"/>
+            <text x="77" y="214" text-anchor="middle" fill="rgba(255,255,255,0.7)"
+                  font-size="10" font-family="Inter,sans-serif">Email</text>
+            <text x="77" y="230" text-anchor="middle" fill="rgba(255,255,255,0.7)"
+                  font-size="10" font-family="Inter,sans-serif">Sequence</text>
+
+            <!-- Node: CRM Updated -->
+            <rect x="184" y="196" width="118" height="44" rx="10"
+                  fill="rgb(9,12,21)" stroke="rgba(37,71,79,0.7)" stroke-width="1"/>
+            <text x="243" y="214" text-anchor="middle" fill="rgba(255,255,255,0.7)"
+                  font-size="10" font-family="Inter,sans-serif">CRM</text>
+            <text x="243" y="230" text-anchor="middle" fill="rgba(255,255,255,0.7)"
+                  font-size="10" font-family="Inter,sans-serif">Updated</text>
+
+            <!-- Node: Website Booking -->
+            <line x1="77" y1="240" x2="77" y2="274" stroke="rgba(92,212,212,0.18)" stroke-width="1.2" stroke-dasharray="5 3.5"/>
+            <line x1="243" y1="240" x2="243" y2="274" stroke="rgba(92,212,212,0.18)" stroke-width="1.2" stroke-dasharray="5 3.5"/>
+            <rect x="95" y="274" width="130" height="20" rx="6"
+                  fill="rgba(92,212,212,0.07)" stroke="rgba(92,212,212,0.22)" stroke-width="1"/>
+            <text x="160" y="288" text-anchor="middle" fill="rgba(92,212,212,0.7)"
+                  font-size="9.5" font-family="Inter,sans-serif" font-weight="500">Client Onboarded ✓</text>
+
+            <!-- merge lines to bottom node -->
+            <line x1="77" y1="274" x2="110" y2="274" stroke="rgba(92,212,212,0.18)" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="243" y1="274" x2="210" y2="274" stroke="rgba(92,212,212,0.18)" stroke-width="1" stroke-dasharray="4 3"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TRUSTED BY ═══ -->
+  <section class="section-trusted">
+    <div class="container">
+      <p class="trusted-label">Trusted by ambitious service businesses</p>
+      <div class="logo-row">
+        <span class="logo-item">ProServe Co.</span>
+        <span class="logo-item">Elevate Group</span>
+        <span class="logo-item">Nexus Agency</span>
+        <span class="logo-item">PeakBiz</span>
+        <span class="logo-item">Clarendon & Co.</span>
+        <span class="logo-item">SwiftOps</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA SECTION ═══ -->
+  <section class="section-cta">
+    <div class="container" style="position:relative;z-index:1;">
+      <h2 class="cta-h2">
+        Tell us about your business and we'll build a custom solution for it.
+      </h2>
+      <p class="cta-sub">
+        Whether you need copy, automations, or a website — we'll scope a plan
+        that fits your goals and your budget.
+      </p>
+      <a href="#" class="btn-primary">
+        Book a Free Strategy Call
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Col 1: brand + newsletter -->
+        <div>
+          <a href="#" class="footer-logo">
+            <div class="footer-logo-icon">
+              <img src="/Brand%20assets/ChatGPT%20Image%20Apr%201%2C%202026%2C%2005_03_06%20PM.png"
+                   alt="Neuromatic" />
+            </div>
+            <span class="footer-logo-text">Neuromatic</span>
+          </a>
+          <p class="footer-tagline">
+            AI-powered solutions for service businesses. Copywriting, automations,
+            and websites built to grow your business on autopilot.
+          </p>
+          <p class="newsletter-label">Stay updated</p>
+          <div class="newsletter-row">
+            <input type="email" class="email-input" placeholder="Your email address" />
+            <button class="btn-subscribe">Subscribe</button>
+          </div>
+        </div>
+
+        <!-- Col 2: Company -->
+        <div>
+          <p class="footer-col-title">Company</p>
+          <ul class="footer-links">
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Services -->
+        <div>
+          <p class="footer-col-title">Services</p>
+          <ul class="footer-links">
+            <li><a href="#">Copywriting</a></li>
+            <li><a href="#">Automations</a></li>
+            <li><a href="#">Websites</a></li>
+            <li><a href="#">Strategy</a></li>
+            <li><a href="#">View All Services</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom row -->
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Neuromatic. All rights reserved.</span>
+        <span class="footer-copy" style="display:flex;gap:20px;">
+          <a href="#" style="color:rgba(255,255,255,0.22);text-decoration:none;font-size:0.78rem;">Privacy Policy</a>
+          <a href="#" style="color:rgba(255,255,255,0.22);text-decoration:none;font-size:0.78rem;">Terms of Service</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
