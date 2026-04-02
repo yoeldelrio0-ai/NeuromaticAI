@@ -535,6 +535,106 @@
       color: rgba(255,255,255,0.22);
       font-size: 0.78rem;
     }
+
+    /* ═══ MOBILE ═══ */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      /* Nav: hide middle links, keep logo + CTA only */
+      .nav-links li:not(:last-child) {
+        display: none;
+      }
+      .nav-inner {
+        height: 56px;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 48px 0 44px;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .hero-deco {
+        display: none;
+      }
+      .hero-h1 {
+        font-size: 1.85rem;
+        white-space: normal;
+        overflow-wrap: break-word;
+        margin-bottom: 16px;
+      }
+      .hero-sub {
+        font-size: 0.9rem;
+        margin-bottom: 36px;
+        max-width: 100%;
+      }
+      .hero-cards {
+        grid-template-columns: 1fr 1fr;
+        max-width: 100%;
+        gap: 10px;
+      }
+      /* 3rd card spans full width on small screens */
+      .hero-cards .card:last-child {
+        grid-column: 1 / -1;
+      }
+      .card {
+        padding: 20px 16px;
+      }
+
+      /* Automate section */
+      .section-automate {
+        padding: 64px 0;
+      }
+      .automate-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .automate-h2 {
+        font-size: 1.75rem;
+      }
+      .flow-wrap svg {
+        width: 100%;
+        height: auto;
+      }
+
+      /* Trusted by */
+      .logo-row {
+        gap: 24px 32px;
+      }
+
+      /* CTA */
+      .section-cta {
+        padding: 80px 0;
+      }
+      .cta-h2 {
+        font-size: 1.75rem;
+      }
+
+      /* Footer */
+      footer {
+        padding: 48px 0 28px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        margin-bottom: 36px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .newsletter-row {
+        flex-wrap: wrap;
+      }
+      .email-input {
+        min-width: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -576,7 +676,7 @@
           </div>
 
           <h1 class="hero-h1">
-            Neuromatic Builds&nbsp;Custom Solutions&nbsp;That&nbsp;Work&nbsp;24/7/365.
+            Neuromatic Builds Custom Solutions That Work 24/7/365.
           </h1>
 
           <p class="hero-sub">
