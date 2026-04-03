@@ -635,6 +635,127 @@
         min-width: 0;
       }
     }
+
+    /* SECTION: Projects */
+    .section-projects {
+      padding: 96px 0;
+      border-top: 1px solid rgba(255,255,255,0.045);
+    }
+    .projects-label {
+      font-size: 0.75rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 14px;
+      opacity: 0.8;
+    }
+    .projects-h2 {
+      font-size: clamp(1.9rem, 3.2vw, 2.9rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: #fff;
+      margin: 0 0 14px;
+    }
+    .projects-sub {
+      color: rgba(255,255,255,0.48);
+      font-size: 0.93rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 0 56px;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .project-card {
+      background: linear-gradient(140deg, var(--card-from), var(--card-to));
+      border: 1px solid rgba(92,212,212,0.14);
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      box-shadow:
+        0 1px 0 rgba(92,212,212,0.05) inset,
+        0 8px 32px rgba(0,0,0,0.45),
+        0 2px 8px rgba(0,0,0,0.3);
+      transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+      position: relative;
+    }
+    .project-card:hover {
+      border-color: rgba(92,212,212,0.36);
+      transform: translateY(-4px);
+      box-shadow:
+        0 1px 0 rgba(92,212,212,0.08) inset,
+        0 16px 48px rgba(0,0,0,0.5),
+        0 4px 16px rgba(92,212,212,0.06);
+    }
+    .project-card:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 3px;
+    }
+    .project-card:active { transform: translateY(-1px); }
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+      position: relative;
+    }
+    .project-thumb-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .project-thumb-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(7,10,19,0.72));
+      pointer-events: none;
+    }
+    .project-info {
+      padding: 20px 22px 22px;
+    }
+    .project-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 8px;
+      opacity: 0.8;
+    }
+    .project-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.0rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 6px;
+      letter-spacing: -0.02em;
+    }
+    .project-url {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.36);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.18s ease;
+    }
+    .project-card:hover .project-url { color: var(--primary); }
+
+    @media (max-width: 768px) {
+      .section-projects {
+        padding: 64px 0;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -655,7 +776,6 @@
           <li><a href="#">Solutions</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Blog</a></li>
-          <li><a href="#" class="nav-cta">Contact Us</a></li>
         </ul>
       </div>
     </div>
@@ -887,6 +1007,65 @@
     </div>
   </section>
 
+  <!-- ═══ PROJECTS SECTION ═══ -->
+  <section class="section-projects">
+    <div class="container">
+      <p class="projects-label">Our Work</p>
+      <h2 class="projects-h2">Websites Built to Convert.</h2>
+      <p class="projects-sub">
+        A selection of high-performance websites we've designed and built for clients across different industries.
+      </p>
+      <div class="projects-grid">
+
+        <!-- Project 1: Peddling.io -->
+        <a href="https://peddling.io/" target="_blank" rel="noopener noreferrer" class="project-card">
+          <div class="project-thumb-wrap">
+            <img class="project-thumb" src="https://placehold.co/640x400/09141a/5cd4d4?text=peddling.io" alt="Peddling.io website" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">E-Commerce</span>
+            <p class="project-name">Peddling.io</p>
+            <span class="project-url">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              peddling.io
+            </span>
+          </div>
+        </a>
+
+        <!-- Project 2: Luxurious Landscapes -->
+        <a href="https://luxuriouslandscapesofgreenville.com/" target="_blank" rel="noopener noreferrer" class="project-card">
+          <div class="project-thumb-wrap">
+            <img class="project-thumb" src="https://placehold.co/640x400/091409/5cd4d4?text=Luxurious+Landscapes" alt="Luxurious Landscapes of Greenville website" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">Landscaping</span>
+            <p class="project-name">Luxurious Landscapes of Greenville</p>
+            <span class="project-url">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              luxuriouslandscapesofgreenville.com
+            </span>
+          </div>
+        </a>
+
+        <!-- Project 3: Twin Brother Builders -->
+        <a href="https://www.twinbrotherbuilders.com/" target="_blank" rel="noopener noreferrer" class="project-card">
+          <div class="project-thumb-wrap">
+            <img class="project-thumb" src="https://placehold.co/640x400/140f09/5cd4d4?text=Twin+Brother+Builders" alt="Twin Brother Builders website" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">Construction</span>
+            <p class="project-name">Twin Brother Builders</p>
+            <span class="project-url">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              twinbrotherbuilders.com
+            </span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ CTA SECTION ═══ -->
   <section class="section-cta">
     <div class="container" style="position:relative;z-index:1;">
@@ -935,7 +1114,6 @@
           <ul class="footer-links">
             <li><a href="#">Blog</a></li>
             <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
             <li><a href="#">Partners</a></li>
             <li><a href="#">Careers</a></li>
           </ul>
