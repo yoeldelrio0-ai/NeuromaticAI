@@ -1,1148 +1,902 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neuromatic — AI-Powered Solutions for Service Businesses</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg:          rgb(7, 10, 19);
-      --bg-spot:     rgb(46, 48, 63);
-      --primary:     rgb(92, 212, 212);
-      --primary-dim: rgba(92, 212, 212, 0.15);
-      --secondary:   rgb(37, 71, 79);
-      --tertiary:    rgb(55, 114, 255);
-      --gray:        rgb(119, 126, 144);
-      --card-from:   rgb(9, 12, 21);
-      --card-to:     rgb(20, 37, 37);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 16px;
-      line-height: 1.5;
-      color: #fff;
-      background-color: var(--bg);
-      background-image:
-        radial-gradient(ellipse at 88% 120px, var(--bg-spot), transparent 52%),
-        radial-gradient(ellipse at 12% 80%, rgba(55,114,255,0.06), transparent 50%);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Noise texture */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1000;
-      opacity: 0.5;
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, .heading {
-      font-family: 'Space Grotesk', sans-serif;
-      letter-spacing: -0.03em;
-    }
-
-    /* Layout */
-    .container {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-
-    /* NAV */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(7, 10, 19, 0.82);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255,255,255,0.055);
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .nav-logo-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      overflow: hidden;
-      flex-shrink: 0;
-      background: rgb(7,10,19);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .nav-logo-icon img {
-      width: 56px;
-      height: 56px;
-      object-fit: cover;
-      object-position: center center;
-      mix-blend-mode: screen;
-      filter: brightness(1.2) saturate(1.4);
-      flex-shrink: 0;
-    }
-    .nav-logo-text {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: -0.02em;
-      color: #fff;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      list-style: none;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,0.62);
-      font-size: 0.875rem;
-      text-decoration: none;
-      transition: color 0.18s ease;
-    }
-    .nav-links a:hover { color: var(--primary); }
-    .nav-cta {
-      padding: 8px 20px;
-      border-radius: 100px;
-      border: 1px solid rgba(92,212,212,0.35);
-      color: rgba(255,255,255,0.82) !important;
-      font-size: 0.875rem;
-      transition: border-color 0.18s ease, color 0.18s ease !important;
-    }
-    .nav-cta:hover {
-      border-color: var(--primary) !important;
-      color: var(--primary) !important;
-    }
-
-    /* BADGE */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 16px;
-      border-radius: 100px;
-      border: 1px solid rgba(92,212,212,0.35);
-      background: rgba(92,212,212,0.04);
-      color: var(--primary);
-      font-size: 0.78rem;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      text-decoration: none;
-      transition: background 0.18s ease, border-color 0.18s ease;
-    }
-    .badge:hover { background: rgba(92,212,212,0.08); border-color: rgba(92,212,212,0.55); }
-    .badge-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--primary);
-      box-shadow: 0 0 6px rgba(92,212,212,0.8);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
-    /* HERO */
-    .hero {
-      position: relative;
-      padding: 88px 0 72px;
-      overflow: hidden;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 40px;
-      align-items: start;
-    }
-    .hero-h1 {
-      font-size: clamp(2.6rem, 4.5vw, 4rem);
-      font-weight: 700;
-      line-height: 1.08;
-      letter-spacing: -0.035em;
-      color: #fff;
-      margin: 0 0 20px;
-    }
-    .hero-sub {
-      color: rgba(255,255,255,0.52);
-      font-size: 0.97rem;
-      line-height: 1.72;
-      max-width: 480px;
-      margin: 0 0 52px;
-    }
-    .hero-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 14px;
-      max-width: 600px;
-    }
-
-    /* CARDS */
-    .card {
-      background: linear-gradient(140deg, var(--card-from), var(--card-to));
-      border: 1px solid rgba(92,212,212,0.18);
-      border-radius: 12px;
-      padding: 26px 22px;
-      box-shadow:
-        0 1px 0 rgba(92,212,212,0.06) inset,
-        0 8px 32px rgba(0,0,0,0.45),
-        0 2px 8px rgba(0,0,0,0.3);
-      transition: border-color 0.2s ease, transform 0.2s ease;
-    }
-    .card:hover {
-      border-color: rgba(92,212,212,0.38);
-      transform: translateY(-2px);
-    }
-    .card-icon {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      background: rgba(92,212,212,0.1);
-      border: 1px solid rgba(92,212,212,0.2);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 14px;
-      color: var(--primary);
-      font-size: 0.9rem;
-    }
-    .card h3 {
-      font-size: 0.93rem;
-      font-weight: 600;
-      color: #fff;
-      margin: 0 0 7px;
-    }
-    .card p {
-      color: rgba(255,255,255,0.46);
-      font-size: 0.8rem;
-      line-height: 1.62;
-    }
-
-    /* HERO DECO — right side squiggle */
-    .hero-deco {
-      position: relative;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-end;
-      padding-top: 16px;
-    }
-
-    /* SECTION: Automate */
-    .section-automate {
-      padding: 96px 0;
-      border-top: 1px solid rgba(255,255,255,0.045);
-    }
-    .automate-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .automate-h2 {
-      font-size: clamp(1.9rem, 3.2vw, 2.9rem);
-      font-weight: 700;
-      line-height: 1.1;
-      color: #fff;
-      margin: 0 0 22px;
-    }
-    .automate-body {
-      color: rgba(255,255,255,0.52);
-      font-size: 0.93rem;
-      line-height: 1.74;
-      margin: 0 0 18px;
-    }
-    .text-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--primary);
-      font-size: 0.88rem;
-      font-weight: 500;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(92,212,212,0.28);
-      padding-bottom: 2px;
-      transition: border-color 0.18s ease, opacity 0.18s ease;
-    }
-    .text-link:hover { border-color: var(--primary); opacity: 0.85; }
-
-    /* Flow diagram */
-    .flow-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .flow-glow {
-      position: absolute;
-      inset: -30px;
-      background: radial-gradient(ellipse at center, rgba(92,212,212,0.07), transparent 68%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    /* TRUSTED BY */
-    .section-trusted {
-      padding: 52px 0;
-      border-top: 1px solid rgba(255,255,255,0.04);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      background: rgba(255,255,255,0.012);
-    }
-    .trusted-label {
-      text-align: center;
-      color: rgba(255,255,255,0.3);
-      font-size: 0.75rem;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 34px;
-    }
-    .logo-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 52px;
-      flex-wrap: wrap;
-    }
-    .logo-item {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: rgba(255,255,255,0.85);
-      filter: grayscale(1) brightness(1.8);
-      opacity: 0.32;
-      letter-spacing: -0.02em;
-      transition: opacity 0.2s ease, filter 0.2s ease;
-      cursor: default;
-    }
-    .logo-item:hover { opacity: 0.72; filter: grayscale(0) brightness(1); }
-
-    /* CTA SECTION */
-    .section-cta {
-      padding: 120px 0;
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-    }
-    .section-cta::before {
-      content: '';
-      position: absolute;
-      bottom: -80px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      height: 420px;
-      background: radial-gradient(ellipse, rgba(92,212,212,0.07), transparent 68%);
-      pointer-events: none;
-    }
-    .section-cta::after {
-      content: '';
-      position: absolute;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 500px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(92,212,212,0.3), transparent);
-    }
-    .cta-h2 {
-      font-size: clamp(2rem, 3.8vw, 3.1rem);
-      font-weight: 700;
-      line-height: 1.1;
-      color: #fff;
-      max-width: 760px;
-      margin: 0 auto 22px;
-    }
-    .cta-sub {
-      color: rgba(255,255,255,0.48);
-      font-size: 0.97rem;
-      line-height: 1.7;
-      max-width: 460px;
-      margin: 0 auto 40px;
-    }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 34px;
-      border-radius: 100px;
-      background: var(--primary);
-      color: rgb(7, 10, 19);
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 0.93rem;
-      letter-spacing: -0.01em;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: opacity 0.18s ease, transform 0.18s ease;
-      box-shadow:
-        0 0 0 1px rgba(92,212,212,0.3),
-        0 4px 20px rgba(92,212,212,0.22),
-        0 8px 40px rgba(0,0,0,0.3);
-    }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
-    .btn-primary:active { transform: translateY(0); opacity: 1; }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.055);
-      padding: 64px 0 32px;
-      background: rgba(0,0,0,0.18);
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr;
-      gap: 56px;
-      margin-bottom: 52px;
-    }
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
-      text-decoration: none;
-    }
-    .footer-logo-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      overflow: hidden;
-      flex-shrink: 0;
-      background: rgb(7,10,19);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .footer-logo-icon img {
-      width: 76px;
-      height: 76px;
-      object-fit: cover;
-      object-position: center center;
-      mix-blend-mode: screen;
-      filter: brightness(1.2) saturate(1.4);
-      flex-shrink: 0;
-    }
-    .footer-logo-text {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: -0.02em;
-      color: #fff;
-    }
-    .footer-tagline {
-      color: rgba(255,255,255,0.38);
-      font-size: 0.83rem;
-      line-height: 1.66;
-      max-width: 270px;
-      margin-bottom: 30px;
-    }
-    .footer-col-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 18px;
-    }
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-    }
-    .footer-links a {
-      color: rgba(255,255,255,0.48);
-      font-size: 0.875rem;
-      text-decoration: none;
-      transition: color 0.18s ease;
-    }
-    .footer-links a:hover { color: var(--primary); }
-
-    /* Newsletter */
-    .newsletter-label {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 12px;
-    }
-    .newsletter-row {
-      display: flex;
-      gap: 8px;
-    }
-    .email-input {
-      flex: 1;
-      padding: 10px 14px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #fff;
-      font-size: 0.83rem;
-      font-family: 'Inter', sans-serif;
-      outline: none;
-      transition: border-color 0.18s ease;
-    }
-    .email-input::placeholder { color: rgba(255,255,255,0.3); }
-    .email-input:focus { border-color: rgba(92,212,212,0.5); }
-    .btn-subscribe {
-      padding: 10px 18px;
-      border-radius: 8px;
-      background: var(--primary);
-      color: rgb(7, 10, 19);
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 0.83rem;
-      border: none;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: opacity 0.18s ease;
-    }
-    .btn-subscribe:hover { opacity: 0.85; }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.055);
-      padding-top: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .footer-copy {
-      color: rgba(255,255,255,0.22);
-      font-size: 0.78rem;
-    }
-
-    /* ═══ MOBILE ═══ */
-    @media (max-width: 768px) {
-      .container {
-        padding: 0 20px;
-      }
-
-      /* Nav: hide middle links, keep logo + CTA only */
-      .nav-links li:not(:last-child) {
-        display: none;
-      }
-      .nav-inner {
-        height: 56px;
-      }
-
-      /* Hero */
-      .hero {
-        padding: 48px 0 44px;
-      }
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-      .hero-deco {
-        display: none;
-      }
-      .hero-h1 {
-        font-size: 1.85rem;
-        white-space: normal;
-        overflow-wrap: break-word;
-        margin-bottom: 16px;
-      }
-      .hero-sub {
-        font-size: 0.9rem;
-        margin-bottom: 36px;
-        max-width: 100%;
-      }
-      .hero-cards {
-        grid-template-columns: 1fr 1fr;
-        max-width: 100%;
-        gap: 10px;
-      }
-      /* 3rd card spans full width on small screens */
-      .hero-cards .card:last-child {
-        grid-column: 1 / -1;
-      }
-      .card {
-        padding: 20px 16px;
-      }
-
-      /* Automate section */
-      .section-automate {
-        padding: 64px 0;
-      }
-      .automate-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      .automate-h2 {
-        font-size: 1.75rem;
-      }
-      .flow-wrap svg {
-        width: 100%;
-        height: auto;
-      }
-
-      /* Trusted by */
-      .logo-row {
-        gap: 24px 32px;
-      }
-
-      /* CTA */
-      .section-cta {
-        padding: 80px 0;
-      }
-      .cta-h2 {
-        font-size: 1.75rem;
-      }
-
-      /* Footer */
-      footer {
-        padding: 48px 0 28px;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 36px;
-        margin-bottom: 36px;
-      }
-      .footer-bottom {
-        flex-direction: column;
-        gap: 12px;
-        align-items: flex-start;
-      }
-      .newsletter-row {
-        flex-wrap: wrap;
-      }
-      .email-input {
-        min-width: 0;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neuromatic AI: AI for Local Service Businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          obsidian: '#0B1F1A',
+          'deep-pine': '#15332C',
+          'forest-ink': '#1F4A3F',
+          mint: '#7FE3C5',
+          'soft-jade': '#A8F0D8',
+          cloud: '#F7F9F8',
+          'cool-mist': '#E6ECEA',
+          steel: '#C9D4D1',
+          'slate-blue': '#9FB3BD',
+          midnight: '#050807',
+        },
+        fontFamily: {
+          serif: ['Playfair Display', 'Georgia', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+        }
       }
     }
+  }
+</script>
+<style>
+  :root {
+    --obsidian: #0B1F1A;
+    --deep-pine: #15332C;
+    --forest-ink: #1F4A3F;
+    --mint: #7FE3C5;
+    --soft-jade: #A8F0D8;
+    --cloud: #F7F9F8;
+    --cool-mist: #E6ECEA;
+    --steel: #C9D4D1;
+    --slate-blue: #9FB3BD;
+    --midnight: #050807;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--midnight);
+    color: var(--cloud);
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-serif { font-family: 'Playfair Display', Georgia, serif; }
 
-    /* SECTION: Projects */
-    .section-projects {
-      padding: 96px 0;
-      border-top: 1px solid rgba(255,255,255,0.045);
-    }
-    .projects-label {
-      font-size: 0.75rem;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 14px;
-      opacity: 0.8;
-    }
-    .projects-h2 {
-      font-size: clamp(1.9rem, 3.2vw, 2.9rem);
-      font-weight: 700;
-      line-height: 1.1;
-      color: #fff;
-      margin: 0 0 14px;
-    }
-    .projects-sub {
-      color: rgba(255,255,255,0.48);
-      font-size: 0.93rem;
-      line-height: 1.7;
-      max-width: 520px;
-      margin: 0 0 56px;
-    }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-    .project-card {
-      background: linear-gradient(140deg, var(--card-from), var(--card-to));
-      border: 1px solid rgba(92,212,212,0.14);
-      border-radius: 14px;
-      overflow: hidden;
-      text-decoration: none;
-      display: block;
-      box-shadow:
-        0 1px 0 rgba(92,212,212,0.05) inset,
-        0 8px 32px rgba(0,0,0,0.45),
-        0 2px 8px rgba(0,0,0,0.3);
-      transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
-      position: relative;
-    }
-    .project-card:hover {
-      border-color: rgba(92,212,212,0.36);
-      transform: translateY(-4px);
-      box-shadow:
-        0 1px 0 rgba(92,212,212,0.08) inset,
-        0 16px 48px rgba(0,0,0,0.5),
-        0 4px 16px rgba(92,212,212,0.06);
-    }
-    .project-card:focus-visible {
-      outline: 2px solid var(--primary);
-      outline-offset: 3px;
-    }
-    .project-card:active { transform: translateY(-1px); }
-    .project-thumb {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      display: block;
-      position: relative;
-    }
-    .project-thumb-wrap {
-      position: relative;
-      overflow: hidden;
-    }
-    .project-thumb-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 40%, rgba(7,10,19,0.72));
-      pointer-events: none;
-    }
-    .project-info {
-      padding: 20px 22px 22px;
-    }
-    .project-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 8px;
-      opacity: 0.8;
-    }
-    .project-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.0rem;
-      font-weight: 700;
-      color: #fff;
-      margin: 0 0 6px;
-      letter-spacing: -0.02em;
-    }
-    .project-url {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.36);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: color 0.18s ease;
-    }
-    .project-card:hover .project-url { color: var(--primary); }
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 5rem;
+  }
+  @media (max-width: 768px) {
+    .container { padding: 0 1.5rem; }
+  }
 
-    @media (max-width: 768px) {
-      .section-projects {
-        padding: 64px 0;
-      }
-      .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-    }
-  </style>
+  .nav-link {
+    color: rgba(247,249,248,0.55);
+    font-size: 14px;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.15s;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: var(--mint);
+    transition: width 0.2s;
+  }
+  .nav-link:hover { color: var(--cloud); }
+  .nav-link:hover::after { width: 100%; }
+
+  .btn-primary {
+    background: var(--mint);
+    color: var(--midnight);
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--soft-jade); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cloud);
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid rgba(247,249,248,0.3);
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--cloud); }
+  .btn-outline:focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; }
+
+  @keyframes wave-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-14px) rotate(1deg); }
+    66% { transform: translateY(9px) rotate(-0.8deg); }
+  }
+  .hero-wave { animation: wave-float 9s ease-in-out infinite; }
+
+  .approach-item { border-bottom: 1px solid rgba(247,249,248,0.08); cursor: pointer; }
+  .approach-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .approach-item.active .approach-content { max-height: 200px; }
+  .approach-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+    font-weight: 500;
+    color: rgba(247,249,248,0.2);
+    transition: color 0.3s;
+    padding: 18px 0;
+    line-height: 1.1;
+    user-select: none;
+  }
+  .approach-item.active .approach-title { color: var(--cloud); }
+  .approach-item:hover:not(.active) .approach-title { color: rgba(247,249,248,0.55); }
+
+  .feature-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(247,249,248,0.09);
+    border-radius: 12px;
+    padding: 28px 24px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .feature-card:hover {
+    border-color: rgba(127,227,197,0.35);
+    background: rgba(127,227,197,0.04);
+  }
+
+  .client-card {
+    background: var(--cool-mist);
+    border-radius: 12px;
+    padding: 24px;
+    transition: transform 0.2s;
+  }
+  .client-card:hover { transform: translateY(-3px); }
+
+  .stat-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 600;
+    color: var(--cloud);
+    line-height: 1;
+  }
+
+  @keyframes orb-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.04); opacity: 1; }
+  }
+  .orb { animation: orb-pulse 4s ease-in-out infinite; }
+
+  .tab-btn {
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid var(--steel);
+    background: transparent;
+    color: #777;
+    transition: all 0.15s;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--midnight);
+    color: var(--cloud);
+    border-color: var(--midnight);
+  }
+
+  .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--midnight); }
+  ::-webkit-scrollbar-thumb { background: var(--forest-ink); border-radius: 3px; }
+
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    background: none;
+    border: none;
+  }
+  .mobile-menu-btn span {
+    width: 22px; height: 1.5px;
+    background: var(--cloud);
+    display: block;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .mobile-menu-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .mobile-menu-btn.open span:nth-child(2) { opacity: 0; }
+  .mobile-menu-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: var(--midnight);
+    border-bottom: 1px solid rgba(247,249,248,0.09);
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    padding: 16px 1.5rem;
+    color: rgba(247,249,248,0.65);
+    text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(247,249,248,0.06);
+    transition: color 0.15s;
+  }
+  .mobile-nav a:hover { color: var(--cloud); }
+  .mobile-nav .mobile-nav-cta {
+    margin: 16px 1.5rem 20px;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .hero-visual { display: none !important; }
+    .approach-grid { grid-template-columns: 1fr !important; }
+    .approach-sticky { position: static !important; }
+    .stats-grid { grid-template-columns: 1fr !important; }
+    .stats-grid > div { border: none !important; padding: 28px 0 !important; border-bottom: 1px solid rgba(247,249,248,0.08) !important; }
+    .stats-grid > div:last-child { border-bottom: none !important; padding-bottom: 0 !important; }
+    .features-grid { grid-template-columns: 1fr !important; }
+    .features-span { grid-column: 1 !important; flex-direction: column !important; }
+    .clients-grid { grid-template-columns: 1fr !important; }
+    .steps-grid { grid-template-columns: 1fr 1fr !important; }
+    .platform-grid { grid-template-columns: 1fr !important; }
+    .platform-orb { display: none !important; }
+    .footer-grid { grid-template-columns: 1fr !important; }
+    .nav-links { display: none !important; }
+    .mobile-menu-btn { display: flex; }
+    .hero-stats { flex-direction: column !important; }
+    .hero-stat-item { flex: none !important; padding: 14px 0 !important; border-left: none !important; border-bottom: 1px solid rgba(247,249,248,0.08) !important; }
+    .hero-stat-item:last-child { border-bottom: none !important; padding-bottom: 0 !important; }
+    .cta-section-pad { padding-top: 72px !important; padding-bottom: 72px !important; }
+    .logo-strip-row { gap: 20px !important; }
+    .approach-title { font-size: clamp(1.5rem, 6vw, 2.2rem) !important; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- ═══ NAV ═══ -->
-  <nav>
-    <div class="container">
-      <div class="nav-inner">
-        <a href="#" class="nav-logo">
-          <div class="nav-logo-icon">
-            <img src="/Brand%20assets/ChatGPT%20Image%20Apr%201%2C%202026%2C%2005_03_06%20PM.png"
-                 alt="Neuromatic logo" />
-          </div>
-          <span class="nav-logo-text">Neuromatic</span>
-        </a>
-        <ul class="nav-links">
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Solutions</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Blog</a></li>
-        </ul>
-      </div>
+<!-- NAV -->
+<nav style="background: var(--midnight); border-bottom: 1px solid rgba(247,249,248,0.07);" class="fixed top-0 left-0 right-0 z-50">
+  <div class="container" style="height: 60px; display: flex; align-items: center; justify-content: space-between;">
+    <a href="#" class="font-serif" style="font-size: 20px; font-weight: 500; color: var(--cloud); text-decoration: none; display: flex; align-items: center; gap: 8px;">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28" viewBox="0 0 1052 1052" aria-hidden="true"><defs><linearGradient id="ng0" gradientUnits="userSpaceOnUse" x1="335.30621" y1="281.12189" x2="675.31519" y2="654.77966"><stop offset="0" stop-color="#0F1C26"/><stop offset="1" stop-color="#14403F"/></linearGradient></defs><path fill="url(#ng0)" transform="scale(1.02771 1.02771)" d="M686.619 227.759C700.667 221.429 718.162 221.204 732.555 226.575C748.252 232.508 760.957 244.422 767.887 259.706C774.322 274.235 774.778 290.714 769.156 305.577C766.222 313.235 759.571 323.688 753.347 328.846C737.533 341.952 730.675 345.243 729.002 366.55C729.034 371.878 729.163 377.484 728.948 382.786C729.868 428.284 728.088 475.205 729.107 520.584C728.703 545.088 729.186 569.693 729.009 594.206C728.917 607.079 728.47 617.699 735.629 628.913C741.444 637.087 749.079 643.213 756.059 650.452C771.563 666.534 779.396 688.214 775.696 710.485C775.016 714.493 774.035 718.445 772.759 722.305C767.674 735.69 759.104 748.498 746.407 755.712C729.018 767.475 708.492 767.983 688.891 762.243C675.395 757.054 663.2 748.663 655.747 735.985C640.936 715.069 647.885 698.037 640.173 674.963C634.42 657.592 609.954 636.33 596.456 622.969L537.577 564.817L454.741 482.685L429.045 457.422C421.064 449.609 412.839 440.62 403.122 435.018C382.187 422.946 354.173 431.127 342.293 452.049C339.513 456.97 337.747 462.397 337.098 468.011C336.32 474.638 336.613 483.638 336.639 490.55L336.689 523.683L336.681 560.274C336.649 572.165 335.395 586.448 340.605 597.29C344.631 605.668 352.048 611.313 359.024 617.057C370.068 626.15 379.237 638.096 382.923 652.082C392.402 686.9 370.266 721.724 335.733 730.403C318.917 734.63 300.15 732.047 285.195 722.999C270.429 714.161 259.837 699.757 255.801 683.028C251.553 665.608 254.716 648.744 263.874 633.517C271.897 620.287 281.485 616.538 289.686 603.431C295.501 590.339 294.696 582.367 294.669 568.381L294.627 537.52L294.629 411.197L294.61 371.859C294.634 352.781 294.089 332.483 304.253 315.461C311.844 298.434 332.123 281.005 349.923 275.672C351.845 274.867 354.232 274.124 356.255 273.576C375.946 268.409 396.854 270.735 414.928 280.104C431.205 288.729 446.16 305.598 459.389 318.864L495.159 354.784L604.653 464.105C616.38 475.732 627.124 487.503 639.833 498.857C658.913 515.904 687.707 508.7 692.655 482.447C693.669 477.065 693.103 467.784 693.104 461.924L693.082 428.826L693.092 387.685C693.088 376.923 694.102 361.157 690.24 351.04C686.249 341.18 677.163 335.92 669.771 329.241C647.512 309.128 643.266 279.239 657.368 253.391C663.346 241.798 674.88 232.969 686.619 227.759ZM683.989 653.663C689.328 659.004 694.779 664.232 700.337 669.344C701.777 670.47 703.571 671.966 705.057 672.951C709.004 671.045 711.264 671.068 715.56 670.779L721.107 670.968C719.735 669.185 717.252 666.711 715.645 665.009L715.454 664.629C709.25 659.638 701.307 649.924 694.309 644.103C692.608 641.672 680.827 630.383 677.66 626.899C696.57 611.541 693.162 600.63 693.129 578.02L693.035 533.904C674.592 548.414 642.35 546.066 623.365 534.649C607.589 525.162 587.815 503.254 574.076 489.569C535.014 450.314 495.753 411.258 456.294 372.402L426.307 342.698C418.273 334.744 408.368 324.185 399.052 318.199C392.649 314.004 385.146 311.802 377.491 311.871C366.57 311.891 356.116 316.304 348.485 324.116C343.452 329.158 339.852 335.448 338.054 342.34C335.989 350.36 336.53 365.379 336.542 374.327L336.667 410.449C338.611 409.983 343.745 405.42 346.226 403.807C361.35 393.985 379.736 390.522 397.396 394.167C408.2 396.203 418.394 400.686 427.197 407.273C435.346 413.374 444.685 422.94 452.226 430.251L490.515 467.498L620.758 592.73L661.143 631.785C666.94 637.438 677.976 648.759 683.989 653.663Z"/><defs><linearGradient id="ng1" gradientUnits="userSpaceOnUse" x1="688.76697" y1="665.75739" x2="745.53809" y2="754.04645"><stop offset="0" stop-color="#227E6C"/><stop offset="1" stop-color="#48CFA9"/></linearGradient></defs><path fill="url(#ng1)" transform="scale(1.02771 1.02771)" d="M735.629 628.913C741.444 637.087 749.079 643.213 756.059 650.452C771.563 666.534 779.396 688.214 775.696 710.485C775.016 714.493 774.035 718.445 772.759 722.305C767.674 735.69 759.104 748.498 746.407 755.712C729.018 767.475 708.492 767.983 688.891 762.243C675.395 757.054 663.2 748.663 655.747 735.985C655.296 732.694 649.704 725.267 648.563 717.617C649.097 715.362 647.62 711.111 647.804 709.417C647.919 708.357 652.179 705.131 653.264 703.939C660.004 696.526 665.604 688.013 672.734 680.951C678.115 675.702 688.066 669.557 692.399 663.388C694.454 665.329 697.711 668.925 700.337 669.344C701.777 670.47 703.571 671.966 705.057 672.951C709.004 671.045 711.264 671.068 715.56 670.779L721.107 670.968L721.637 671.156C730.099 676.219 732.63 678.342 738.212 686.536C737.983 685.334 737.731 684.137 737.456 682.945C742.201 680.237 762.593 668.077 766.043 667.781L766.251 666.792C765.256 665.317 765.239 665.146 764.774 663.501L764.654 663.065C759.766 652.829 740.817 639.354 735.255 629.723L735.629 628.913Z"/><path fill="#CFF9E8" transform="scale(1.02771 1.02771)" d="M715.56 670.779L721.107 670.968L721.637 671.156C730.099 676.219 732.63 678.342 738.212 686.536C738.502 687.879 739.729 690.753 740.225 692.275C742.37 698.853 742.259 705.929 740.023 712.51C737.344 720.164 731.726 726.435 724.41 729.934C717.184 733.441 708.854 733.905 701.283 731.224C693.806 728.533 687.705 722.983 684.32 715.794C680.948 708.52 680.625 700.2 683.423 692.687C687.675 681.416 694.921 677.467 705.057 672.951C709.004 671.045 711.264 671.068 715.56 670.779Z"/><path fill="#106E5B" transform="scale(1.02771 1.02771)" d="M735.629 628.913C741.444 637.087 749.079 643.213 756.059 650.452C771.563 666.534 779.396 688.214 775.696 710.485C775.016 714.493 774.035 718.445 772.759 722.305C767.674 735.69 759.104 748.498 746.407 755.712C747.541 753.833 754.246 748.916 756.394 746.937C777.536 727.464 782.381 686.17 764.654 663.065C759.766 652.829 740.817 639.354 735.255 629.723L735.629 628.913Z"/><defs><linearGradient id="ng2" gradientUnits="userSpaceOnUse" x1="707.8866" y1="620.91333" x2="750.41742" y2="678.92438"><stop offset="0" stop-color="#1E685B"/><stop offset="1" stop-color="#32A78A"/></linearGradient></defs><path fill="url(#ng2)" transform="scale(1.02771 1.02771)" d="M680.487 627.263C683.13 629.814 687.439 634.399 690.326 636.195C692.543 635.675 690.723 635.251 691.776 634.117C695.907 629.667 726.718 609.805 726.97 606.232C727.899 593.096 727.154 578.601 727.071 565.354C727.046 561.385 727.531 566.184 727.272 563.843C727.723 565.641 727.774 565.988 727.922 567.84C727.996 578.833 728.044 589.888 728.032 600.879C728.02 612.485 728.98 619.871 735.255 629.723C740.817 639.354 759.766 652.829 764.654 663.065L764.774 663.501C765.239 665.146 765.256 665.317 766.251 666.792L766.043 667.781C762.593 668.077 742.201 680.237 737.456 682.945C737.731 684.137 737.983 685.334 738.212 686.536C732.63 678.342 730.099 676.219 721.637 671.156L721.107 670.968C719.735 669.185 717.252 666.711 715.645 665.009L715.454 664.629C715.273 663.159 714.249 662.476 713.083 661.099C702.436 650.669 689.232 637.776 679.283 626.939C693.454 615.069 694.409 607.777 694.582 590.22C695.124 592.36 695.323 598.499 695.21 600.809C694.647 612.272 688.529 619.894 680.487 627.263Z"/><path fill="#106E5B" transform="scale(1.02771 1.02771)" d="M713.083 661.099C716.005 663.126 719.923 667.021 722.107 669.836C722.031 670.85 722.21 670.419 721.637 671.156L721.107 670.968C719.735 669.185 717.252 666.711 715.645 665.009L715.454 664.629C715.273 663.159 714.249 662.476 713.083 661.099Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M335.086 503.631C334.966 496.693 334.923 489.754 334.955 482.816C334.97 472.88 334.705 463.252 339.473 454.196C347.502 438.948 362.911 428.313 380.351 427.989C396.905 427.681 408.132 434.949 419.579 446.07L566.506 591.182L605.509 630.011C611.276 635.782 620.359 645.449 626.32 650.603C627.007 652.495 630.111 655.71 631.464 657.534C634.986 662.279 638.38 667.196 640.681 672.671C646.617 686.763 644.016 704.183 648.563 717.617C649.704 725.267 655.296 732.694 655.747 735.985C640.936 715.069 647.885 698.037 640.173 674.963C634.42 657.592 609.954 636.33 596.456 622.969L537.577 564.817L454.741 482.685L429.045 457.422C421.064 449.609 412.839 440.62 403.122 435.018C382.187 422.946 354.173 431.127 342.293 452.049C339.513 456.97 337.747 462.397 337.098 468.011C336.32 474.638 336.613 483.638 336.639 490.55L336.689 523.683L336.681 560.274C336.649 572.165 335.395 586.448 340.605 597.29C344.631 605.668 352.048 611.313 359.024 617.057C370.068 626.15 379.237 638.096 382.923 652.082C392.402 686.9 370.266 721.724 335.733 730.403C318.917 734.63 300.15 732.047 285.195 722.999C270.429 714.161 259.837 699.757 255.801 683.028C251.553 665.608 254.716 648.744 263.874 633.517C264.875 636.037 259.682 644.311 258.788 647.437C257.009 653.653 255.99 659.478 255.743 665.943C255.104 682.69 261.24 698.988 272.765 711.155C284.398 723.466 301.628 730.534 318.463 730.846C335.961 731.108 352.824 724.297 365.233 711.958C390.114 687.479 389.23 646.483 363.304 622.909C351.984 612.615 337.145 603.369 335.274 586.426C334.377 578.296 334.903 567.704 334.907 559.459L335.034 507.157L335.086 503.631Z"/><defs><linearGradient id="ng3" gradientUnits="userSpaceOnUse" x1="652.95074" y1="670.42865" x2="670.76495" y2="686.68042"><stop offset="0" stop-color="#1D6458"/><stop offset="1" stop-color="#247D6B"/></linearGradient></defs><path fill="url(#ng3)" transform="scale(1.02771 1.02771)" d="M649.517 622.403C662.752 633.251 678.877 651.413 692.399 663.388C688.066 669.557 678.115 675.702 672.734 680.951C665.604 688.013 660.004 696.526 653.264 703.939C652.179 705.131 647.919 708.357 647.804 709.417C647.62 711.111 649.097 715.362 648.563 717.617C644.016 704.183 646.617 686.763 640.681 672.671C638.38 667.196 634.986 662.279 631.464 657.534C630.111 655.71 627.007 652.495 626.32 650.603L627.123 650.728C632.444 656.871 637.518 663.888 641.032 671.236C642.383 674.062 642.615 680.939 645.875 681.516C650.931 677.975 669.563 655.072 672.333 649.708L672.752 648.885C673.733 648.478 673.859 648.268 674.62 647.45C668.348 640.987 655.969 629.341 649.086 623.093L649.517 622.403Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M657.368 253.391C658.167 256.04 652.411 267.782 651.701 272.284C648.659 291.567 653.485 310.564 667.317 324.74C675.282 332.903 686.742 339.054 691.453 350.165C695.863 360.767 694.637 376.697 694.632 388.212L694.599 429.943L694.626 461.667C694.639 467.083 694.874 475.36 694.35 480.495C693.928 484.864 692.651 489.107 690.59 492.982C680.165 512.745 654.816 514.387 639.091 500.009C625.834 487.887 613.404 474.946 600.697 462.243L503.255 365.066L461.74 323.29C446.868 308.41 431.035 290.08 412.414 280.43C394.101 270.94 370.75 270.282 351.266 276.214C350.818 276.033 350.371 275.853 349.923 275.672C351.845 274.867 354.232 274.124 356.255 273.576C375.946 268.409 396.854 270.735 414.928 280.104C431.205 288.729 446.16 305.598 459.389 318.864L495.159 354.784L604.653 464.105C616.38 475.732 627.124 487.503 639.833 498.857C658.913 515.904 687.707 508.7 692.655 482.447C693.669 477.065 693.103 467.784 693.104 461.924L693.082 428.826L693.092 387.685C693.088 376.923 694.102 361.157 690.24 351.04C686.249 341.18 677.163 335.92 669.771 329.241C647.512 309.128 643.266 279.239 657.368 253.391Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M336.667 410.449C333.39 407.408 335.806 362.89 335.013 354.977C334.749 352.346 335.703 345.303 336.432 342.487C338.295 335.426 341.888 328.94 346.886 323.615C361.084 308.511 386.592 305.863 402.603 318.973C421.462 334.416 439.128 353.548 456.545 370.725C489.46 402.898 522.129 435.322 554.55 467.994L591.983 505.523C606.794 520.366 617.591 533.624 638.746 539.632C660.655 545.855 675.12 543.46 694.412 531.827C694.798 550.849 693.832 571.634 694.582 590.22C694.409 607.777 693.454 615.069 679.283 626.939C689.232 637.776 702.436 650.669 713.083 661.099C714.249 662.476 715.273 663.159 715.454 664.629C709.25 659.638 701.307 649.924 694.309 644.103C692.608 641.672 680.827 630.383 677.66 626.899C696.57 611.541 693.162 600.63 693.129 578.02L693.035 533.904C674.592 548.414 642.35 546.066 623.365 534.649C607.589 525.162 587.815 503.254 574.076 489.569C535.014 450.314 495.753 411.258 456.294 372.402L426.307 342.698C418.273 334.744 408.368 324.185 399.052 318.199C392.649 314.004 385.146 311.802 377.491 311.871C366.57 311.891 356.116 316.304 348.485 324.116C343.452 329.158 339.852 335.448 338.054 342.34C335.989 350.36 336.53 365.379 336.542 374.327L336.667 410.449Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M397.396 394.167C408.2 396.203 418.394 400.686 427.197 407.273C435.346 413.374 444.685 422.94 452.226 430.251L490.515 467.498L620.758 592.73L661.143 631.785C666.94 637.438 677.976 648.759 683.989 653.663C689.328 659.004 694.779 664.232 700.337 669.344C697.711 668.925 694.454 665.329 692.399 663.388C678.877 651.413 662.752 633.251 649.517 622.403C646.117 618.715 640.428 613.539 636.73 609.97C628.114 601.607 619.436 593.306 610.698 585.07L542.5 520.022L466.754 446.494C454.039 434.177 440.865 420.69 427.466 409.237C419.116 402.1 407.087 397.967 396.678 394.752L397.396 394.167Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M304.253 315.461C304.37 315.891 304.487 316.322 304.604 316.752C293.899 338.377 295.953 360.432 295.981 383.779L296.013 520.39L296.055 562.958C296.069 571.195 297.489 598.736 290.04 603.924L289.686 603.431C295.501 590.339 294.696 582.367 294.669 568.381L294.627 537.52L294.629 411.197L294.61 371.859C294.634 352.781 294.089 332.483 304.253 315.461Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M686.619 227.759C700.667 221.429 718.162 221.204 732.555 226.575C748.252 232.508 760.957 244.422 767.887 259.706C774.322 274.235 774.778 290.714 769.156 305.577C766.222 313.235 759.571 323.688 753.347 328.846C737.533 341.952 730.675 345.243 729.002 366.55C726.153 356.402 732.688 343.772 740.412 337.541C753.449 327.026 763.122 319.349 768.512 302.558C773.41 287.43 772.028 270.968 764.675 256.868C751.417 231.249 722.505 218.967 694.926 226.464C692.49 227.126 688.927 228.487 686.619 227.759Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M727.922 567.84C728.272 564.61 728.062 556.341 728.043 552.854L727.933 525.572L728.043 424.813C728.079 412.696 727.265 394.357 728.948 382.786C729.868 428.284 728.088 475.205 729.107 520.584C728.703 545.088 729.186 569.693 729.009 594.206C728.917 607.079 728.47 617.699 735.629 628.913L735.255 629.723C728.98 619.871 728.02 612.485 728.032 600.879C728.044 589.888 727.996 578.833 727.922 567.84Z"/><path fill="#CFF9E8" transform="scale(1.02771 1.02771)" d="M316.151 634.191C333.437 631.983 349.247 644.188 351.487 661.469C353.727 678.751 341.552 694.583 324.275 696.856C306.952 699.134 291.068 686.92 288.822 669.593C286.576 652.265 298.82 636.405 316.151 634.191Z"/><path fill="#CFF9E8" transform="scale(1.02771 1.02771)" d="M709.978 256.051C725.22 255.239 738.256 266.888 739.158 282.124C740.06 297.36 728.489 310.466 713.258 311.458C697.899 312.46 684.659 300.77 683.749 285.404C682.839 270.039 694.608 256.869 709.978 256.051Z"/></svg>
+      Neuromatic
+    </a>
+    <div class="nav-links" style="display: flex; align-items: center; gap: 32px;">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#results" class="nav-link">Results</a>
+      <a href="#how-it-works" class="nav-link">Process</a>
+      <a href="#faq" class="nav-link">FAQ</a>
     </div>
-  </nav>
+    <a href="#contact" class="btn-primary nav-links">Book Free Call</a>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#results" onclick="closeMobileMenu()">Results</a>
+    <a href="#how-it-works" onclick="closeMobileMenu()">Process</a>
+    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+    <div class="mobile-nav-cta">
+      <a href="#contact" class="btn-primary" style="display: block;" onclick="closeMobileMenu()">Book Free Call</a>
+    </div>
+  </div>
+</nav>
 
-  <!-- ═══ HERO ═══ -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-grid">
-
-        <!-- Left content -->
-        <div>
-          <div style="margin-bottom: 30px;">
-            <a href="#" class="badge">
-              <span class="badge-dot"></span>
-              Free Strategy Call Available &nbsp;→
-            </a>
+<!-- HERO -->
+<section style="background: var(--midnight); padding-top: 60px; min-height: 100vh; overflow: hidden;">
+  <div class="container" style="padding-top: 90px; padding-bottom: 80px;">
+    <div class="hero-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; min-height: calc(100vh - 200px);">
+      <div>
+        <p style="font-size: 12px; color: var(--mint); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px;">AI Web Design &amp; Automation</p>
+        <h1 class="font-serif" style="font-size: clamp(2.8rem, 5vw, 4.8rem); line-height: 1.06; color: var(--cloud); font-weight: 500; margin-bottom: 28px;">
+          AI-Powered Websites.<br>Real Business Growth.
+        </h1>
+        <p style="font-size: 17px; color: rgba(247,249,248,0.58); line-height: 1.7; max-width: 440px; margin-bottom: 40px;">
+          Neuromatic builds and automates your online presence so your phone rings while you work. Built exclusively for local service and trades businesses.
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="#contact" class="btn-primary" style="font-size: 15px; padding: 13px 28px;">Book a Free Call</a>
+          <a href="#results" class="btn-outline" style="font-size: 15px; padding: 13px 28px;">See Client Results</a>
+        </div>
+        <div class="hero-stats" style="display: flex; margin-top: 52px; border-top: 1px solid rgba(247,249,248,0.08); padding-top: 32px;">
+          <div class="hero-stat-item" style="flex: 1; padding-right: 24px;">
+            <div style="font-size: 11px; color: var(--slate-blue); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px;">Avg. build time</div>
+            <div class="font-serif" style="font-size: 22px; font-weight: 600; color: var(--cloud);">2 weeks</div>
           </div>
-
-          <h1 class="hero-h1">
-            Systems That Think For You.
-          </h1>
-
-          <p class="hero-sub">
-            Neuromatic has helped dozens of service businesses scale faster
-            with expert copywriting, smart automations, and high-converting websites —
-            all built around your specific goals.
-          </p>
-
-          <!-- Three service cards -->
-          <div class="hero-cards">
-            <div class="card">
-              <div class="card-icon">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-              </div>
-              <h3>Expert Copywriting</h3>
-              <p>Words that convert, crafted specifically for your service business and audience.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              </div>
-              <h3>Smart Automations</h3>
-              <p>Tap into powerful workflows that eliminate bottlenecks and reclaim your time.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v13H3zM8 21h8M12 16v5"/><path d="M7 8h.01M11 8h5M7 12h3M14 12h2"/></svg>
-              </div>
-              <h3>Custom Websites</h3>
-              <p>High-converting sites built for your business — with full analytics tracking and ongoing management included.</p>
-            </div>
+          <div class="hero-stat-item" style="flex: 1; padding: 0 24px; border-left: 1px solid rgba(247,249,248,0.08);">
+            <div style="font-size: 11px; color: var(--slate-blue); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px;">Leads automated</div>
+            <div class="font-serif" style="font-size: 22px; font-weight: 600; color: var(--cloud);">10,000+</div>
+          </div>
+          <div class="hero-stat-item" style="flex: 1; padding-left: 24px; border-left: 1px solid rgba(247,249,248,0.08);">
+            <div style="font-size: 11px; color: var(--slate-blue); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px;">Clients served</div>
+            <div class="font-serif" style="font-size: 22px; font-weight: 600; color: var(--cloud);">100+</div>
           </div>
         </div>
-
-        <!-- Right deco -->
-        <div class="hero-deco">
-          <svg viewBox="0 0 380 500" width="380" height="500" fill="none" xmlns="http://www.w3.org/2000/svg"
-               style="margin-top:-20px; margin-right:-32px;">
+      </div>
+      <div class="hero-visual" style="display: flex; align-items: center; justify-content: center;">
+        <div class="hero-wave" style="width: 100%; max-width: 500px;">
+          <svg viewBox="0 0 500 460" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
             <defs>
-              <radialGradient id="glowGrad" cx="52%" cy="38%" r="55%">
-                <stop offset="0%" stop-color="rgb(92,212,212)" stop-opacity="0.13"/>
-                <stop offset="100%" stop-color="rgb(92,212,212)" stop-opacity="0"/>
+              <radialGradient id="hg1" cx="38%" cy="38%" r="65%">
+                <stop offset="0%" stop-color="#7FE3C5" stop-opacity="0.28"/>
+                <stop offset="55%" stop-color="#1F4A3F" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="#0B1F1A" stop-opacity="0.7"/>
               </radialGradient>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="2.5" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
+              <linearGradient id="hg2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#7FE3C5" stop-opacity="0.75"/>
+                <stop offset="100%" stop-color="#15332C" stop-opacity="0.1"/>
+              </linearGradient>
+              <linearGradient id="hg3" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#A8F0D8" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#0B1F1A" stop-opacity="0.05"/>
+              </linearGradient>
+              <filter id="hblur"><feGaussianBlur stdDeviation="2.5"/></filter>
             </defs>
-
-            <!-- Ambient glow blob -->
-            <ellipse cx="220" cy="220" rx="220" ry="210" fill="url(#glowGrad)"/>
-
-            <!-- Main large squiggle — bold S-curve -->
-            <path d="M 280 20
-                     C 360 70, 240 140, 300 210
-                     C 355 275, 245 340, 290 415
-                     C 310 460, 260 488, 265 510"
-                  stroke="rgb(92,212,212)" stroke-width="2.2" stroke-linecap="round"
-                  opacity="0.72" filter="url(#glow)"/>
-
-            <!-- Arrow pointing down at bottom -->
-            <path d="M 246 498 L 265 510 L 284 498"
-                  stroke="rgb(92,212,212)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
-                  opacity="0.72"/>
-
-            <!-- Secondary inner curve, offset left -->
-            <path d="M 215 50
-                     C 175 100, 230 155, 195 210
-                     C 162 262, 210 308, 180 368"
-                  stroke="rgb(92,212,212)" stroke-width="1.2" stroke-linecap="round"
-                  opacity="0.3"/>
-
-            <!-- Tertiary faint curve further left -->
-            <path d="M 155 80
-                     C 125 118, 160 162, 135 208
-                     C 112 250, 148 285, 130 330"
-                  stroke="rgb(92,212,212)" stroke-width="0.8" stroke-linecap="round"
-                  opacity="0.14"/>
-
-            <!-- Glowing dots on main curve -->
-            <circle cx="300" cy="210" r="4.5" fill="rgb(92,212,212)" opacity="0.85" filter="url(#glow)"/>
-            <circle cx="290" cy="415" r="3.5" fill="rgb(92,212,212)" opacity="0.6" filter="url(#glow)"/>
-            <circle cx="268" cy="120" r="2.5" fill="rgb(92,212,212)" opacity="0.4"/>
-
-            <!-- Horizontal tick marks -->
-            <line x1="100" y1="178" x2="178" y2="178" stroke="rgba(92,212,212,0.18)" stroke-width="1" stroke-dasharray="5 4"/>
-            <line x1="76"  y1="270" x2="160" y2="270" stroke="rgba(92,212,212,0.12)" stroke-width="1" stroke-dasharray="5 4"/>
-            <line x1="110" y1="355" x2="176" y2="355" stroke="rgba(92,212,212,0.10)" stroke-width="1" stroke-dasharray="5 4"/>
-
-            <!-- Corner bracket top-right -->
-            <path d="M 336 36 L 366 36 L 366 66"
-                  stroke="rgba(92,212,212,0.38)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- Corner bracket mid-right -->
-            <path d="M 338 140 L 364 140 L 364 114"
-                  stroke="rgba(92,212,212,0.18)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <ellipse cx="250" cy="230" rx="190" ry="170" fill="url(#hg1)"/>
+            <path d="M 55 310 C 100 190, 195 115, 310 170 C 405 220, 445 315, 385 372 C 328 428, 190 448, 115 408 C 58 378, 28 368, 55 310 Z"
+                  fill="url(#hg2)" opacity="0.55" filter="url(#hblur)"/>
+            <path d="M 115 150 C 195 75, 350 95, 408 192 C 458 272, 428 370, 348 390 C 268 410, 150 372, 115 292 C 78 222, 58 210, 115 150 Z"
+                  fill="url(#hg3)" opacity="0.45"/>
+            <g opacity="0.18" stroke="#7FE3C5" stroke-width="0.7" fill="none">
+              <path d="M 95 390 C 190 340, 340 295, 428 195"/>
+              <path d="M 75 348 C 170 298, 320 253, 448 155"/>
+              <path d="M 115 430 C 210 380, 360 335, 448 235"/>
+              <path d="M 58 288 C 153 238, 303 193, 428 115"/>
+              <path d="M 135 468 C 230 418, 380 373, 468 273"/>
+            </g>
+            <circle cx="174" cy="194" r="4" fill="#7FE3C5" opacity="0.9"/>
+            <circle cx="328" cy="154" r="2.5" fill="#A8F0D8" opacity="0.7"/>
+            <circle cx="390" cy="312" r="3" fill="#7FE3C5" opacity="0.5"/>
           </svg>
         </div>
-
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ AUTOMATE SECTION ═══ -->
-  <section class="section-automate">
-    <div class="container">
-      <div class="automate-grid">
+<!-- LOGO STRIP -->
+<section style="background: var(--obsidian); border-top: 1px solid rgba(247,249,248,0.06); border-bottom: 1px solid rgba(247,249,248,0.06);">
+  <div class="container" style="padding-top: 36px; padding-bottom: 36px;">
+    <p style="font-size: 11px; color: var(--slate-blue); text-transform: uppercase; letter-spacing: 0.1em; text-align: center; margin-bottom: 28px;">Trusted by trade businesses across the US</p>
+    <div class="logo-strip-row" style="display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap;">
+      <span style="font-size: 12px; color: rgba(247,249,248,0.28); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">HVAC Pro</span>
+      <span style="font-size: 12px; color: rgba(247,249,248,0.28); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">RoofRight</span>
+      <span style="font-size: 12px; color: rgba(247,249,248,0.28); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">PlumbFast</span>
+      <span style="font-size: 12px; color: rgba(247,249,248,0.28); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">LandscapeKing</span>
+      <span style="font-size: 12px; color: rgba(247,249,248,0.28); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">ElectriCo</span>
+      <span style="font-size: 12px; color: rgba(247,249,248,0.28); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">CleanShield</span>
+    </div>
+  </div>
+</section>
 
-        <!-- Left text -->
-        <div>
-          <h2 class="automate-h2">
-            Automate Your Business in Weeks, Not Quarters.
-          </h2>
-          <p class="automate-body">
-            Since 2023, Neuromatic has helped service businesses launch and
-            scale AI-powered workflows that save real time and drive real revenue.
-          </p>
-          <p class="automate-body">
-            Neuromatic helps clients rapidly prototype and deploy solutions for
-            their most time-consuming tasks — then maintains them month-to-month
-            with dedicated consulting support.
-          </p>
-          <a href="#" class="text-link">Book a free consultation →</a>
+<!-- STATS -->
+<section style="background: var(--obsidian);">
+  <div class="container" style="padding-top: 80px; padding-bottom: 80px;">
+    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; text-align: center;">
+      <div style="padding: 0 40px;">
+        <div class="stat-number">$6M+</div>
+        <div style="font-size: 14px; color: var(--slate-blue); margin-top: 10px;">Revenue generated for clients</div>
+      </div>
+      <div style="padding: 0 40px; border-left: 1px solid rgba(247,249,248,0.1); border-right: 1px solid rgba(247,249,248,0.1);">
+        <div class="stat-number">48h</div>
+        <div style="font-size: 14px; color: var(--slate-blue); margin-top: 10px;">Average time to first results</div>
+      </div>
+      <div style="padding: 0 40px;">
+        <div class="stat-number">10,000+</div>
+        <div style="font-size: 14px; color: var(--slate-blue); margin-top: 10px;">Leads automated &amp; captured</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE OTHER APPROACHES FALL SHORT -->
+<section style="background: var(--midnight);">
+  <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
+    <p style="font-size: 12px; color: var(--mint); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px;">The problem</p>
+    <h2 class="font-serif" style="font-size: clamp(2rem, 3.5vw, 3rem); color: var(--cloud); font-weight: 500; margin-bottom: 64px; max-width: 480px;">Where other approaches fall short.</h2>
+    <div class="approach-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
+      <div>
+        <div class="approach-item active" id="ap-0">
+          <div class="approach-title" onclick="toggleApproach(0)">Hire a generic agency</div>
+          <div class="approach-content">
+            <p style="font-size: 15px; color: rgba(247,249,248,0.55); line-height: 1.65; padding-bottom: 24px; max-width: 380px;">Generic agencies charge $5K–$15K for websites that aren't built for trades: no automation, no lead capture, no AI. You get a pretty site that doesn't convert.</p>
+          </div>
         </div>
-
-        <!-- Right: automation flow diagram -->
-        <div class="flow-wrap">
-          <div class="flow-glow"></div>
-          <svg viewBox="0 0 320 300" width="320" height="300" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;">
-            <defs>
-              <filter id="cardGlow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="3" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-
-            <!-- Node: New Client Lead -->
-            <rect x="95" y="10" width="130" height="44" rx="10"
-                  fill="rgb(9,12,21)" stroke="rgba(92,212,212,0.45)" stroke-width="1"/>
-            <text x="160" y="28" text-anchor="middle" fill="rgba(255,255,255,0.85)"
-                  font-size="10.5" font-family="Inter,sans-serif" font-weight="500">New Client</text>
-            <text x="160" y="44" text-anchor="middle" fill="rgba(255,255,255,0.85)"
-                  font-size="10.5" font-family="Inter,sans-serif" font-weight="500">Lead</text>
-
-            <!-- Connector -->
-            <line x1="160" y1="54" x2="160" y2="100" stroke="rgba(92,212,212,0.4)" stroke-width="1.2" stroke-dasharray="5 3.5"/>
-            <circle cx="160" cy="77" r="2.5" fill="rgb(92,212,212)" opacity="0.6"/>
-
-            <!-- Node: Auto Onboarding -->
-            <rect x="95" y="100" width="130" height="44" rx="10"
-                  fill="rgb(9,12,21)" stroke="rgba(92,212,212,0.45)" stroke-width="1"/>
-            <text x="160" y="118" text-anchor="middle" fill="rgba(255,255,255,0.85)"
-                  font-size="10.5" font-family="Inter,sans-serif" font-weight="500">Auto</text>
-            <text x="160" y="134" text-anchor="middle" fill="rgba(255,255,255,0.85)"
-                  font-size="10.5" font-family="Inter,sans-serif" font-weight="500">Onboarding</text>
-
-            <!-- Branch lines -->
-            <line x1="130" y1="144" x2="72" y2="196" stroke="rgba(92,212,212,0.28)" stroke-width="1.2" stroke-dasharray="5 3.5"/>
-            <line x1="190" y1="144" x2="248" y2="196" stroke="rgba(92,212,212,0.28)" stroke-width="1.2" stroke-dasharray="5 3.5"/>
-            <circle cx="101" cy="170" r="2" fill="rgb(92,212,212)" opacity="0.4"/>
-            <circle cx="219" cy="170" r="2" fill="rgb(92,212,212)" opacity="0.4"/>
-
-            <!-- Node: Email Sequence -->
-            <rect x="18" y="196" width="118" height="44" rx="10"
-                  fill="rgb(9,12,21)" stroke="rgba(37,71,79,0.7)" stroke-width="1"/>
-            <text x="77" y="214" text-anchor="middle" fill="rgba(255,255,255,0.7)"
-                  font-size="10" font-family="Inter,sans-serif">Email</text>
-            <text x="77" y="230" text-anchor="middle" fill="rgba(255,255,255,0.7)"
-                  font-size="10" font-family="Inter,sans-serif">Sequence</text>
-
-            <!-- Node: CRM Updated -->
-            <rect x="184" y="196" width="118" height="44" rx="10"
-                  fill="rgb(9,12,21)" stroke="rgba(37,71,79,0.7)" stroke-width="1"/>
-            <text x="243" y="214" text-anchor="middle" fill="rgba(255,255,255,0.7)"
-                  font-size="10" font-family="Inter,sans-serif">CRM</text>
-            <text x="243" y="230" text-anchor="middle" fill="rgba(255,255,255,0.7)"
-                  font-size="10" font-family="Inter,sans-serif">Updated</text>
-
-            <!-- Node: Website Booking -->
-            <line x1="77" y1="240" x2="77" y2="274" stroke="rgba(92,212,212,0.18)" stroke-width="1.2" stroke-dasharray="5 3.5"/>
-            <line x1="243" y1="240" x2="243" y2="274" stroke="rgba(92,212,212,0.18)" stroke-width="1.2" stroke-dasharray="5 3.5"/>
-            <rect x="95" y="274" width="130" height="20" rx="6"
-                  fill="rgba(92,212,212,0.07)" stroke="rgba(92,212,212,0.22)" stroke-width="1"/>
-            <text x="160" y="288" text-anchor="middle" fill="rgba(92,212,212,0.7)"
-                  font-size="9.5" font-family="Inter,sans-serif" font-weight="500">Client Onboarded ✓</text>
-
-            <!-- merge lines to bottom node -->
-            <line x1="77" y1="274" x2="110" y2="274" stroke="rgba(92,212,212,0.18)" stroke-width="1" stroke-dasharray="4 3"/>
-            <line x1="243" y1="274" x2="210" y2="274" stroke="rgba(92,212,212,0.18)" stroke-width="1" stroke-dasharray="4 3"/>
-          </svg>
+        <div class="approach-item" id="ap-1">
+          <div class="approach-title" onclick="toggleApproach(1)">Use DIY builders</div>
+          <div class="approach-content">
+            <p style="font-size: 15px; color: rgba(247,249,248,0.55); line-height: 1.65; padding-bottom: 24px; max-width: 380px;">Template builders look cheap and feel generic. They don't rank in local search, don't automate follow-up, and can't respond to a lead at 2am when a pipe bursts.</p>
+          </div>
         </div>
-
+        <div class="approach-item" id="ap-2">
+          <div class="approach-title" onclick="toggleApproach(2)">Do nothing</div>
+          <div class="approach-content">
+            <p style="font-size: 15px; color: rgba(247,249,248,0.55); line-height: 1.65; padding-bottom: 24px; max-width: 380px;">Every day without a proper online presence is a job lost to a competitor. AI tools aren't optional anymore. They're the difference between growing and getting left behind.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ═══ TRUSTED BY ═══ -->
-  <section class="section-trusted">
-    <div class="container">
-      <p class="trusted-label">Trusted by ambitious service businesses</p>
-      <div class="logo-row">
-        <span class="logo-item">ProServe Co.</span>
-        <span class="logo-item">Elevate Group</span>
-        <span class="logo-item">Nexus Agency</span>
-        <span class="logo-item">PeakBiz</span>
-        <span class="logo-item">Clarendon & Co.</span>
-        <span class="logo-item">SwiftOps</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ PROJECTS SECTION ═══ -->
-  <section class="section-projects">
-    <div class="container">
-      <p class="projects-label">Our Work</p>
-      <h2 class="projects-h2">Websites Built to Convert.</h2>
-      <p class="projects-sub">
-        A selection of high-performance websites we've designed and built for clients across different industries.
-      </p>
-      <div class="projects-grid">
-
-        <!-- Project 1: Peddling.io -->
-        <a href="https://peddling.io/" target="_blank" rel="noopener noreferrer" class="project-card">
-          <div class="project-thumb-wrap">
-            <img class="project-thumb" src="https://placehold.co/640x400/09141a/5cd4d4?text=peddling.io" alt="Peddling.io website" />
-          </div>
-          <div class="project-info">
-            <span class="project-tag">E-Commerce</span>
-            <p class="project-name">Peddling.io</p>
-            <span class="project-url">
-              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-              peddling.io
-            </span>
-          </div>
-        </a>
-
-        <!-- Project 2: Luxurious Landscapes -->
-        <a href="https://luxuriouslandscapesofgreenville.com/" target="_blank" rel="noopener noreferrer" class="project-card">
-          <div class="project-thumb-wrap">
-            <img class="project-thumb" src="https://placehold.co/640x400/091409/5cd4d4?text=Luxurious+Landscapes" alt="Luxurious Landscapes of Greenville website" />
-          </div>
-          <div class="project-info">
-            <span class="project-tag">Landscaping</span>
-            <p class="project-name">Luxurious Landscapes of Greenville</p>
-            <span class="project-url">
-              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-              luxuriouslandscapesofgreenville.com
-            </span>
-          </div>
-        </a>
-
-        <!-- Project 3: Twin Brother Builders -->
-        <a href="https://www.twinbrotherbuilders.com/" target="_blank" rel="noopener noreferrer" class="project-card">
-          <div class="project-thumb-wrap">
-            <img class="project-thumb" src="https://placehold.co/640x400/140f09/5cd4d4?text=Twin+Brother+Builders" alt="Twin Brother Builders website" />
-          </div>
-          <div class="project-info">
-            <span class="project-tag">Construction</span>
-            <p class="project-name">Twin Brother Builders</p>
-            <span class="project-url">
-              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-              twinbrotherbuilders.com
-            </span>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ CTA SECTION ═══ -->
-  <section class="section-cta">
-    <div class="container" style="position:relative;z-index:1;">
-      <h2 class="cta-h2">
-        Tell us about your business and we'll build a custom solution for it.
-      </h2>
-      <p class="cta-sub">
-        Whether you need copy, automations, or a website — we'll scope a plan
-        that fits your goals and your budget.
-      </p>
-      <a href="#" class="btn-primary">
-        Book a Free Strategy Call
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- ═══ FOOTER ═══ -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-
-        <!-- Col 1: brand + newsletter -->
-        <div>
-          <a href="#" class="footer-logo">
-            <div class="footer-logo-icon">
-              <img src="/Brand%20assets/ChatGPT%20Image%20Apr%201%2C%202026%2C%2005_03_06%20PM.png"
-                   alt="Neuromatic" />
+      <div class="approach-sticky" style="position: sticky; top: 80px;">
+        <div style="background: var(--deep-pine); border-radius: 16px; padding: 28px; border: 1px solid rgba(127,227,197,0.14);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px;">
+            <span style="font-size: 12px; color: var(--mint); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;">Live Dashboard</span>
+            <div style="display: flex; gap: 6px;">
+              <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(247,249,248,0.15);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--mint); opacity: 0.7;"></div>
             </div>
-            <span class="footer-logo-text">Neuromatic</span>
-          </a>
-          <p class="footer-tagline">
-            AI-powered solutions for service businesses. Copywriting, automations,
-            and websites built to grow your business on autopilot.
-          </p>
-          <p class="newsletter-label">Stay updated</p>
-          <div class="newsletter-row">
-            <input type="email" class="email-input" placeholder="Your email address" />
-            <button class="btn-subscribe">Subscribe</button>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="background: rgba(127,227,197,0.07); border-radius: 8px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-size: 11px; color: var(--slate-blue); margin-bottom: 3px;">New leads today</div>
+                <div style="font-size: 22px; font-weight: 700; color: var(--cloud);">14</div>
+              </div>
+              <span style="color: var(--mint); font-size: 12px; font-weight: 600;">+40% ↑</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-size: 11px; color: var(--slate-blue); margin-bottom: 3px;">AI responses sent</div>
+                <div style="font-size: 22px; font-weight: 700; color: var(--cloud);">847</div>
+              </div>
+              <span style="color: var(--soft-jade); font-size: 12px;">Auto ✓</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-size: 11px; color: var(--slate-blue); margin-bottom: 3px;">Appointments booked</div>
+                <div style="font-size: 22px; font-weight: 700; color: var(--cloud);">38</div>
+              </div>
+              <span style="color: var(--soft-jade); font-size: 12px;">This month</span>
+            </div>
+          </div>
+          <div style="margin-top: 18px; display: flex; align-items: center; gap: 8px;">
+            <div style="width: 7px; height: 7px; border-radius: 50%; background: var(--mint);"></div>
+            <span style="font-size: 12px; color: var(--slate-blue);">AI Dispatcher active, responding 24/7</span>
           </div>
         </div>
-
-        <!-- Col 2: Company -->
-        <div>
-          <p class="footer-col-title">Company</p>
-          <ul class="footer-links">
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Partners</a></li>
-            <li><a href="#">Careers</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Services -->
-        <div>
-          <p class="footer-col-title">Services</p>
-          <ul class="footer-links">
-            <li><a href="#">Copywriting</a></li>
-            <li><a href="#">Automations</a></li>
-            <li><a href="#">Websites</a></li>
-            <li><a href="#">Strategy</a></li>
-            <li><a href="#">View All Services</a></li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- Bottom row -->
-      <div class="footer-bottom">
-        <span class="footer-copy">© 2026 Neuromatic. All rights reserved.</span>
-        <span class="footer-copy" style="display:flex;gap:20px;">
-          <a href="#" style="color:rgba(255,255,255,0.22);text-decoration:none;font-size:0.78rem;">Privacy Policy</a>
-          <a href="#" style="color:rgba(255,255,255,0.22);text-decoration:none;font-size:0.78rem;">Terms of Service</a>
-        </span>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
+<!-- CLIENT RESULTS -->
+<section id="results" style="background: var(--cloud);">
+  <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
+    <p style="font-size: 12px; color: var(--forest-ink); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px;">Client results</p>
+    <h2 class="font-serif" style="font-size: clamp(2rem, 3.5vw, 3rem); color: var(--midnight); font-weight: 500; margin-bottom: 10px;">What our clients have achieved.</h2>
+    <p style="font-size: 16px; color: #666; margin-bottom: 44px;">Real results from real trade businesses using Neuromatic AI.</p>
+    <div style="display: flex; gap: 10px; margin-bottom: 40px; flex-wrap: wrap;">
+      <button class="tab-btn active" onclick="filterClients(this,'all')">All Industries</button>
+      <button class="tab-btn" onclick="filterClients(this,'hvac')">HVAC</button>
+      <button class="tab-btn" onclick="filterClients(this,'roofing')">Roofing</button>
+      <button class="tab-btn" onclick="filterClients(this,'plumbing')">Plumbing</button>
+      <button class="tab-btn" onclick="filterClients(this,'landscaping')">Landscaping</button>
+    </div>
+    <div class="clients-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;" id="client-cards">
+      <div class="client-card" data-industry="hvac">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 18px;">
+          <div>
+            <div style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px;">HVAC</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--midnight);">AirComfort Solutions</div>
+          </div>
+          <span style="background: var(--mint); color: var(--midnight); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;">Active</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;">
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">+70%</div><div style="font-size: 11px; color: #888;">Booked jobs</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">4.9★</div><div style="font-size: 11px; color: #888;">Avg review</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">2 wks</div><div style="font-size: 11px; color: #888;">To launch</div></div>
+        </div>
+        <p style="font-size: 13px; color: #555; line-height: 1.55;">"We went from missing calls to booking jobs 24/7. The AI dispatcher paid for itself in the first week."</p>
+      </div>
+      <div class="client-card" data-industry="roofing">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 18px;">
+          <div>
+            <div style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px;">Roofing</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--midnight);">Peak Ridge Roofing</div>
+          </div>
+          <span style="background: var(--mint); color: var(--midnight); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;">Active</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;">
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">3×</div><div style="font-size: 11px; color: #888;">More reviews</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">+$12K</div><div style="font-size: 11px; color: #888;">First month</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">#1</div><div style="font-size: 11px; color: #888;">Local rank</div></div>
+        </div>
+        <p style="font-size: 13px; color: #555; line-height: 1.55;">"Neuromatic got us to #1 on Google in our area within 6 weeks. Review automation tripled our 5-stars."</p>
+      </div>
+      <div class="client-card" data-industry="plumbing">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 18px;">
+          <div>
+            <div style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px;">Plumbing</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--midnight);">FlowPro Plumbing</div>
+          </div>
+          <span style="background: var(--mint); color: var(--midnight); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;">Active</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;">
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">24/7</div><div style="font-size: 11px; color: #888;">Lead response</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">+80%</div><div style="font-size: 11px; color: #888;">Conversion</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">0</div><div style="font-size: 11px; color: #888;">Missed leads</div></div>
+        </div>
+        <p style="font-size: 13px; color: #555; line-height: 1.55;">"The AI answers every inquiry instantly, even at 3am for emergency calls. We haven't missed a lead since day one."</p>
+      </div>
+      <div class="client-card" data-industry="landscaping">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 18px;">
+          <div>
+            <div style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px;">Landscaping</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--midnight);">GreenEdge Landscaping</div>
+          </div>
+          <span style="background: var(--mint); color: var(--midnight); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;">Active</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;">
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">+55%</div><div style="font-size: 11px; color: #888;">Quote requests</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">2 wks</div><div style="font-size: 11px; color: #888;">To go live</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">5.0★</div><div style="font-size: 11px; color: #888;">Google rating</div></div>
+        </div>
+        <p style="font-size: 13px; color: #555; line-height: 1.55;">"Site looked premium from day one and started ranking locally fast. Our quote volume nearly doubled in 60 days."</p>
+      </div>
+      <div class="client-card" data-industry="hvac">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 18px;">
+          <div>
+            <div style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px;">HVAC</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--midnight);">CoolBreeze HVAC</div>
+          </div>
+          <span style="background: var(--mint); color: var(--midnight); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;">Active</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;">
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">+$8K</div><div style="font-size: 11px; color: #888;">Month 1</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">92%</div><div style="font-size: 11px; color: #888;">Lead open rate</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">#2</div><div style="font-size: 11px; color: #888;">Local rank</div></div>
+        </div>
+        <p style="font-size: 13px; color: #555; line-height: 1.55;">"The automated follow-up sequences are incredible. Leads that used to go cold now book appointments on their own."</p>
+      </div>
+      <div class="client-card" data-industry="roofing">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 18px;">
+          <div>
+            <div style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px;">Roofing</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--midnight);">Summit Roofing Co.</div>
+          </div>
+          <span style="background: var(--mint); color: var(--midnight); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;">Active</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;">
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">+60%</div><div style="font-size: 11px; color: #888;">Inbound leads</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">14d</div><div style="font-size: 11px; color: #888;">Launch time</div></div>
+          <div><div style="font-size: 22px; font-weight: 700; color: var(--midnight);">4.8★</div><div style="font-size: 11px; color: #888;">Avg review</div></div>
+        </div>
+        <p style="font-size: 13px; color: #555; line-height: 1.55;">"Website went from embarrassing to elite in two weeks. Now customers trust us before we even call back."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background: var(--obsidian);">
+  <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
+    <p style="font-size: 12px; color: var(--mint); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px;">What we build</p>
+    <h2 class="font-serif" style="font-size: clamp(2rem, 3.5vw, 3rem); color: var(--cloud); font-weight: 500; margin-bottom: 10px;">AI automation across your trade business.</h2>
+    <p style="font-size: 16px; color: var(--slate-blue); margin-bottom: 56px; max-width: 500px;">Five integrated services that work together to grow your business while you focus on the work.</p>
+    <div class="features-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+      <div class="feature-card">
+        <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(127,227,197,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FE3C5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        <h3 style="font-size: 17px; font-weight: 600; color: var(--cloud); margin-bottom: 10px;">Custom AI Web Design</h3>
+        <p style="font-size: 14px; color: var(--slate-blue); line-height: 1.65;">Fast, conversion-focused websites built specifically for trades. Designed to rank locally and turn visitors into booked jobs.</p>
+      </div>
+      <div class="feature-card">
+        <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(127,227,197,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FE3C5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3 style="font-size: 17px; font-weight: 600; color: var(--cloud); margin-bottom: 10px;">AI Automation</h3>
+        <p style="font-size: 14px; color: var(--slate-blue); line-height: 1.65;">Automated lead follow-up, appointment reminders, review requests, and reporting. Your business runs on autopilot.</p>
+      </div>
+      <div class="feature-card">
+        <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(127,227,197,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FE3C5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </div>
+        <h3 style="font-size: 17px; font-weight: 600; color: var(--cloud); margin-bottom: 10px;">SEO &amp; Online Growth</h3>
+        <p style="font-size: 14px; color: var(--slate-blue); line-height: 1.65;">Dominate local search. We optimize your Google Business Profile, build local citations, and rank you above your competitors.</p>
+      </div>
+      <div class="feature-card">
+        <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(127,227,197,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FE3C5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <h3 style="font-size: 17px; font-weight: 600; color: var(--cloud); margin-bottom: 10px;">24/7 AI Dispatcher</h3>
+        <p style="font-size: 14px; color: var(--slate-blue); line-height: 1.65;">AI agents that respond to leads, answer questions, and book appointments around the clock, including nights and weekends.</p>
+      </div>
+      <div class="feature-card features-span" style="grid-column: 1 / -1; display: flex; align-items: center; gap: 24px;">
+        <div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 8px; background: rgba(127,227,197,0.1); display: flex; align-items: center; justify-content: center;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FE3C5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+        </div>
+        <div>
+          <h3 style="font-size: 17px; font-weight: 600; color: var(--cloud); margin-bottom: 6px;">CRM &amp; Tool Integrations</h3>
+          <p style="font-size: 14px; color: var(--slate-blue); line-height: 1.65;">We connect everything to the tools you already use: GoHighLevel, Zapier, Make, and more. One ecosystem, fully automated.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONE PLATFORM -->
+<section style="background: var(--midnight); overflow: hidden;">
+  <div class="container" style="padding-top: 120px; padding-bottom: 120px;">
+    <div class="platform-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+      <div class="platform-orb" style="display: flex; justify-content: center; align-items: center;">
+        <div class="orb" style="position: relative; width: 300px; height: 300px;">
+          <div style="position: absolute; inset: -50px; border-radius: 50%; background: radial-gradient(circle, rgba(127,227,197,0.18) 0%, rgba(127,227,197,0.04) 50%, transparent 70%);"></div>
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+            <defs>
+              <radialGradient id="og" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#A8F0D8"/>
+                <stop offset="28%" stop-color="#7FE3C5"/>
+                <stop offset="60%" stop-color="#1F4A3F"/>
+                <stop offset="100%" stop-color="#050807"/>
+              </radialGradient>
+              <radialGradient id="os" cx="28%" cy="24%" r="48%">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.38)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+              </radialGradient>
+              <filter id="ob"><feGaussianBlur stdDeviation="5"/></filter>
+            </defs>
+            <circle cx="150" cy="150" r="130" fill="rgba(127,227,197,0.05)" filter="url(#ob)"/>
+            <circle cx="150" cy="150" r="112" fill="url(#og)"/>
+            <circle cx="150" cy="150" r="112" fill="url(#os)"/>
+            <g opacity="0.13" stroke="#7FE3C5" stroke-width="0.7" fill="none">
+              <ellipse cx="150" cy="150" rx="112" ry="38" transform="rotate(22 150 150)"/>
+              <ellipse cx="150" cy="150" rx="112" ry="66" transform="rotate(-14 150 150)"/>
+              <ellipse cx="150" cy="150" rx="74" ry="112" transform="rotate(44 150 150)"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: 12px; color: var(--mint); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px;">The Neuromatic platform</p>
+        <h2 class="font-serif" style="font-size: clamp(2rem, 3.5vw, 3.2rem); color: var(--cloud); font-weight: 500; line-height: 1.1; margin-bottom: 16px;">One platform.<br>Every trade business.</h2>
+        <p style="font-size: 16px; color: var(--slate-blue); line-height: 1.65; margin-bottom: 40px;">Everything your local business needs to compete online: websites, AI, automation, SEO, and integrations, all in one place.</p>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%; background: rgba(127,227,197,0.14); display: flex; align-items: center; justify-content: center;">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#7FE3C5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size: 15px; color: rgba(247,249,248,0.78);">Custom website live in 2 weeks or less</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%; background: rgba(127,227,197,0.14); display: flex; align-items: center; justify-content: center;">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#7FE3C5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size: 15px; color: rgba(247,249,248,0.78);">AI Dispatcher responds to leads 24/7</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%; background: rgba(127,227,197,0.14); display: flex; align-items: center; justify-content: center;">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#7FE3C5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size: 15px; color: rgba(247,249,248,0.78);">Automated review &amp; follow-up sequences</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%; background: rgba(127,227,197,0.14); display: flex; align-items: center; justify-content: center;">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#7FE3C5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size: 15px; color: rgba(247,249,248,0.78);">Local SEO to rank #1 in your market</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%; background: rgba(127,227,197,0.14); display: flex; align-items: center; justify-content: center;">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#7FE3C5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size: 15px; color: rgba(247,249,248,0.78);">CRM integrations: GoHighLevel, Zapier, Make</span>
+          </div>
+        </div>
+        <div style="margin-top: 40px;">
+          <a href="#contact" class="btn-primary" style="font-size: 15px; padding: 13px 28px;">See How It Works</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="how-it-works" style="background: var(--obsidian);">
+  <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
+    <p style="font-size: 12px; color: var(--mint); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px;">The process</p>
+    <h2 class="font-serif" style="font-size: clamp(2rem, 3.5vw, 3rem); color: var(--cloud); font-weight: 500; margin-bottom: 60px;">From zero to automated in 4 steps.</h2>
+    <div class="steps-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
+      <div>
+        <div class="font-serif" style="font-size: 52px; color: rgba(127,227,197,0.25); font-weight: 600; line-height: 1; margin-bottom: 16px;">01</div>
+        <h3 style="font-size: 16px; font-weight: 600; color: var(--cloud); margin-bottom: 10px;">Discovery Call</h3>
+        <p style="font-size: 14px; color: var(--slate-blue); line-height: 1.65;">We learn your business, goals, service area, and competitors. 30 minutes, free.</p>
+      </div>
+      <div>
+        <div class="font-serif" style="font-size: 52px; color: rgba(127,227,197,0.25); font-weight: 600; line-height: 1; margin-bottom: 16px;">02</div>
+        <h3 style="font-size: 16px; font-weight: 600; color: var(--cloud); margin-bottom: 10px;">Strategy &amp; Proposal</h3>
+        <p style="font-size: 14px; color: var(--slate-blue); line-height: 1.65;">We build a custom plan with a clear scope, timeline, and deliverables. No surprises.</p>
+      </div>
+      <div>
+        <div class="font-serif" style="font-size: 52px; color: rgba(127,227,197,0.25); font-weight: 600; line-height: 1; margin-bottom: 16px;">03</div>
+        <h3 style="font-size: 16px; font-weight: 600; color: var(--cloud); margin-bottom: 10px;">Build &amp; Launch</h3>
+        <p style="font-size: 14px; color: var(--slate-blue); line-height: 1.65;">Your website, AI, and automations go live in 1–2 weeks. Fast, clean, done right.</p>
+      </div>
+      <div>
+        <div class="font-serif" style="font-size: 52px; color: rgba(127,227,197,0.25); font-weight: 600; line-height: 1; margin-bottom: 16px;">04</div>
+        <h3 style="font-size: 16px; font-weight: 600; color: var(--cloud); margin-bottom: 10px;">Optimize &amp; Support</h3>
+        <p style="font-size: 14px; color: var(--slate-blue); line-height: 1.65;">Ongoing SEO, AI tuning, and support. We grow with your business over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background: var(--cloud);">
+  <div class="container" style="padding-top: 100px; padding-bottom: 100px; max-width: 860px;">
+    <p style="font-size: 12px; color: var(--forest-ink); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px;">FAQ</p>
+    <h2 class="font-serif" style="font-size: clamp(2rem, 3.5vw, 3rem); color: var(--midnight); font-weight: 500; margin-bottom: 48px;">Common questions.</h2>
+    <div>
+      <div class="faq-item" style="border-top: 1px solid var(--steel);">
+        <button class="faq-trigger" onclick="toggleFaq(this)" style="width: 100%; text-align: left; padding: 22px 0; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 16px; font-weight: 500; color: var(--midnight);">How long does it take to build my website?</span>
+          <span class="faq-icon" style="font-size: 22px; color: var(--forest-ink); flex-shrink: 0; margin-left: 16px; transition: transform 0.25s; line-height: 1;">+</span>
+        </button>
+        <div class="faq-content">
+          <p style="font-size: 15px; color: #555; line-height: 1.65; padding-bottom: 22px;">Most websites are designed, built, and launched within 1–2 weeks. Our streamlined process means you get a professional site fast, without the 3-month agency timelines.</p>
+        </div>
+      </div>
+      <div class="faq-item" style="border-top: 1px solid var(--steel);">
+        <button class="faq-trigger" onclick="toggleFaq(this)" style="width: 100%; text-align: left; padding: 22px 0; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 16px; font-weight: 500; color: var(--midnight);">Do I need to be tech-savvy to use Neuromatic?</span>
+          <span class="faq-icon" style="font-size: 22px; color: var(--forest-ink); flex-shrink: 0; margin-left: 16px; transition: transform 0.25s; line-height: 1;">+</span>
+        </button>
+        <div class="faq-content">
+          <p style="font-size: 15px; color: #555; line-height: 1.65; padding-bottom: 22px;">Not at all. We handle everything technical. You just approve designs and check your results. If you can use a phone, you can use Neuromatic.</p>
+        </div>
+      </div>
+      <div class="faq-item" style="border-top: 1px solid var(--steel);">
+        <button class="faq-trigger" onclick="toggleFaq(this)" style="width: 100%; text-align: left; padding: 22px 0; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 16px; font-weight: 500; color: var(--midnight);">What kinds of businesses do you work with?</span>
+          <span class="faq-icon" style="font-size: 22px; color: var(--forest-ink); flex-shrink: 0; margin-left: 16px; transition: transform 0.25s; line-height: 1;">+</span>
+        </button>
+        <div class="faq-content">
+          <p style="font-size: 15px; color: #555; line-height: 1.65; padding-bottom: 22px;">We specialize in local service trades: HVAC, plumbing, roofing, landscaping, pressure washing, painting, fencing, electrical, pest control, cleaning, pool &amp; spa, and general contracting.</p>
+        </div>
+      </div>
+      <div class="faq-item" style="border-top: 1px solid var(--steel);">
+        <button class="faq-trigger" onclick="toggleFaq(this)" style="width: 100%; text-align: left; padding: 22px 0; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 16px; font-weight: 500; color: var(--midnight);">How does the AI Dispatcher work?</span>
+          <span class="faq-icon" style="font-size: 22px; color: var(--forest-ink); flex-shrink: 0; margin-left: 16px; transition: transform 0.25s; line-height: 1;">+</span>
+        </button>
+        <div class="faq-content">
+          <p style="font-size: 15px; color: #555; line-height: 1.65; padding-bottom: 22px;">The AI Dispatcher is a trained AI agent that answers incoming leads via text, chat, or email, instantly, 24/7. It qualifies leads, answers common questions, and books appointments directly in your calendar.</p>
+        </div>
+      </div>
+      <div class="faq-item" style="border-top: 1px solid var(--steel); border-bottom: 1px solid var(--steel);">
+        <button class="faq-trigger" onclick="toggleFaq(this)" style="width: 100%; text-align: left; padding: 22px 0; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 16px; font-weight: 500; color: var(--midnight);">What's included in the free discovery call?</span>
+          <span class="faq-icon" style="font-size: 22px; color: var(--forest-ink); flex-shrink: 0; margin-left: 16px; transition: transform 0.25s; line-height: 1;">+</span>
+        </button>
+        <div class="faq-content">
+          <p style="font-size: 15px; color: #555; line-height: 1.65; padding-bottom: 22px;">A 30-minute strategy session where we audit your current online presence, identify growth opportunities, and show you exactly what a Neuromatic build would look like. No pressure, no obligation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" style="background: var(--obsidian);">
+  <div class="container cta-section-pad" style="padding-top: 120px; padding-bottom: 120px; text-align: center;">
+    <p style="font-size: 12px; color: var(--mint); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px;">Get started</p>
+    <h2 class="font-serif" style="font-size: clamp(2.5rem, 5vw, 4.5rem); color: var(--cloud); font-weight: 500; line-height: 1.08; margin-bottom: 20px; max-width: 680px; margin-left: auto; margin-right: auto;">Ready to grow your trade business with AI?</h2>
+    <p style="font-size: 17px; color: var(--slate-blue); margin-bottom: 48px; max-width: 460px; margin-left: auto; margin-right: auto; line-height: 1.65;">Book a free 30-minute call. We'll audit your online presence and show you exactly what's possible.</p>
+    <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+      <a href="mailto:hello@neuromatic.ai" class="btn-primary" style="font-size: 16px; padding: 14px 32px;">Book Your Free Call</a>
+      <a href="tel:+1234567890" class="btn-outline" style="font-size: 16px; padding: 14px 32px;">Call Us Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: var(--midnight); border-top: 1px solid rgba(247,249,248,0.07);">
+  <div class="container" style="padding-top: 64px; padding-bottom: 40px;">
+    <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 56px;">
+      <div>
+        <a href="#" class="font-serif" style="font-size: 22px; font-weight: 500; color: var(--cloud); text-decoration: none; display: flex; align-items: center; gap: 9px; margin-bottom: 14px;">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 1052 1052" aria-hidden="true"><defs><linearGradient id="fg0" gradientUnits="userSpaceOnUse" x1="335.30621" y1="281.12189" x2="675.31519" y2="654.77966"><stop offset="0" stop-color="#0F1C26"/><stop offset="1" stop-color="#14403F"/></linearGradient></defs><path fill="url(#fg0)" transform="scale(1.02771 1.02771)" d="M686.619 227.759C700.667 221.429 718.162 221.204 732.555 226.575C748.252 232.508 760.957 244.422 767.887 259.706C774.322 274.235 774.778 290.714 769.156 305.577C766.222 313.235 759.571 323.688 753.347 328.846C737.533 341.952 730.675 345.243 729.002 366.55C729.034 371.878 729.163 377.484 728.948 382.786C729.868 428.284 728.088 475.205 729.107 520.584C728.703 545.088 729.186 569.693 729.009 594.206C728.917 607.079 728.47 617.699 735.629 628.913C741.444 637.087 749.079 643.213 756.059 650.452C771.563 666.534 779.396 688.214 775.696 710.485C775.016 714.493 774.035 718.445 772.759 722.305C767.674 735.69 759.104 748.498 746.407 755.712C729.018 767.475 708.492 767.983 688.891 762.243C675.395 757.054 663.2 748.663 655.747 735.985C640.936 715.069 647.885 698.037 640.173 674.963C634.42 657.592 609.954 636.33 596.456 622.969L537.577 564.817L454.741 482.685L429.045 457.422C421.064 449.609 412.839 440.62 403.122 435.018C382.187 422.946 354.173 431.127 342.293 452.049C339.513 456.97 337.747 462.397 337.098 468.011C336.32 474.638 336.613 483.638 336.639 490.55L336.689 523.683L336.681 560.274C336.649 572.165 335.395 586.448 340.605 597.29C344.631 605.668 352.048 611.313 359.024 617.057C370.068 626.15 379.237 638.096 382.923 652.082C392.402 686.9 370.266 721.724 335.733 730.403C318.917 734.63 300.15 732.047 285.195 722.999C270.429 714.161 259.837 699.757 255.801 683.028C251.553 665.608 254.716 648.744 263.874 633.517C271.897 620.287 281.485 616.538 289.686 603.431C295.501 590.339 294.696 582.367 294.669 568.381L294.627 537.52L294.629 411.197L294.61 371.859C294.634 352.781 294.089 332.483 304.253 315.461C311.844 298.434 332.123 281.005 349.923 275.672C351.845 274.867 354.232 274.124 356.255 273.576C375.946 268.409 396.854 270.735 414.928 280.104C431.205 288.729 446.16 305.598 459.389 318.864L495.159 354.784L604.653 464.105C616.38 475.732 627.124 487.503 639.833 498.857C658.913 515.904 687.707 508.7 692.655 482.447C693.669 477.065 693.103 467.784 693.104 461.924L693.082 428.826L693.092 387.685C693.088 376.923 694.102 361.157 690.24 351.04C686.249 341.18 677.163 335.92 669.771 329.241C647.512 309.128 643.266 279.239 657.368 253.391C663.346 241.798 674.88 232.969 686.619 227.759ZM683.989 653.663C689.328 659.004 694.779 664.232 700.337 669.344C701.777 670.47 703.571 671.966 705.057 672.951C709.004 671.045 711.264 671.068 715.56 670.779L721.107 670.968C719.735 669.185 717.252 666.711 715.645 665.009L715.454 664.629C709.25 659.638 701.307 649.924 694.309 644.103C692.608 641.672 680.827 630.383 677.66 626.899C696.57 611.541 693.162 600.63 693.129 578.02L693.035 533.904C674.592 548.414 642.35 546.066 623.365 534.649C607.589 525.162 587.815 503.254 574.076 489.569C535.014 450.314 495.753 411.258 456.294 372.402L426.307 342.698C418.273 334.744 408.368 324.185 399.052 318.199C392.649 314.004 385.146 311.802 377.491 311.871C366.57 311.891 356.116 316.304 348.485 324.116C343.452 329.158 339.852 335.448 338.054 342.34C335.989 350.36 336.53 365.379 336.542 374.327L336.667 410.449C338.611 409.983 343.745 405.42 346.226 403.807C361.35 393.985 379.736 390.522 397.396 394.167C408.2 396.203 418.394 400.686 427.197 407.273C435.346 413.374 444.685 422.94 452.226 430.251L490.515 467.498L620.758 592.73L661.143 631.785C666.94 637.438 677.976 648.759 683.989 653.663Z"/><defs><linearGradient id="fg1" gradientUnits="userSpaceOnUse" x1="688.76697" y1="665.75739" x2="745.53809" y2="754.04645"><stop offset="0" stop-color="#227E6C"/><stop offset="1" stop-color="#48CFA9"/></linearGradient></defs><path fill="url(#fg1)" transform="scale(1.02771 1.02771)" d="M735.629 628.913C741.444 637.087 749.079 643.213 756.059 650.452C771.563 666.534 779.396 688.214 775.696 710.485C775.016 714.493 774.035 718.445 772.759 722.305C767.674 735.69 759.104 748.498 746.407 755.712C729.018 767.475 708.492 767.983 688.891 762.243C675.395 757.054 663.2 748.663 655.747 735.985C655.296 732.694 649.704 725.267 648.563 717.617C649.097 715.362 647.62 711.111 647.804 709.417C647.919 708.357 652.179 705.131 653.264 703.939C660.004 696.526 665.604 688.013 672.734 680.951C678.115 675.702 688.066 669.557 692.399 663.388C694.454 665.329 697.711 668.925 700.337 669.344C701.777 670.47 703.571 671.966 705.057 672.951C709.004 671.045 711.264 671.068 715.56 670.779L721.107 670.968L721.637 671.156C730.099 676.219 732.63 678.342 738.212 686.536C737.983 685.334 737.731 684.137 737.456 682.945C742.201 680.237 762.593 668.077 766.043 667.781L766.251 666.792C765.256 665.317 765.239 665.146 764.774 663.501L764.654 663.065C759.766 652.829 740.817 639.354 735.255 629.723L735.629 628.913Z"/><path fill="#CFF9E8" transform="scale(1.02771 1.02771)" d="M715.56 670.779L721.107 670.968L721.637 671.156C730.099 676.219 732.63 678.342 738.212 686.536C738.502 687.879 739.729 690.753 740.225 692.275C742.37 698.853 742.259 705.929 740.023 712.51C737.344 720.164 731.726 726.435 724.41 729.934C717.184 733.441 708.854 733.905 701.283 731.224C693.806 728.533 687.705 722.983 684.32 715.794C680.948 708.52 680.625 700.2 683.423 692.687C687.675 681.416 694.921 677.467 705.057 672.951C709.004 671.045 711.264 671.068 715.56 670.779Z"/><path fill="#106E5B" transform="scale(1.02771 1.02771)" d="M735.629 628.913C741.444 637.087 749.079 643.213 756.059 650.452C771.563 666.534 779.396 688.214 775.696 710.485C775.016 714.493 774.035 718.445 772.759 722.305C767.674 735.69 759.104 748.498 746.407 755.712C747.541 753.833 754.246 748.916 756.394 746.937C777.536 727.464 782.381 686.17 764.654 663.065C759.766 652.829 740.817 639.354 735.255 629.723L735.629 628.913Z"/><defs><linearGradient id="fg2" gradientUnits="userSpaceOnUse" x1="707.8866" y1="620.91333" x2="750.41742" y2="678.92438"><stop offset="0" stop-color="#1E685B"/><stop offset="1" stop-color="#32A78A"/></linearGradient></defs><path fill="url(#fg2)" transform="scale(1.02771 1.02771)" d="M680.487 627.263C683.13 629.814 687.439 634.399 690.326 636.195C692.543 635.675 690.723 635.251 691.776 634.117C695.907 629.667 726.718 609.805 726.97 606.232C727.899 593.096 727.154 578.601 727.071 565.354C727.046 561.385 727.531 566.184 727.272 563.843C727.723 565.641 727.774 565.988 727.922 567.84C727.996 578.833 728.044 589.888 728.032 600.879C728.02 612.485 728.98 619.871 735.255 629.723C740.817 639.354 759.766 652.829 764.654 663.065L764.774 663.501C765.239 665.146 765.256 665.317 766.251 666.792L766.043 667.781C762.593 668.077 742.201 680.237 737.456 682.945C737.731 684.137 737.983 685.334 738.212 686.536C732.63 678.342 730.099 676.219 721.637 671.156L721.107 670.968C719.735 669.185 717.252 666.711 715.645 665.009L715.454 664.629C715.273 663.159 714.249 662.476 713.083 661.099C702.436 650.669 689.232 637.776 679.283 626.939C693.454 615.069 694.409 607.777 694.582 590.22C695.124 592.36 695.323 598.499 695.21 600.809C694.647 612.272 688.529 619.894 680.487 627.263Z"/><path fill="#106E5B" transform="scale(1.02771 1.02771)" d="M713.083 661.099C716.005 663.126 719.923 667.021 722.107 669.836C722.031 670.85 722.21 670.419 721.637 671.156L721.107 670.968C719.735 669.185 717.252 666.711 715.645 665.009L715.454 664.629C715.273 663.159 714.249 662.476 713.083 661.099Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M335.086 503.631C334.966 496.693 334.923 489.754 334.955 482.816C334.97 472.88 334.705 463.252 339.473 454.196C347.502 438.948 362.911 428.313 380.351 427.989C396.905 427.681 408.132 434.949 419.579 446.07L566.506 591.182L605.509 630.011C611.276 635.782 620.359 645.449 626.32 650.603C627.007 652.495 630.111 655.71 631.464 657.534C634.986 662.279 638.38 667.196 640.681 672.671C646.617 686.763 644.016 704.183 648.563 717.617C649.704 725.267 655.296 732.694 655.747 735.985C640.936 715.069 647.885 698.037 640.173 674.963C634.42 657.592 609.954 636.33 596.456 622.969L537.577 564.817L454.741 482.685L429.045 457.422C421.064 449.609 412.839 440.62 403.122 435.018C382.187 422.946 354.173 431.127 342.293 452.049C339.513 456.97 337.747 462.397 337.098 468.011C336.32 474.638 336.613 483.638 336.639 490.55L336.689 523.683L336.681 560.274C336.649 572.165 335.395 586.448 340.605 597.29C344.631 605.668 352.048 611.313 359.024 617.057C370.068 626.15 379.237 638.096 382.923 652.082C392.402 686.9 370.266 721.724 335.733 730.403C318.917 734.63 300.15 732.047 285.195 722.999C270.429 714.161 259.837 699.757 255.801 683.028C251.553 665.608 254.716 648.744 263.874 633.517C264.875 636.037 259.682 644.311 258.788 647.437C257.009 653.653 255.99 659.478 255.743 665.943C255.104 682.69 261.24 698.988 272.765 711.155C284.398 723.466 301.628 730.534 318.463 730.846C335.961 731.108 352.824 724.297 365.233 711.958C390.114 687.479 389.23 646.483 363.304 622.909C351.984 612.615 337.145 603.369 335.274 586.426C334.377 578.296 334.903 567.704 334.907 559.459L335.034 507.157L335.086 503.631Z"/><defs><linearGradient id="fg3" gradientUnits="userSpaceOnUse" x1="652.95074" y1="670.42865" x2="670.76495" y2="686.68042"><stop offset="0" stop-color="#1D6458"/><stop offset="1" stop-color="#247D6B"/></linearGradient></defs><path fill="url(#fg3)" transform="scale(1.02771 1.02771)" d="M649.517 622.403C662.752 633.251 678.877 651.413 692.399 663.388C688.066 669.557 678.115 675.702 672.734 680.951C665.604 688.013 660.004 696.526 653.264 703.939C652.179 705.131 647.919 708.357 647.804 709.417C647.62 711.111 649.097 715.362 648.563 717.617C644.016 704.183 646.617 686.763 640.681 672.671C638.38 667.196 634.986 662.279 631.464 657.534C630.111 655.71 627.007 652.495 626.32 650.603L627.123 650.728C632.444 656.871 637.518 663.888 641.032 671.236C642.383 674.062 642.615 680.939 645.875 681.516C650.931 677.975 669.563 655.072 672.333 649.708L672.752 648.885C673.733 648.478 673.859 648.268 674.62 647.45C668.348 640.987 655.969 629.341 649.086 623.093L649.517 622.403Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M657.368 253.391C658.167 256.04 652.411 267.782 651.701 272.284C648.659 291.567 653.485 310.564 667.317 324.74C675.282 332.903 686.742 339.054 691.453 350.165C695.863 360.767 694.637 376.697 694.632 388.212L694.599 429.943L694.626 461.667C694.639 467.083 694.874 475.36 694.35 480.495C693.928 484.864 692.651 489.107 690.59 492.982C680.165 512.745 654.816 514.387 639.091 500.009C625.834 487.887 613.404 474.946 600.697 462.243L503.255 365.066L461.74 323.29C446.868 308.41 431.035 290.08 412.414 280.43C394.101 270.94 370.75 270.282 351.266 276.214C350.818 276.033 350.371 275.853 349.923 275.672C351.845 274.867 354.232 274.124 356.255 273.576C375.946 268.409 396.854 270.735 414.928 280.104C431.205 288.729 446.16 305.598 459.389 318.864L495.159 354.784L604.653 464.105C616.38 475.732 627.124 487.503 639.833 498.857C658.913 515.904 687.707 508.7 692.655 482.447C693.669 477.065 693.103 467.784 693.104 461.924L693.082 428.826L693.092 387.685C693.088 376.923 694.102 361.157 690.24 351.04C686.249 341.18 677.163 335.92 669.771 329.241C647.512 309.128 643.266 279.239 657.368 253.391Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M336.667 410.449C333.39 407.408 335.806 362.89 335.013 354.977C334.749 352.346 335.703 345.303 336.432 342.487C338.295 335.426 341.888 328.94 346.886 323.615C361.084 308.511 386.592 305.863 402.603 318.973C421.462 334.416 439.128 353.548 456.545 370.725C489.46 402.898 522.129 435.322 554.55 467.994L591.983 505.523C606.794 520.366 617.591 533.624 638.746 539.632C660.655 545.855 675.12 543.46 694.412 531.827C694.798 550.849 693.832 571.634 694.582 590.22C694.409 607.777 693.454 615.069 679.283 626.939C689.232 637.776 702.436 650.669 713.083 661.099C714.249 662.476 715.273 663.159 715.454 664.629C709.25 659.638 701.307 649.924 694.309 644.103C692.608 641.672 680.827 630.383 677.66 626.899C696.57 611.541 693.162 600.63 693.129 578.02L693.035 533.904C674.592 548.414 642.35 546.066 623.365 534.649C607.589 525.162 587.815 503.254 574.076 489.569C535.014 450.314 495.753 411.258 456.294 372.402L426.307 342.698C418.273 334.744 408.368 324.185 399.052 318.199C392.649 314.004 385.146 311.802 377.491 311.871C366.57 311.891 356.116 316.304 348.485 324.116C343.452 329.158 339.852 335.448 338.054 342.34C335.989 350.36 336.53 365.379 336.542 374.327L336.667 410.449Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M397.396 394.167C408.2 396.203 418.394 400.686 427.197 407.273C435.346 413.374 444.685 422.94 452.226 430.251L490.515 467.498L620.758 592.73L661.143 631.785C666.94 637.438 677.976 648.759 683.989 653.663C689.328 659.004 694.779 664.232 700.337 669.344C697.711 668.925 694.454 665.329 692.399 663.388C678.877 651.413 662.752 633.251 649.517 622.403C646.117 618.715 640.428 613.539 636.73 609.97C628.114 601.607 619.436 593.306 610.698 585.07L542.5 520.022L466.754 446.494C454.039 434.177 440.865 420.69 427.466 409.237C419.116 402.1 407.087 397.967 396.678 394.752L397.396 394.167Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M304.253 315.461C304.37 315.891 304.487 316.322 304.604 316.752C293.899 338.377 295.953 360.432 295.981 383.779L296.013 520.39L296.055 562.958C296.069 571.195 297.489 598.736 290.04 603.924L289.686 603.431C295.501 590.339 294.696 582.367 294.669 568.381L294.627 537.52L294.629 411.197L294.61 371.859C294.634 352.781 294.089 332.483 304.253 315.461Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M686.619 227.759C700.667 221.429 718.162 221.204 732.555 226.575C748.252 232.508 760.957 244.422 767.887 259.706C774.322 274.235 774.778 290.714 769.156 305.577C766.222 313.235 759.571 323.688 753.347 328.846C737.533 341.952 730.675 345.243 729.002 366.55C726.153 356.402 732.688 343.772 740.412 337.541C753.449 327.026 763.122 319.349 768.512 302.558C773.41 287.43 772.028 270.968 764.675 256.868C751.417 231.249 722.505 218.967 694.926 226.464C692.49 227.126 688.927 228.487 686.619 227.759Z"/><path fill="#03090B" transform="scale(1.02771 1.02771)" d="M727.922 567.84C728.272 564.61 728.062 556.341 728.043 552.854L727.933 525.572L728.043 424.813C728.079 412.696 727.265 394.357 728.948 382.786C729.868 428.284 728.088 475.205 729.107 520.584C728.703 545.088 729.186 569.693 729.009 594.206C728.917 607.079 728.47 617.699 735.629 628.913L735.255 629.723C728.98 619.871 728.02 612.485 728.032 600.879C728.044 589.888 727.996 578.833 727.922 567.84Z"/><path fill="#CFF9E8" transform="scale(1.02771 1.02771)" d="M316.151 634.191C333.437 631.983 349.247 644.188 351.487 661.469C353.727 678.751 341.552 694.583 324.275 696.856C306.952 699.134 291.068 686.92 288.822 669.593C286.576 652.265 298.82 636.405 316.151 634.191Z"/><path fill="#CFF9E8" transform="scale(1.02771 1.02771)" d="M709.978 256.051C725.22 255.239 738.256 266.888 739.158 282.124C740.06 297.36 728.489 310.466 713.258 311.458C697.899 312.46 684.659 300.77 683.749 285.404C682.839 270.039 694.608 256.869 709.978 256.051Z"/></svg>
+          Neuromatic
+        </a>
+        <p style="font-size: 14px; color: var(--slate-blue); line-height: 1.7; max-width: 280px;">AI Web Design &amp; Automation for local service businesses. Built for the trades. Fast. Intelligent. Effective.</p>
+      </div>
+      <div>
+        <p style="font-size: 11px; color: var(--slate-blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 18px;">Services</p>
+        <div style="display: flex; flex-direction: column; gap: 11px;">
+          <a href="#services" style="font-size: 14px; color: rgba(247,249,248,0.5); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='#F7F9F8'" onmouseout="this.style.color='rgba(247,249,248,0.5)'">AI Web Design</a>
+          <a href="#services" style="font-size: 14px; color: rgba(247,249,248,0.5); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='#F7F9F8'" onmouseout="this.style.color='rgba(247,249,248,0.5)'">AI Automation</a>
+          <a href="#services" style="font-size: 14px; color: rgba(247,249,248,0.5); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='#F7F9F8'" onmouseout="this.style.color='rgba(247,249,248,0.5)'">Local SEO</a>
+          <a href="#services" style="font-size: 14px; color: rgba(247,249,248,0.5); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='#F7F9F8'" onmouseout="this.style.color='rgba(247,249,248,0.5)'">AI Dispatcher</a>
+          <a href="#services" style="font-size: 14px; color: rgba(247,249,248,0.5); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='#F7F9F8'" onmouseout="this.style.color='rgba(247,249,248,0.5)'">CRM Integrations</a>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: 11px; color: var(--slate-blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 18px;">Company</p>
+        <div style="display: flex; flex-direction: column; gap: 11px;">
+          <a href="#results" style="font-size: 14px; color: rgba(247,249,248,0.5); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='#F7F9F8'" onmouseout="this.style.color='rgba(247,249,248,0.5)'">Results</a>
+          <a href="#how-it-works" style="font-size: 14px; color: rgba(247,249,248,0.5); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='#F7F9F8'" onmouseout="this.style.color='rgba(247,249,248,0.5)'">Process</a>
+          <a href="#faq" style="font-size: 14px; color: rgba(247,249,248,0.5); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='#F7F9F8'" onmouseout="this.style.color='rgba(247,249,248,0.5)'">FAQ</a>
+          <a href="#contact" style="font-size: 14px; color: rgba(247,249,248,0.5); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='#F7F9F8'" onmouseout="this.style.color='rgba(247,249,248,0.5)'">Contact</a>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: 11px; color: var(--slate-blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 18px;">Contact</p>
+        <div style="display: flex; flex-direction: column; gap: 11px;">
+          <a href="mailto:hello@neuromatic.ai" style="font-size: 14px; color: rgba(247,249,248,0.5); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='#F7F9F8'" onmouseout="this.style.color='rgba(247,249,248,0.5)'">hello@neuromatic.ai</a>
+          <a href="#contact" class="btn-primary" style="font-size: 13px; padding: 8px 16px; margin-top: 6px; display: inline-block; text-align: center;">Book Free Call</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(247,249,248,0.07); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <p style="font-size: 13px; color: var(--slate-blue);">&copy; 2026 Neuromatic AI. All rights reserved.</p>
+      <div style="display: flex; gap: 20px;">
+        <a href="#" style="font-size: 13px; color: var(--slate-blue); text-decoration: none;">Privacy Policy</a>
+        <a href="#" style="font-size: 13px; color: var(--slate-blue); text-decoration: none;">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const nav = document.getElementById('mobile-nav');
+    btn.classList.toggle('open');
+    nav.classList.toggle('open');
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu-btn').classList.remove('open');
+    document.getElementById('mobile-nav').classList.remove('open');
+  }
+
+  function toggleApproach(index) {
+    document.querySelectorAll('.approach-item').forEach((item, i) => {
+      i === index ? item.classList.toggle('active') : item.classList.remove('active');
+    });
+  }
+
+  function toggleFaq(btn) {
+    const content = btn.nextElementSibling;
+    const icon = btn.querySelector('.faq-icon');
+    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+    document.querySelectorAll('.faq-content').forEach(el => el.style.maxHeight = '0px');
+    document.querySelectorAll('.faq-icon').forEach(el => el.textContent = '+');
+    if (!isOpen) {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      icon.textContent = '−';
+    }
+  }
+
+  function filterClients(btn, industry) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#client-cards > div').forEach(card => {
+      card.style.display = (industry === 'all' || card.dataset.industry === industry) ? '' : 'none';
+    });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
 </body>
 </html>

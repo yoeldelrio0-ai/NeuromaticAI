@@ -15,6 +15,8 @@ if (!fs.existsSync(screenshotDir)) {
 
 const url = process.argv[2] || 'http://localhost:3000';
 const label = process.argv[3] ? `-${process.argv[3]}` : '';
+const viewportWidth = parseInt(process.argv[4]) || 1440;
+const viewportHeight = parseInt(process.argv[5]) || 900;
 
 // Auto-increment screenshot number
 const existing = fs.readdirSync(screenshotDir).filter(f => f.endsWith('.png'));
@@ -28,7 +30,7 @@ const browser = await puppeteer.launch({
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
 });
 const page = await browser.newPage();
-await page.setViewport({ width: 1440, height: 900 });
+await page.setViewport({ width: viewportWidth, height: viewportHeight });
 await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
 await page.screenshot({ path: outPath, fullPage: true });
 await browser.close();
