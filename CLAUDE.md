@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Neuromatic is a single-page sales site (`index.html`) for an agency that builds AI systems (AI receptionist, admin automation, lead generation) for local service businesses. The page has one job: get an owner to book a free automation audit. Copy follows the "Neuromatic One Page Sales Copy Blueprint"; look and feel follows the "Neuromatic Brand" design system.
+Neuromatic is a single-page sales site (`index.html`) for an agency that builds AI systems (AI receptionist, admin automation, lead generation) for service businesses and industrial companies across the US and abroad. The page has one job: get an owner to book a free automation audit. Copy follows the "Neuromatic One Page Sales Copy Blueprint"; look and feel follows the "Neuromatic Brand" design system.
 
 - Plain CSS with brand tokens on `:root` (no Tailwind, no build step)
 - **Sora** for everything, self-hosted from `assets/fonts/` (the brand allows no second typeface)
