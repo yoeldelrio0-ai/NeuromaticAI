@@ -1,0 +1,1153 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<script>/* relative paths need /mecanizados/, not /mecanizados */if(!/(\/|\.html)$/.test(location.pathname))location.replace(location.pathname+"/"+location.search+location.hash)</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Propuesta Mecanizados Group</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Propuesta de Neuromatic para Mecanizados Group: sitio web bilingüe, mesa de servicio y sistema completo, paso a paso.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0A0A'/%3E%3Cpath d='M14 50V22h9v4c2-3 6-5 10-5 7 0 11 5 11 12v17h-9V35c0-4-2-6-5-6-4 0-7 3-7 7v14z' fill='%23fff'/%3E%3Crect x='46' y='41' width='9' height='9' fill='%23C8F560'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: night machine shop. Full-bleed photographic bands alternate with flat black
+   "instrument" panels; machine data (alarms, serials, G-code) is set in mono as content.
+   Neuromatic brand: black ground, white Sora, one lime thing per view, pill buttons, flat color. */
+:root{
+  --bg:#0A0A0A; --surface:#111111; --surface-2:#161616; --line:#262626; --line-2:#333333;
+  --fg:#FFFFFF; --muted:#D6D6D6; --dim:#8C8C8C;
+  --lime:#C8F560; --on-lime:#0A0A0A; --amber:#FFB020;
+  --font:"Sora",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  --wrap:1200px; --r:18px; --r-sm:12px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 17px/1.65 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:6px}
+h1,h2,h3,h4{margin:0;font-weight:700;text-wrap:balance}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+.mono{font-family:var(--mono);font-feature-settings:"zero" 1}
+.num{font-variant-numeric:tabular-nums}
+
+/* language */
+body:not([data-lang="en"]) .en{display:none!important}
+body[data-lang="en"] .es{display:none!important}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.section{padding-block:clamp(72px,10vw,140px)}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.h-title{font-size:clamp(32px,4.6vw,56px);line-height:1.07;letter-spacing:-.03em}
+.h-sub{font-size:clamp(24px,2.6vw,34px);line-height:1.18;letter-spacing:-.02em}
+.lead{font-size:clamp(17px,1.5vw,20px);color:var(--muted);max-width:62ch}
+.lime{color:var(--lime)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 16px/1 var(--font);padding:16px 26px;border-radius:999px;border:1.5px solid var(--fg);background:transparent;color:var(--fg);text-decoration:none;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn--primary{background:var(--lime);border-color:var(--lime);color:var(--on-lime)}
+.btn--ghost:hover{background:var(--fg);color:var(--bg)}
+.btn--sm{padding:11px 18px;font-size:14px}
+.btn svg{width:18px;height:18px}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(10,10,10,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+.top.scrolled{border-bottom-color:var(--line)}
+.top__in{display:flex;align-items:center;gap:20px;height:68px}
+.wordmark{font:800 23px/1 var(--font);letter-spacing:-.045em;text-decoration:none;color:var(--fg);white-space:nowrap}
+.wordmark i{font-style:normal;display:inline-block;width:.24em;height:.24em;background:var(--lime);margin-left:.04em;vertical-align:baseline}
+.top__nav{display:flex;gap:4px;margin-left:auto}
+.top__nav a{font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:999px}
+.top__nav a:hover{color:var(--fg);background:var(--surface-2)}
+.lang{display:inline-flex;border:1px solid var(--line-2);border-radius:999px;padding:3px}
+.lang button{font:600 13px/1 var(--font);color:var(--dim);background:none;border:0;padding:8px 11px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--fg)}
+@media (max-width:980px){.top__nav{display:none}.top .lang{margin-left:auto}}
+@media (max-width:520px){.top .btn{display:none}}
+
+/* hero: sticky 3D stage, four beats scrubbed by scroll */
+.hero3d{position:relative;height:420vh;border-bottom:1px solid var(--line);--p:0}
+.hero3d__sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--bg)}
+.stage-poster,#film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 50%}
+#film{opacity:0;transition:opacity .8s ease}
+.hero3d.film-ready #film{opacity:1}
+.hero3d.film-ready .stage-poster{opacity:0;transition:opacity .8s ease}
+.hero3d.film-failed #film{display:none}
+.hero3d__sticky::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(10,10,10,.78) 0%,rgba(10,10,10,.35) 45%,rgba(10,10,10,0) 70%),linear-gradient(0deg,rgba(10,10,10,.9) 0%,rgba(10,10,10,0) 22%)}
+.stage-load{position:absolute;left:0;top:0;height:2px;width:calc(var(--load,0)*100%);background:var(--fg);transition:opacity .4s;z-index:3}
+.hero3d.film-ready .stage-load,.hero3d.film-failed .stage-load{opacity:0}
+.hero3d__beats{position:absolute;inset:0;pointer-events:none;z-index:2}
+.hero3d__beats .wrap{position:relative;height:100%}
+.hb{position:absolute;top:50%;transform:translateY(calc(-50% + var(--dy,0px)));width:min(560px,46%);opacity:var(--o,0);text-shadow:0 2px 24px rgba(10,10,10,.9);transition:opacity .15s linear}
+.hb--l{left:max(20px,env(safe-area-inset-left,0px))}
+.hb--r{right:max(20px,env(safe-area-inset-right,0px))}
+.hb a,.hb button{pointer-events:auto}
+.hb h1{font-size:clamp(40px,5.4vw,76px);line-height:1.02;letter-spacing:-.045em;font-weight:800}
+.hb h2{font-size:clamp(30px,3.6vw,50px);line-height:1.06;letter-spacing:-.035em;font-weight:800}
+.hb p.l{margin-top:20px;font-size:clamp(16px,1.4vw,19px);color:var(--muted);max-width:46ch}
+.hero__meta{display:grid;gap:6px;margin-bottom:26px;font-size:14px;color:var(--dim)}
+.hero__meta b{color:var(--fg);font-weight:600;font-size:16px}
+.hero__cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:32px}
+.hero__trust{font-size:14px;color:var(--dim);max-width:30ch}
+.spec{margin-top:22px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13px;border-top:1px solid var(--line-2);padding-top:16px;max-width:380px}
+.spec dt{color:var(--dim)}
+.spec dd{margin:0;color:var(--fg)}
+.hero3d__hint{position:absolute;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:2;display:flex;gap:14px;align-items:center;font-size:13px;color:var(--dim);white-space:nowrap;opacity:calc(1 - var(--p)*6)}
+.hero3d__hint i{display:block;width:1px;height:28px;background:var(--line-2);position:relative;overflow:hidden}
+.hero3d__hint i::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--fg);animation:drop 1.8s ease-in-out infinite}
+@keyframes drop{to{top:100%}}
+.hero3d__count{position:absolute;right:max(20px,env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:2;font-size:12px;color:var(--dim)}
+@media (max-width:900px){
+  .hero3d{height:380vh}
+  .hb{top:calc(76px + env(safe-area-inset-top,0px));transform:translateY(var(--dy,0px));width:auto;left:max(20px,env(safe-area-inset-left,0px));right:max(20px,env(safe-area-inset-right,0px))}
+  .hb h1{font-size:clamp(34px,9vw,48px)}
+  .hb h2{font-size:clamp(26px,7vw,36px)}
+  .hb p.l{font-size:15.5px;margin-top:14px}
+  .hero__trust,.spec{display:none}
+  .hero__cta{margin-top:20px}
+  .hero3d__sticky::after{content:"";position:absolute;inset:0 0 auto;height:48%;background:linear-gradient(180deg,rgba(10,10,10,.9) 40%,rgba(10,10,10,0));z-index:1;pointer-events:none}
+  .hero3d__sticky::before{background:linear-gradient(0deg,rgba(10,10,10,.85) 0%,rgba(10,10,10,0) 18%)}
+  .hero3d__count{display:none}
+  .stage-poster,#film{object-position:74% 50%}
+}
+@media (max-width:560px){ [data-hb="0"] p.l{display:none} }
+
+/* heard */
+.heard__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:start}
+.heard__quote{font-size:clamp(26px,3.2vw,42px);line-height:1.18;letter-spacing:-.025em;font-weight:600}
+.heard__quote small{display:block;margin-top:18px;font-size:15px;font-weight:400;letter-spacing:0;color:var(--dim)}
+.heard__list{display:grid;gap:0;border-top:1px solid var(--line)}
+.heard__list li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:16px;padding:20px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+.heard__list li b{color:var(--fg);font-weight:600}
+.heard__list svg{width:22px;height:22px;margin-top:3px;color:var(--fg)}
+.steps3{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.steps3>span{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;padding:10px 16px;border:1px solid var(--line-2);border-radius:999px}@media (max-width:900px){.heard__grid{grid-template-columns:1fr}}
+
+/* diagnostic */
+.diag{background:var(--surface);border-block:1px solid var(--line)}
+.diag__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:48px}
+.diag__img{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);aspect-ratio:16/8;max-width:100%}
+.diag__img img{width:100%;height:100%;object-fit:cover}
+.panel{border:1px solid var(--line);border-radius:var(--r);background:var(--bg);overflow:hidden}
+.panel__bar{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--dim)}
+.panel__bar b{color:var(--amber);font-weight:500}
+.alarms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.alarm{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 16px;padding:20px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.alarm:nth-child(2n){border-right:0}
+.alarm__code{font-size:12.5px;color:var(--amber);padding-top:3px;white-space:nowrap}
+.alarm h4{font-size:16px;font-weight:600;line-height:1.35}
+.alarm p{grid-column:2;font-size:14.5px;color:var(--dim);line-height:1.55}
+.alarm--group{grid-column:1/-1;border-right:0;padding:12px 20px;background:var(--surface-2);font-size:12px;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;font-weight:600;display:block}
+.diag__sum{display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;padding:22px 20px;font-size:17px;font-weight:600}
+@media (max-width:900px){.diag__head{grid-template-columns:1fr}.alarms{grid-template-columns:1fr}.alarm{border-right:0}}
+
+/* story */
+.story{position:relative}
+.story__intro{max-width:760px;margin-bottom:56px}
+.story__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,80px)}
+.beat{min-height:78vh;display:flex;flex-direction:column;justify-content:center;gap:16px;padding-block:40px;opacity:.35;transition:opacity .5s ease}
+.beat.is-on{opacity:1}
+.beat:first-child{min-height:60vh}
+.beat__time{font-size:14px;color:var(--dim)}
+.beat__time b{color:var(--fg);font-weight:500}
+.beat h3{font-size:clamp(26px,3vw,40px);line-height:1.12;letter-spacing:-.025em}
+.beat p{color:var(--muted);max-width:46ch}
+.beat .mini{display:none}
+.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 96px);height:min(640px,calc(100vh - 130px));border-radius:22px;overflow:hidden;border:1px solid var(--line);background:#000}
+.stage__bg{position:absolute;inset:0}
+.stage__bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s ease,transform 6s ease;transform:scale(1.04)}
+.stage__bg img.on{opacity:.5;transform:scale(1)}
+.stage__bg::after{content:"";position:absolute;inset:0;background:rgba(10,10,10,.35)}
+.stage__ui{position:absolute;inset:auto 22px 22px 22px;display:flex;justify-content:flex-end}
+@media (max-width:900px){
+  .story__grid{grid-template-columns:1fr}
+  .stage{display:none}
+  .beat{min-height:0;opacity:1;padding-block:28px;border-top:1px solid var(--line)}
+  .beat:first-child{min-height:0}
+  .beat .mini{display:block;margin-top:10px}
+}
+
+/* ticket UI (shared by stage and mobile minis) */
+.tk{width:100%;max-width:420px;background:rgba(10,10,10,.92);border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden;font-size:14px;animation:tkIn .5s cubic-bezier(.2,.7,.1,1)}
+@keyframes tkIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.tk__hd{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--dim)}
+.tk__bd{padding:16px;display:grid;gap:12px}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--muted);white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.chip--amber{color:var(--amber);border-color:rgba(255,176,32,.4)}
+.chip--white{color:var(--fg)}
+.chip--lime{color:var(--lime);border-color:rgba(200,245,96,.45)}
+.msg{max-width:88%;padding:10px 13px;border-radius:14px;line-height:1.45}
+.msg--in{background:var(--surface-2);border:1px solid var(--line);border-top-left-radius:4px}
+.msg--out{margin-left:auto;background:var(--fg);color:var(--bg);border-top-right-radius:4px}
+.msg small{display:block;margin-top:4px;font-size:11px;opacity:.6}
+.photo{height:84px;border-radius:10px;background:url(img/alarm.jpg) center/cover;border:1px solid var(--line)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13px}
+.kv dt{color:var(--dim)}
+.kv dd{margin:0;color:var(--fg)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.match{border:1px solid var(--line-2);border-radius:12px;padding:12px;display:grid;gap:6px}
+.match b{font-weight:600}
+.match small{color:var(--dim);font-size:12.5px}
+.tl{display:grid;gap:0;border-left:1px solid var(--line-2);margin-left:6px}
+.tl li{position:relative;padding:0 0 12px 18px;color:var(--muted);font-size:13.5px}
+.tl li::before{content:"";position:absolute;left:-4px;top:7px;width:7px;height:7px;border-radius:50%;background:var(--dim)}
+.tl li.now{color:var(--fg)}
+.tl li.now::before{background:var(--amber)}
+.tl li small{display:block;color:var(--dim);font-size:12px}
+.sig{height:46px;border-bottom:1px solid var(--line-2);position:relative}
+.sig svg{position:absolute;left:4px;bottom:4px;width:150px;height:40px;color:var(--fg)}
+
+/* proposal hub */
+.hub{background:var(--surface);border-top:1px solid var(--line)}
+.hub__head{display:flex;flex-wrap:wrap;gap:24px;align-items:end;justify-content:space-between;margin-bottom:36px}
+.tabs{position:sticky;top:calc(env(safe-area-inset-top,0px) + 68px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line);margin-bottom:48px}
+.tabs__list{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-block:12px}
+.tabs__list::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;font:600 15px/1 var(--font);color:var(--dim);background:none;border:1px solid transparent;padding:12px 18px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:color .2s,background .2s,border-color .2s}
+.tab:hover{color:var(--fg)}
+.tab[aria-selected="true"]{color:var(--bg);background:var(--fg)}
+.pane{animation:paneIn .45s cubic-bezier(.2,.7,.1,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pane__intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:48px}
+@media (max-width:900px){.pane__intro{grid-template-columns:1fr;gap:18px}}
+
+/* scope: roadmap */
+.road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--bg)}
+.road__step{padding:28px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;position:relative}
+.road__step:last-child{border-right:0}
+.road__n{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--dim);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.road__n svg{width:24px;height:24px;color:var(--fg)}
+.road__step h3{font-size:24px;letter-spacing:-.02em}
+.road__step p{color:var(--muted);font-size:15.5px}
+.road__step ul{display:grid;gap:9px;margin-top:4px}
+.road__step li{display:grid;grid-template-columns:16px 1fr;gap:10px;font-size:14.5px;color:var(--muted);line-height:1.5}
+.road__step li::before{content:"";width:9px;height:1.5px;background:var(--fg);margin-top:11px}
+.road__step--lead{background:var(--surface-2)}
+@media (max-width:900px){.road{grid-template-columns:1fr}.road__step{border-right:0;border-bottom:1px solid var(--line)}.road__step:last-child{border-bottom:0}}
+.feat{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:24px;margin-top:24px}
+.feat__card{border:1px solid var(--line);border-radius:var(--r);padding:28px;background:var(--bg);display:flex;flex-direction:column;gap:16px}
+.feat__card h3{font-size:22px;letter-spacing:-.02em}
+.feat__card p{color:var(--muted);font-size:15.5px}
+.lib{border:1px solid var(--line-2);border-radius:var(--r-sm);overflow:hidden;font-size:13px}
+.lib__search{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);color:var(--muted)}
+.lib__search svg{width:16px;height:16px;flex:none}
+.lib__search input{all:unset;flex:1;min-width:0;color:var(--fg);font:500 13px/1.4 var(--mono)}
+.lib__tags{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.lib__tags span{font-size:11.5px;padding:4px 9px;border-radius:999px;border:1px solid var(--line-2);color:var(--dim)}
+.lib__res{display:grid}
+.lib__res div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:11px 14px;border-bottom:1px solid var(--line)}
+.lib__res div:last-child{border-bottom:0}
+.lib__res b{font-weight:600;color:var(--fg);font-size:13.5px}
+.lib__res small{color:var(--dim);grid-column:1/-1}
+.lib__res em{font-style:normal;color:var(--dim)}
+.lib__empty{padding:14px;color:var(--dim)}
+.one{display:grid;gap:12px}
+.one li{display:grid;grid-template-columns:22px 1fr;gap:12px;color:var(--muted);font-size:15px}
+.one svg{width:20px;height:20px;margin-top:3px;color:var(--fg)}
+@media (max-width:900px){.feat{grid-template-columns:1fr}}
+
+/* value: calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--bg)}
+.calc__in{padding:28px;border-right:1px solid var(--line);display:grid;gap:22px;align-content:start}
+.calc__note{font-size:13px;color:var(--dim);display:flex;gap:10px;align-items:flex-start}
+.calc__note svg{width:16px;height:16px;flex:none;margin-top:2px}
+.field{display:grid;gap:8px}
+.field__top{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;color:var(--muted)}
+.field__top output{color:var(--fg);font-weight:600}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--line-2)}
+input[type=range]::-moz-range-track{height:2px;background:var(--line-2)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--fg);margin-top:-8px;border:0}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--fg);border:0}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line-2);border-radius:999px;padding:3px;gap:2px}
+.seg button{font:600 13px/1 var(--font);color:var(--dim);background:none;border:0;padding:9px 13px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.calc__out{padding:28px;display:grid;gap:18px;align-content:start;background:var(--surface-2)}
+.big{display:grid;gap:4px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.big small{font-size:13.5px;color:var(--dim)}
+.big b{font-size:clamp(36px,4.4vw,56px);line-height:1;letter-spacing:-.035em;font-weight:800}
+.lines{display:grid;gap:0}
+.lines div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--muted)}
+.lines div b{color:var(--fg);font-weight:600;white-space:nowrap}
+.payback{font-size:16px;line-height:1.5}
+@media (max-width:900px){.calc{grid-template-columns:1fr}.calc__in{border-right:0;border-bottom:1px solid var(--line)}}
+.why3{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:24px;margin-top:24px}
+.why3>div{border-top:1px solid var(--line-2);padding-top:20px;display:grid;gap:10px;align-content:start}
+.why3 h4{font-size:19px;letter-spacing:-.01em}
+.why3 p{color:var(--muted);font-size:15px}
+@media (max-width:900px){.why3{grid-template-columns:1fr}}
+
+/* investment */
+.blue{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:var(--r);padding:22px 28px;background:var(--bg);margin-bottom:24px}
+.blue h3{font-size:19px}
+.blue p{color:var(--muted);font-size:15px;max-width:60ch}
+.blue__price{font-size:28px;font-weight:800;letter-spacing:-.03em;white-space:nowrap}
+.tiers{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr) minmax(0,.95fr);gap:16px;align-items:stretch}
+.tier{border:1px solid var(--line);border-radius:var(--r);padding:28px;background:var(--bg);display:flex;flex-direction:column;gap:18px}
+.tier--rec{border-color:var(--fg);background:var(--surface-2);padding-block:36px;margin-block:-8px}
+.tier__tag{align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--bg);background:var(--fg);padding:6px 11px;border-radius:999px}
+.tier__opt{font-size:13px;color:var(--dim);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.tier h3{font-size:24px;letter-spacing:-.02em;line-height:1.2}
+.tier__price{display:grid;gap:4px;padding-block:16px;border-block:1px solid var(--line)}
+.tier__price b{font-size:clamp(30px,3vw,40px);line-height:1;letter-spacing:-.035em;font-weight:800}
+.tier__price>span{font-size:15px;color:var(--muted)}
+.tier__to{font-size:.6em;font-weight:500;color:var(--dim);letter-spacing:0}
+.tier ul{display:grid;gap:10px;flex:1}
+.tier li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:14.5px;color:var(--muted);line-height:1.5}
+.tier li svg{width:16px;height:16px;margin-top:3px;color:var(--fg)}
+.tier li.plus{color:var(--fg);font-weight:600}
+.tier .btn{justify-content:center}
+.tier.chosen{outline:2px solid var(--fg);outline-offset:4px}
+.terms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:40px;border-top:1px solid var(--line);padding-top:28px}
+.terms div{display:grid;gap:6px}
+.terms b{font-size:15px}
+.terms p{font-size:14px;color:var(--dim)}
+@media (max-width:980px){.tiers{grid-template-columns:1fr}.tier--rec{margin-block:0}.terms{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.terms{grid-template-columns:1fr}}
+
+/* why us */
+.us{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.us__img{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);min-height:320px;position:relative}
+.us__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.us__list{display:grid;gap:0;border-top:1px solid var(--line)}
+.us__list li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.us__list .ic{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center}
+.us__list .ic svg{width:20px;height:20px}
+.us__list h4{font-size:18px;margin-bottom:4px}
+.us__list p{color:var(--muted);font-size:15px}
+@media (max-width:900px){.us{grid-template-columns:1fr}}
+
+/* plan */
+.gantt{border:1px solid var(--line);border-radius:var(--r);background:var(--bg);overflow-x:auto}
+.gantt__in{min-width:720px}
+.gantt__row{display:grid;grid-template-columns:220px repeat(14,minmax(0,1fr));align-items:center;border-bottom:1px solid var(--line);min-height:58px}
+.gantt__row:last-child{border-bottom:0}
+.gantt__row--head{min-height:42px;font-size:12px;color:var(--dim)}
+.gantt__row--head span{text-align:center}
+.gantt__label{padding:10px 18px;font-size:14.5px;font-weight:600;line-height:1.3}
+.gantt__label small{display:block;font-weight:400;color:var(--dim);font-size:12.5px}
+.bar{height:22px;border-radius:999px;background:var(--fg);transform-origin:0 50%;animation:barIn .9s cubic-bezier(.2,.7,.1,1) both}
+.bar--soft{background:var(--line-2)}
+.bar--outline{background:transparent;border:1.5px dashed var(--dim)}
+@keyframes barIn{from{transform:scaleX(0)}to{transform:none}}
+.next{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+.next li{border:1px solid var(--line);border-radius:var(--r);padding:22px;background:var(--bg);display:grid;gap:10px;align-content:start}
+.next__n{font-size:13px;color:var(--dim);font-weight:600}
+.next li h4{font-size:17px;line-height:1.3}
+.next li p{font-size:14px;color:var(--muted)}
+.next li.is-date{border-color:var(--fg)}
+.need{margin-top:24px;border:1px solid var(--line);border-radius:var(--r);padding:28px;background:var(--bg);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:32px}
+.need ul{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}
+.need li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:14.5px;color:var(--muted)}
+.need li::before{content:"";width:12px;height:12px;border:1.5px solid var(--dim);border-radius:3px;margin-top:5px}
+@media (max-width:980px){.next{grid-template-columns:1fr 1fr}.need{grid-template-columns:1fr}}
+@media (max-width:560px){.next{grid-template-columns:1fr}.need ul{grid-template-columns:1fr}}
+
+/* confirm a choice, then the thank-you screen */
+.confirm{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));background:rgba(10,10,10,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.confirm__box{width:min(460px,100%);background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r);padding:28px;display:grid;gap:14px}
+.confirm__box h3{font-size:24px;letter-spacing:-.02em;line-height:1.2}
+.confirm__box p{color:var(--muted);font-size:15px}
+.confirm__sum{border-block:1px solid var(--line);padding-block:14px;display:grid;gap:4px}
+.confirm__sum b{font-size:18px}
+.confirm__sum span{color:var(--dim);font-size:14px}
+.confirm__act{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.confirm__act .btn{flex:1 1 160px;justify-content:center}
+.btn[aria-busy="true"]{opacity:.6;pointer-events:none}
+.thanks{position:fixed;inset:0;z-index:90;background:var(--bg);overflow:auto;display:grid;align-items:center}
+.thanks__in{max-width:720px;padding-block:96px}
+.thanks__mark{width:56px;height:56px;border-radius:50%;border:1.5px solid var(--lime);display:grid;place-items:center;color:var(--lime);margin-bottom:28px}
+.thanks__mark svg{width:26px;height:26px}
+.thanks h2:focus{outline:none}
+.thanks h2{font-size:clamp(36px,5vw,60px);line-height:1.04;letter-spacing:-.04em;font-weight:800}
+.thanks__choice{margin-top:28px;border:1px solid var(--line-2);border-radius:var(--r);padding:20px 22px;display:grid;gap:4px;max-width:520px}
+.thanks__choice small{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.thanks__choice b{font-size:20px}
+.thanks__choice span{color:var(--muted);font-size:15px}
+.thanks p.lead{margin-top:24px}
+.thanks__fallback{margin-top:16px;font-size:14px;color:var(--dim)}
+.thanks__fallback b{color:var(--fg);font-weight:600}
+.thanks .btn{margin-top:32px}
+
+.foot{border-top:1px solid var(--line);padding-block:36px;font-size:14px;color:var(--dim)}
+.foot__in{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between}
+.foot__links{display:flex;flex-wrap:wrap;gap:8px 24px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--fg)}
+
+.reveal{transition:transform .9s cubic-bezier(.2,.7,.1,1),opacity .9s}
+.js .reveal:not(.in){transform:translateY(22px)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .js .reveal:not(.in){transform:none;opacity:1}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.18 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.7A8.5 8.5 0 1 1 21 11.5z"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7l10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    <symbol id="i-steps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h5v-5h5v-5h5V5h3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  </defs>
+</svg>
+
+<header class="top" id="top">
+  <div class="wrap top__in">
+    <a class="wordmark" href="#inicio" aria-label="Neuromatic">neuromatic<i></i></a>
+    <nav class="top__nav" aria-label="Secciones">
+      <a href="#escuchamos"><span class="es">Lo que escuchamos</span><span class="en">What we heard</span></a>
+      <a href="#diagnostico"><span class="es">Diagnóstico</span><span class="en">Diagnosis</span></a>
+      <a href="#historia"><span class="es">Cómo funciona</span><span class="en">How it works</span></a>
+      <a href="#propuesta-hub"><span class="es">Propuesta</span><span class="en">Proposal</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn--ghost btn--sm" href="#inversion" data-tab-link="inversion"><span class="es">Ver opciones</span><span class="en">See options</span></a>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero3d" id="inicio" aria-label="Mecanizados Group">
+  <div class="hero3d__sticky">
+    <img class="stage-poster" src="img/poster.jpg" alt="" fetchpriority="high">
+    <video id="film" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+    <div class="stage-load" aria-hidden="true"></div>
+    <div class="hero3d__beats">
+      <div class="wrap">
+        <div class="hb hb--l" data-hb="0">
+          <div class="hero__meta">
+            <b><span class="es">Propuesta para Mecanizados Group</span><span class="en">Proposal for Mecanizados Group</span></b>
+            <span class="num"><span class="es">Para Oscar Acevedo y Esteban · 22 de octubre de 2026</span><span class="en">For Oscar Acevedo and Esteban · October 22, 2026</span></span>
+          </div>
+          <h1><span class="es">Cada alarma, atendida. Cada máquina, con historia.</span><span class="en">Every alarm answered. Every machine on record.</span></h1>
+          <p class="l"><span class="es">Un sistema construido solo para Mecanizados Group, paso a paso: primero un sitio web que capta solicitudes, después una mesa de servicio que no pierde ninguna, y al final un CRM que reúne todo en un solo lugar.</span><span class="en">A system built only for Mecanizados Group, one step at a time: first a website that captures requests, then a service desk that never loses one, and finally a CRM that puts everything in one place.</span></p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#inversion" data-tab-link="inversion"><span class="es">Ver las tres opciones</span><span class="en">See the three options</span><svg><use href="#i-arrow"/></svg></a>
+            <p class="hero__trust"><span class="es">Empezamos por lo que más dinero les cuesta hoy. Ustedes deciden hasta dónde llegar.</span><span class="en">We start with what costs you the most today. You decide how far to go.</span></p>
+          </div>
+        </div>
+        <div class="hb hb--l" data-hb="1">
+          <h2><span class="es">Detrás de cada puerta hay un historial.</span><span class="en">Behind every door there's a history.</span></h2>
+          <p class="l"><span class="es">Alarmas, visitas, repuestos, la solución que funcionó la última vez. Hoy esa historia vive en WhatsApp y en cuatro hojas de cálculo.</span><span class="en">Alarms, visits, parts, the fix that worked last time. Today that history lives in WhatsApp and four spreadsheets.</span></p>
+        </div>
+        <div class="hb hb--l" data-hb="2">
+          <h2><span class="es">Desde 2011, máquinas instaladas en cinco países.</span><span class="en">Since 2011, machines installed across five countries.</span></h2>
+          <p class="l"><span class="es">Colombia, Ecuador, Venezuela y las Guayanas. Cada una merece un registro propio que el equipo encuentre en segundos.</span><span class="en">Colombia, Ecuador, Venezuela and the Guianas. Each one deserves its own record the team can find in seconds.</span></p>
+          <dl class="spec mono">
+            <dt>S/N</dt><dd>2214-0371</dd>
+            <dt>CONTROL</dt><dd>OSP-P300</dd>
+            <dt><span class="es">ÚLTIMA ALARMA</span><span class="en">LAST ALARM</span></dt><dd>1062 · <span class="es">resuelta</span><span class="en">solved</span></dd>
+            <dt><span class="es">PREVENTIVO</span><span class="en">PREVENTIVE</span></dt><dd>2027-04-22</dd>
+          </dl>
+        </div>
+        <div class="hb hb--l" data-hb="3">
+          <h2><span class="es">Un sistema a la altura de sus máquinas.</span><span class="en">A system that matches your machines.</span></h2>
+          <p class="l"><span class="es">Eso es lo que proponemos. Abajo está lo que escuchamos, lo que encontramos y cómo lo resolvemos.</span><span class="en">That's what we're proposing. Below is what we heard, what we found and how we'd fix it.</span></p>
+          <div class="hero__cta"><a class="btn btn--ghost" href="#escuchamos"><span class="es">Seguir</span><span class="en">Continue</span><svg><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </div>
+    </div>
+    <p class="hero3d__hint" aria-hidden="true"><span class="es">Baje para entrar a la máquina</span><span class="en">Scroll to go inside the machine</span><i></i></p>
+    <p class="hero3d__count mono num" aria-hidden="true"><span id="hbN">01</span> / 04</p>
+  </div>
+</section>
+
+<!-- WHAT WE HEARD -->
+<section class="section" id="escuchamos">
+  <div class="wrap heard__grid">
+    <div class="reveal">
+      <p class="eyebrow"><span class="es">Lo que escuchamos · 20 de octubre</span><span class="en">What we heard · October 20</span></p>
+      <p class="heard__quote" style="margin-top:20px">
+        <span class="es">"Paso a paso. Primero la página, después el servicio, después el CRM."</span>
+        <span class="en">"Step by step. First the website, then service, then the CRM."</span>
+        <small><span class="es">Oscar Acevedo, en nuestra llamada. Esta propuesta sigue ese orden.</span><span class="en">Oscar Acevedo, on our call. This proposal follows that order.</span></small>
+      </p>
+      <div class="steps3">
+        <span><svg width="18" height="18"><use href="#i-globe"/></svg><span class="es">Sitio web</span><span class="en">Website</span></span>
+        <span><svg width="18" height="18"><use href="#i-wrench"/></svg><span class="es">Mesa de servicio</span><span class="en">Service desk</span></span>
+        <span><svg width="18" height="18"><use href="#i-layers"/></svg>CRM</span>
+      </div>
+    </div>
+    <ul class="heard__list reveal">
+      <li><svg><use href="#i-check"/></svg><div><b class="es">El servicio no cabe en un checklist.</b><b class="en">Service doesn't fit a checklist.</b> <span class="es">Las máquinas tienen miles de alarmas y un trabajo puede tomar horas, días o semanas esperando repuestos de Estados Unidos o Japón.</span><span class="en">The machines have thousands of alarms and a job can take hours, days or weeks waiting on parts from the US or Japan.</span></div></li>
+      <li><svg><use href="#i-check"/></svg><div><b class="es">Cada trabajo necesita un estado.</b><b class="en">Every job needs a status.</b> <span class="es">Pendiente, en proceso o terminado, y qué lo tiene detenido.</span><span class="en">Pending, in progress or done, and what it's waiting on.</span></div></li>
+      <li><svg><use href="#i-check"/></svg><div><b class="es">Reportes con fotos y video.</b><b class="en">Reports with photos and video.</b> <span class="es">Hoy son solo texto.</span><span class="en">Today they're text only.</span></div></li>
+      <li><svg><use href="#i-check"/></svg><div><b class="es">La idea de Oscar: una biblioteca de soluciones.</b><b class="en">Oscar's idea: a library of past fixes.</b> <span class="es">Buscable por cliente, tipo de máquina, modelo, serie y control (por ejemplo LB 4000), para que el siguiente técnico resuelva la misma alarma más rápido.</span><span class="en">Searchable by customer, machine type, model, serial and control (for example LB 4000), so the next tech solves the same alarm faster.</span></div></li>
+      <li><svg><use href="#i-check"/></svg><div><b class="es">Un sitio que ustedes mismos actualizan.</b><b class="en">A site you update yourselves.</b> <span class="es">Promociones y nuevas tecnologías cada semana, sin pedir ayuda, y que capte clientes.</span><span class="en">Promotions and new technology every week, without help, and it captures leads.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- DIAGNOSIS -->
+<section class="section diag" id="diagnostico">
+  <div class="wrap">
+    <div class="diag__head">
+      <div class="reveal">
+        <p class="eyebrow"><span class="es">Diagnóstico</span><span class="en">Diagnosis</span></p>
+        <h2 class="h-title" style="margin-top:16px"><span class="es">Hoy no hay forma de recibir una solicitud en línea, ni un solo lugar donde vivan sus datos.</span><span class="en">Today there's no way to take a request online, and no single place where your data lives.</span></h2>
+      </div>
+      <div class="diag__img reveal"><img src="img/alarm.jpg" alt="" loading="lazy"></div>
+    </div>
+    <div class="panel reveal">
+      <div class="panel__bar mono"><span>DIAG · mecanizadosgroup.com + <span class="es">operación</span><span class="en">operations</span></span><span><b>12</b> <span class="es">alarmas activas</span><span class="en">active alarms</span></span></div>
+      <div class="alarms">
+        <div class="alarm alarm--group"><span class="es">Sitio web</span><span class="en">Website</span></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1001</span><h4><span class="es">Contacto sin formulario</span><span class="en">Contact page has no form</span></h4><p><span class="es">El enlace de correo abre WhatsApp. Una solicitud no queda registrada en ningún lado.</span><span class="en">The email link opens WhatsApp. A request isn't recorded anywhere.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1002</span><h4><span class="es">Ayuda Técnica con Lorem ipsum</span><span class="en">Technical Help page shows Lorem ipsum</span></h4><p><span class="es">Y texto sobre soporte "en toda Europa", cuando su territorio es Colombia, Ecuador, Venezuela y las Guayanas.</span><span class="en">Plus copy about support "across Europe", when your territory is Colombia, Ecuador, Venezuela and the Guianas.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1003</span><h4><span class="es">Solo en español, 119 páginas</span><span class="en">Spanish only, 119 pages</span></h4><p><span class="es">La mayoría sin tocar desde 2020.</span><span class="en">Most untouched since 2020.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1004</span><h4><span class="es">Botones y redes rotas</span><span class="en">Broken buttons and social links</span></h4><p><span class="es">Botones "Learn More" que no llevan a nada, testimonios vacíos y errores de digitación.</span><span class="en">"Learn More" buttons that go nowhere, an empty testimonials section and typos.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1005</span><h4><span class="es">Horarios que no coinciden</span><span class="en">Conflicting hours</span></h4><p><span class="es">De 9 a 12 en una página, de 9 a 6 en otra.</span><span class="en">9 to 12 on one page, 9 to 6 on another.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1006</span><h4><span class="es">Invisibles para buscadores con IA</span><span class="en">Invisible to AI search</span></h4><p><span class="es">El robots.txt bloquea a ChatGPT y herramientas similares, así que no los pueden encontrar ni recomendar.</span><span class="en">robots.txt blocks ChatGPT and similar tools, so they can't find or recommend you.</span></p></div>
+        <div class="alarm alarm--group"><span class="es">Datos y operación</span><span class="en">Data and operations</span></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2001</span><h4><span class="es">Todo pasa por WhatsApp y correo</span><span class="en">Everything runs through WhatsApp and email</span></h4><p><span class="es">Las solicitudes se pierden entre conversaciones y nadie ve el estado completo.</span><span class="en">Requests get lost between chats and no one sees the full picture.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2002</span><h4><span class="es">Cuatro hojas de cálculo separadas</span><span class="en">Four separate spreadsheets</span></h4><p><span class="es">La misma información se escribe más de una vez y no se cruza.</span><span class="en">The same information gets typed more than once and never connects.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2003</span><h4><span class="es">Sin registro de máquinas instaladas</span><span class="en">No record of installed machines</span></h4><p><span class="es">Después de 14 años vendiendo e instalando Okuma, no hay un mapa de qué máquina está dónde.</span><span class="en">After 14 years selling and installing Okuma, there's no map of which machine is where.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2004</span><h4><span class="es">Sin seguimiento de preventivos</span><span class="en">No preventive maintenance tracking</span></h4><p><span class="es">Ingresos recurrentes de mantenimiento que hoy se quedan en la mesa.</span><span class="en">Recurring maintenance revenue left on the table.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2005</span><h4><span class="es">Reportes solo en texto</span><span class="en">Text-only reports</span></h4><p><span class="es">Sin fotos, sin video, sin firma del cliente.</span><span class="en">No photos, no video, no customer signature.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2006</span><h4><span class="es">Todo depende de Oscar</span><span class="en">Everything runs through Oscar</span></h4><p><span class="es">Asignar, avisar y hacer seguimiento recae en una persona que ya está al límite.</span><span class="en">Assigning, notifying and following up falls on one person who's already stretched thin.</span></p></div>
+      </div>
+      <div class="diag__sum"><span class="es">Ninguna de estas alarmas necesita un equipo nuevo. Necesita un sistema.</span><span class="en">None of these alarms needs new staff. It needs a system.</span> <a class="btn btn--ghost btn--sm" href="#historia"><span class="es">Ver cómo funcionaría</span><span class="en">See how it would work</span><svg><use href="#i-arrow"/></svg></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="section story" id="historia">
+  <div class="wrap">
+    <div class="story__intro reveal">
+      <p class="eyebrow"><span class="es">Cómo funciona</span><span class="en">How it works</span></p>
+      <h2 class="h-title" style="margin-top:16px"><span class="es">Viernes, 9:47 p.m. Un torno de un cliente se detiene.</span><span class="en">Friday, 9:47 p.m. A customer's lathe stops.</span></h2>
+      <p class="lead" style="margin-top:18px"><span class="es">Así se ve la misma noche con el sistema funcionando. Baje para seguir el caso de principio a fin.</span><span class="en">Here's the same night with the system running. Scroll to follow the case from start to finish.</span></p>
+    </div>
+    <div class="story__grid">
+      <div class="beats" id="beats">
+        <article class="beat is-on" data-beat="0">
+          <p class="beat__time mono"><b>21:47</b> · <span class="es">viernes</span><span class="en">Friday</span></p>
+          <h3><span class="es">La máquina se detiene con una alarma.</span><span class="en">The machine stops with an alarm.</span></h3>
+          <p><span class="es">Fuera de horario. Hoy, el cliente escribe a un WhatsApp que nadie mira hasta el lunes, y el mensaje se pierde entre otros cien.</span><span class="en">After hours. Today, the customer texts a WhatsApp nobody checks until Monday, and the message gets buried under a hundred others.</span></p>
+          <div class="mini" data-mini="0"></div>
+        </article>
+        <article class="beat" data-beat="1">
+          <p class="beat__time mono"><b>21:48</b></p>
+          <h3><span class="es">El cliente escribe. Se abre un ticket solo.</span><span class="en">The customer texts. A ticket opens on its own.</span></h3>
+          <p><span class="es">Por WhatsApp o el formulario del sitio, con modelo, serie, código de alarma y una foto. Nada se escribe dos veces.</span><span class="en">By WhatsApp or the website form, with model, serial, alarm code and a photo. Nothing gets typed twice.</span></p>
+          <div class="mini" data-mini="1"></div>
+        </article>
+        <article class="beat" data-beat="2">
+          <p class="beat__time mono"><b>21:49</b></p>
+          <h3><span class="es">El agente responde en español y busca la solución.</span><span class="en">The agent replies in Spanish and looks up the fix.</span></h3>
+          <p><span class="es">Encuentra la misma alarma en la biblioteca de soluciones y avisa al técnico más cercano. El cliente sabe que alguien ya tiene su caso.</span><span class="en">It finds the same alarm in the fix library and alerts the closest tech. The customer knows someone already has the case.</span></p>
+          <div class="mini" data-mini="2"></div>
+        </article>
+        <article class="beat" data-beat="3">
+          <p class="beat__time mono"><b><span class="es">Lun</span><span class="en">Mon</span> 08:10</b></p>
+          <h3><span class="es">El técnico documenta con fotos y video.</span><span class="en">The tech documents with photos and video.</span></h3>
+          <p><span class="es">El ticket muestra qué lo tiene detenido: un repuesto que viene de Japón. El cliente recibe cada cambio de estado sin tener que llamar.</span><span class="en">The ticket shows what it's waiting on: a part coming from Japan. The customer gets every status change without calling.</span></p>
+          <div class="mini" data-mini="3"></div>
+        </article>
+        <article class="beat" data-beat="4">
+          <p class="beat__time mono"><b><span class="es">Jue</span><span class="en">Thu</span> 15:30</b></p>
+          <h3><span class="es">Reporte firmado. El próximo preventivo ya está agendado.</span><span class="en">Signed report. The next preventive visit is already booked.</span></h3>
+          <p><span class="es">PDF con fotos y firma del cliente, listo para facturar. La solución queda en la biblioteca para la próxima vez, y el registro de la máquina programa su siguiente mantenimiento.</span><span class="en">A PDF with photos and the customer's signature, ready to invoice. The fix goes into the library for next time, and the machine's record schedules its next maintenance.</span></p>
+          <div class="mini" data-mini="4"></div>
+        </article>
+      </div>
+      <div class="stage" aria-hidden="true">
+        <div class="stage__bg">
+          <img src="img/alarm.jpg" alt="" class="on" data-bg="0">
+          <img src="img/tech.jpg" alt="" data-bg="1" loading="lazy">
+          <img src="img/steel.jpg" alt="" data-bg="2" loading="lazy">
+          <img src="img/shop.jpg" alt="" data-bg="3" loading="lazy">
+        </div>
+        <div class="stage__ui" id="stageUi"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPOSAL HUB -->
+<section class="section hub" id="propuesta-hub">
+  <div class="wrap">
+    <div class="hub__head reveal">
+      <div>
+        <p class="eyebrow"><span class="es">La propuesta</span><span class="en">The proposal</span></p>
+        <h2 class="h-title" style="margin-top:16px"><span class="es">Un solo sistema que atiende, automatiza y crece.</span><span class="en">One system that answers, automates and grows.</span></h2>
+      </div>
+    </div>
+  </div>
+  <div class="tabs">
+    <div class="wrap">
+      <div class="tabs__list" role="tablist" aria-label="Propuesta">
+        <button class="tab" role="tab" id="t-propuesta" aria-controls="propuesta" aria-selected="true" data-tab="propuesta"><span class="es">La propuesta</span><span class="en">The proposal</span></button>
+        <button class="tab" role="tab" id="t-valor" aria-controls="valor" aria-selected="false" tabindex="-1" data-tab="valor"><span class="es">Por qué vale la pena</span><span class="en">Why it's worth it</span></button>
+        <button class="tab" role="tab" id="t-inversion" aria-controls="inversion" aria-selected="false" tabindex="-1" data-tab="inversion"><span class="es">Inversión</span><span class="en">Investment</span></button>
+        <button class="tab" role="tab" id="t-nosotros" aria-controls="nosotros" aria-selected="false" tabindex="-1" data-tab="nosotros"><span class="es">Por qué Neuromatic</span><span class="en">Why Neuromatic</span></button>
+        <button class="tab" role="tab" id="t-plan" aria-controls="plan" aria-selected="false" tabindex="-1" data-tab="plan"><span class="es">Plan y próximos pasos</span><span class="en">Plan and next steps</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- TAB: PROPOSAL -->
+    <div class="pane" role="tabpanel" id="propuesta" aria-labelledby="t-propuesta">
+      <div class="pane__intro">
+        <h3 class="h-sub"><span class="es">Tres etapas, en el orden que pidió Oscar. Cada una funciona sola y prepara la siguiente.</span><span class="en">Three stages, in the order Oscar asked for. Each one works on its own and sets up the next.</span></h3>
+        <p class="lead"><span class="es">Recomendamos empezar por el sitio y la mesa de servicio juntos, porque ahí es donde hoy se pierden solicitudes y horas. El CRM completo llega cuando la base ya esté funcionando.</span><span class="en">We recommend starting with the website and service desk together, since that's where requests and hours get lost today. The full CRM comes once the foundation is running.</span></p>
+      </div>
+      <div class="road">
+        <div class="road__step">
+          <p class="road__n"><svg><use href="#i-globe"/></svg><span class="es">Etapa 1 · Crecer</span><span class="en">Stage 1 · Grow</span></p>
+          <h3><span class="es">Un sitio web que trabaja.</span><span class="en">A website that works.</span></h3>
+          <p><span class="es">Bilingüe, construido alrededor de Okuma, que ustedes actualizan solos.</span><span class="en">Bilingual, built around Okuma, and you update it yourselves.</span></p>
+          <ul>
+            <li><span class="es">Español e inglés con selector de idioma</span><span class="en">Spanish and English with a language toggle</span></li>
+            <li><span class="es">Máquinas por tecnología e industria (aviación, automotriz, moldes, médica, petróleo)</span><span class="en">Machines by technology and industry (aviation, automotive, molds, medical, oil)</span></li>
+            <li><span class="es">Panel de administración para promociones y novedades semanales</span><span class="en">Admin panel for weekly promotions and news</span></li>
+            <li><span class="es">Formularios de servicio, repuestos y cotización que sí llegan</span><span class="en">Service, parts and quote forms that actually arrive</span></li>
+            <li><span class="es">Abierto a Google y a buscadores con IA</span><span class="en">Open to Google and AI search</span></li>
+          </ul>
+        </div>
+        <div class="road__step road__step--lead">
+          <p class="road__n"><svg><use href="#i-phone"/></svg><span class="es">Etapa 2 · Atender</span><span class="en">Stage 2 · Answer</span></p>
+          <h3><span class="es">Una mesa de servicio que no pierde nada.</span><span class="en">A service desk that loses nothing.</span></h3>
+          <p><span class="es">Cada solicitud, de cualquier canal, se vuelve un ticket con dueño y estado.</span><span class="en">Every request, from any channel, becomes a ticket with an owner and a status.</span></p>
+          <ul>
+            <li><span class="es">WhatsApp y web con modelo, serie, alarma y fotos</span><span class="en">WhatsApp and web with model, serial, alarm and photos</span></li>
+            <li><span class="es">Estados: pendiente, en proceso, terminado, y qué espera</span><span class="en">Status: pending, in progress, done, and what it's waiting on</span></li>
+            <li><span class="es">Agente con IA bilingüe para fuera de horario</span><span class="en">Bilingual AI agent for after hours</span></li>
+            <li><span class="es">Reportes con fotos, video y PDF firmado</span><span class="en">Reports with photos, video and a signed PDF</span></li>
+            <li><span class="es">Biblioteca de soluciones y registro de máquinas</span><span class="en">Fix library and machine registry</span></li>
+          </ul>
+        </div>
+        <div class="road__step">
+          <p class="road__n"><svg><use href="#i-bolt"/></svg><span class="es">Etapa 3 · Automatizar</span><span class="en">Stage 3 · Automate</span></p>
+          <h3><span class="es">El CRM completo.</span><span class="en">The full CRM.</span></h3>
+          <p><span class="es">Ventas, pedidos y técnicos en el mismo sistema que el servicio.</span><span class="en">Sales, orders and techs in the same system as service.</span></p>
+          <ul>
+            <li><span class="es">Embudo: prospecto, calificado, cotización, licitación, ganado</span><span class="en">Pipeline: lead, qualified, quote, tender, won</span></li>
+            <li><span class="es">Seguimiento de pedidos para quien maneja las órdenes</span><span class="en">Order tracking for whoever runs orders</span></li>
+            <li><span class="es">Asignación al técnico más cercano y avisos al cliente</span><span class="en">Assignment to the closest tech and customer notifications</span></li>
+            <li><span class="es">Conexión con facturación</span><span class="en">Invoicing hooks</span></li>
+            <li><span class="es">App para técnicos en iOS y Android, si el diagnóstico lo justifica</span><span class="en">iOS and Android tech app, if discovery shows it's needed</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat__card">
+          <h3><span class="es">Biblioteca de soluciones. Pruébela.</span><span class="en">The fix library. Try it.</span></h3>
+          <p><span class="es">Cada trabajo terminado queda etiquetado por cliente, máquina, modelo, serie, control y alarma. Escriba un control o un código. Los casos son de ejemplo.</span><span class="en">Every finished job gets tagged by customer, machine, model, serial, control and alarm. Type a control or a code. The cases are examples.</span></p>
+          <div class="lib">
+            <label class="lib__search"><svg><use href="#i-search"/></svg><input id="libq" type="text" value="LB 4000" aria-label="Buscar en la biblioteca"></label>
+            <div class="lib__tags" id="libtags"></div>
+            <div class="lib__res" id="libres"></div>
+          </div>
+        </div>
+        <div class="feat__card">
+          <p class="eyebrow"><span class="es">Un solo sistema</span><span class="en">One system</span></p>
+          <h3><span class="es">Hecho a la medida, no cinco suscripciones conectadas.</span><span class="en">Built to fit, not five subscriptions stitched together.</span></h3>
+          <ul class="one">
+            <li><svg><use href="#i-check"/></svg><span class="es">Reemplaza las cuatro hojas de cálculo con una sola base de datos.</span><span class="en">Replaces the four spreadsheets with one database.</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Sin plataformas genéricas que haya que mantener hablando entre sí.</span><span class="en">No generic platforms that have to be kept talking to each other.</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Dimensionado para un equipo de menos de 50 personas, listo para crecer.</span><span class="en">Sized for a team under 50, ready to grow.</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Empieza con avisos por mensaje de texto. La app llega solo si hace falta.</span><span class="en">Starts with text notifications. The app comes only if it's needed.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: VALUE -->
+    <div class="pane" role="tabpanel" id="valor" aria-labelledby="t-valor" hidden>
+      <div class="pane__intro">
+        <h3 class="h-sub"><span class="es">Cada solicitud perdida es un servicio que hace otro. Cada máquina sin preventivo es un ingreso que no llega.</span><span class="en">Every lost request is a job someone else does. Every machine without preventive maintenance is revenue that never arrives.</span></h3>
+        <p class="lead"><span class="es">No tenemos aún sus cifras, así que no inventamos ninguna. Mueva los controles con sus números reales y vea el resultado.</span><span class="en">We don't have your numbers yet, so we didn't make any up. Move the sliders to your real numbers and see the result.</span></p>
+      </div>
+      <div class="calc">
+        <div class="calc__in">
+          <p class="calc__note"><svg><use href="#i-info"/></svg><span class="es">Los valores iniciales son de ejemplo. Ajústelos con sus datos.</span><span class="en">Starting values are examples. Adjust them to your data.</span></p>
+          <div class="field"><div class="field__top"><label for="c-req"><span class="es">Solicitudes de servicio al mes</span><span class="en">Service requests per month</span></label><output for="c-req" id="o-req" class="num"></output></div><input type="range" id="c-req" min="5" max="200" step="5" value="40"></div>
+          <div class="field"><div class="field__top"><label for="c-lost"><span class="es">Que se pierden o se demoran tanto que el cliente busca a otro</span><span class="en">Lost, or delayed so long the customer goes elsewhere</span></label><output for="c-lost" id="o-lost" class="num"></output></div><input type="range" id="c-lost" min="0" max="30" step="1" value="8"></div>
+          <div class="field"><div class="field__top"><label for="c-val"><span class="es">Valor promedio de un servicio (USD)</span><span class="en">Average value of a service job (USD)</span></label><output for="c-val" id="o-val" class="num"></output></div><input type="range" id="c-val" min="100" max="5000" step="50" value="600"></div>
+          <div class="field"><div class="field__top"><label for="c-mach"><span class="es">Máquinas instaladas en el territorio</span><span class="en">Machines installed in your territory</span></label><output for="c-mach" id="o-mach" class="num"></output></div><input type="range" id="c-mach" min="10" max="1000" step="10" value="150"></div>
+          <div class="field"><div class="field__top"><label for="c-pm"><span class="es">Que firmarían un plan preventivo al año</span><span class="en">That would sign a preventive plan per year</span></label><output for="c-pm" id="o-pm" class="num"></output></div><input type="range" id="c-pm" min="0" max="60" step="1" value="15"></div>
+          <div class="field"><div class="field__top"><label for="c-pmv"><span class="es">Valor anual de un plan preventivo por máquina (USD)</span><span class="en">Annual preventive plan value per machine (USD)</span></label><output for="c-pmv" id="o-pmv" class="num"></output></div><input type="range" id="c-pmv" min="200" max="6000" step="100" value="1200"></div>
+          <div class="field"><span class="field__top"><span class="es">Comparar con</span><span class="en">Compare with</span></span>
+            <div class="seg" role="group" id="c-opt">
+              <button type="button" data-opt="1" aria-pressed="false"><span class="es">Opción 1</span><span class="en">Option 1</span></button>
+              <button type="button" data-opt="2" aria-pressed="true"><span class="es">Opción 2</span><span class="en">Option 2</span></button>
+              <button type="button" data-opt="3" aria-pressed="false"><span class="es">Opción 3</span><span class="en">Option 3</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="calc__out" aria-live="polite">
+          <div class="big"><small><span class="es">Ingreso que hoy se escapa, por mes</span><span class="en">Revenue slipping away today, per month</span></small><b class="num" id="r-total">$0</b></div>
+          <div class="lines">
+            <div><span><span class="es">Servicios recuperados</span><span class="en">Recovered service jobs</span></span><b class="num" id="r-svc"></b></div>
+            <div><span><span class="es">Planes preventivos nuevos</span><span class="en">New preventive plans</span></span><b class="num" id="r-pm"></b></div>
+            <div><span><span class="es">Mensualidad de la opción</span><span class="en">Option monthly fee</span></span><b class="num" id="r-fee"></b></div>
+            <div><span><span class="es">Inversión inicial</span><span class="en">Setup investment</span></span><b class="num" id="r-setup"></b></div>
+          </div>
+          <p class="payback" id="r-pay"></p>
+        </div>
+      </div>
+      <div class="why3">
+        <div><h4><span class="es">Menos tiempo resolviendo lo mismo</span><span class="en">Less time solving the same thing twice</span></h4><p><span class="es">Una alarma resuelta una vez queda documentada para siempre. El técnico nuevo llega con lo que sabía el técnico con más años.</span><span class="en">An alarm solved once stays documented for good. A new tech shows up knowing what your most senior tech knows.</span></p></div>
+        <div><h4><span class="es">Oscar recupera su semana</span><span class="en">Oscar gets his week back</span></h4><p><span class="es">Asignar, avisar y perseguir estados lo hace el sistema.</span><span class="en">The system assigns, notifies and chases statuses.</span></p></div>
+        <div><h4><span class="es">Una ventaja frente a Okuma</span><span class="en">A stronger position with Okuma</span></h4><p><span class="es">Un distribuidor con registro de máquinas, tiempos de respuesta y reportes en inglés habla el idioma del fabricante.</span><span class="en">A distributor with a machine registry, response times and English reports speaks the manufacturer's language.</span></p></div>
+      </div>
+    </div>
+
+    <!-- TAB: INVESTMENT -->
+    <div class="pane" role="tabpanel" id="inversion" aria-labelledby="t-inversion" hidden>
+      <div class="pane__intro">
+        <h3 class="h-sub"><span class="es">Tres opciones. Empiecen donde tenga sentido y crezcan después.</span><span class="en">Three options. Start where it makes sense and grow from there.</span></h3>
+        <p class="lead"><span class="es">Precios en dólares, antes de impuestos. Las cifras finales se confirman en la sesión Blueprint, cuando veamos sus hojas de cálculo y procesos.</span><span class="en">Prices in USD, before taxes. Final figures are confirmed in the Blueprint session, once we've seen your spreadsheets and processes.</span></p>
+      </div>
+      <div class="blue">
+        <div>
+          <h3><span class="es">Sesión Blueprint</span><span class="en">Blueprint session</span></h3>
+          <p><span class="es">Revisamos sus cuatro hojas de cálculo, el flujo de servicio y de pedidos, y salimos con el plan exacto y el precio final. Se abona al proyecto. El plan es suyo, trabajen con nosotros o no.</span><span class="en">We review your four spreadsheets and your service and order flow, and leave with the exact plan and final price. Credited to the project. The plan is yours whether you work with us or not.</span></p>
+        </div>
+        <span class="blue__price num" data-money="997"></span>
+      </div>
+      <div class="tiers">
+        <article class="tier" data-tier="1">
+          <p class="tier__opt"><span class="es">Opción 1</span><span class="en">Option 1</span></p>
+          <h3><span class="es">Sitio web</span><span class="en">Website</span></h3>
+          <div class="tier__price"><b class="num" data-money="5000"></b><span class="num"><span class="es">inicial · </span><span class="en">setup · </span><span data-money="300"></span><span class="es"> al mes</span><span class="en"> per month</span></span></div>
+          <ul>
+            <li><svg><use href="#i-check"/></svg><span class="es">Sitio bilingüe a la medida</span><span class="en">Custom bilingual site</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Panel de administración semanal</span><span class="en">Weekly admin panel</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Formularios de servicio, repuestos y cotización</span><span class="en">Service, parts and quote forms</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">SEO y acceso para buscadores con IA</span><span class="en">SEO and AI search access</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Hosting, soporte y cambios menores</span><span class="en">Hosting, support and small changes</span></li>
+          </ul>
+          <button class="btn btn--ghost" type="button" data-choose="1"><span class="es">Elegir opción 1</span><span class="en">Choose option 1</span></button>
+        </article>
+        <article class="tier tier--rec" data-tier="2">
+          <span class="tier__tag"><span class="es">Recomendada</span><span class="en">Recommended</span></span>
+          <p class="tier__opt"><span class="es">Opción 2</span><span class="en">Option 2</span></p>
+          <h3><span class="es">Sitio web + mesa de servicio</span><span class="en">Website + service desk</span></h3>
+          <div class="tier__price"><b class="num"><span class="es">aprox. </span><span class="en">about </span><span data-money="9000"></span></b><span class="num"><span class="es">inicial · aprox. </span><span class="en">setup · about </span><span data-money="800"></span><span class="es"> al mes</span><span class="en"> per month</span></span></div>
+          <ul>
+            <li class="plus"><svg><use href="#i-check"/></svg><span class="es">Todo lo de la opción 1, más:</span><span class="en">Everything in option 1, plus:</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Tickets desde WhatsApp y la web, con estado</span><span class="en">Tickets from WhatsApp and web, with status</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Agente con IA bilingüe fuera de horario</span><span class="en">Bilingual AI agent after hours</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Fotos, video y reportes PDF firmados</span><span class="en">Photos, video and signed PDF reports</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Biblioteca de soluciones etiquetada</span><span class="en">Tagged fix library</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Registro de máquinas con próximo preventivo</span><span class="en">Machine registry with next preventive date</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Reemplaza las cuatro hojas de cálculo</span><span class="en">Replaces the four spreadsheets</span></li>
+          </ul>
+          <button class="btn btn--primary" type="button" data-choose="2"><span class="es">Elegir opción 2</span><span class="en">Choose option 2</span></button>
+        </article>
+        <article class="tier" data-tier="3">
+          <p class="tier__opt"><span class="es">Opción 3</span><span class="en">Option 3</span></p>
+          <h3><span class="es">Sistema completo</span><span class="en">Full system</span></h3>
+          <div class="tier__price"><b class="num"><span data-money="10000"></span><span class="tier__to"><span class="es"> a </span><span class="en"> to </span></span><span data-money="15000"></span></b><span class="num"><span class="es">inicial · aprox. </span><span class="en">setup · about </span><span data-money="1100"></span><span class="es"> al mes</span><span class="en"> per month</span></span></div>
+          <ul>
+            <li class="plus"><svg><use href="#i-check"/></svg><span class="es">Todo lo de la opción 2, más:</span><span class="en">Everything in option 2, plus:</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">CRM y embudo de ventas con licitaciones</span><span class="en">CRM and sales pipeline with tenders</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Seguimiento de pedidos</span><span class="en">Order tracking</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Asignación por cercanía y avisos al cliente</span><span class="en">Closest-tech assignment and customer updates</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Conexión con facturación</span><span class="en">Invoicing hooks</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">App para técnicos iOS y Android con firma</span><span class="en">iOS and Android tech app with signature</span></li>
+          </ul>
+          <button class="btn btn--ghost" type="button" data-choose="3"><span class="es">Elegir opción 3</span><span class="en">Choose option 3</span></button>
+        </article>
+      </div>
+      <div class="terms">
+        <div><b><span class="es">Pagos</span><span class="en">Payments</span></b><p><span class="es">50% de anticipo al firmar, 25% a mitad del proyecto y 25% al lanzar. En USD.</span><span class="en">50% deposit at signing, 25% at the project midpoint and 25% at launch. In USD.</span></p></div>
+        <div><b><span class="es">Sin permanencia</span><span class="en">No lock-in</span></b><p><span class="es">Mes a mes después del lanzamiento, con 30 días de aviso.</span><span class="en">Month to month after launch, 30 days notice.</span></p></div>
+        <div><b><span class="es">Uso al costo</span><span class="en">Usage at cost</span></b><p><span class="es">WhatsApp, IA y hosting se cobran a precio de costo, sin margen.</span><span class="en">WhatsApp, AI and hosting billed at cost, no markup.</span></p></div>
+        <div><b><span class="es">Fuera de alcance</span><span class="en">Out of scope</span></b><p><span class="es">Cualquier extra se cotiza aparte antes de hacerlo.</span><span class="en">Any extra is quoted separately before we do it.</span></p></div>
+      </div>
+    </div>
+
+    <!-- TAB: WHY US -->
+    <div class="pane" role="tabpanel" id="nosotros" aria-labelledby="t-nosotros" hidden>
+      <div class="us">
+        <div>
+          <h3 class="h-sub" style="margin-bottom:28px"><span class="es">Construimos el sistema, lo conectamos y nos quedamos después del lanzamiento.</span><span class="en">We build the system, connect it, and stay on after launch.</span></h3>
+          <ul class="us__list">
+            <li><span class="ic"><svg><use href="#i-msg"/></svg></span><div><h4><span class="es">Bilingüe, español e inglés</span><span class="en">Bilingual, Spanish and English</span></h4><p><span class="es">Reuniones, soporte y el agente con IA en el idioma que prefiera cada cliente. Reportes en inglés cuando los necesiten para Okuma.</span><span class="en">Meetings, support and the AI agent in whichever language each customer prefers. English reports when you need them for Okuma.</span></p></div></li>
+            <li><span class="ic"><svg><use href="#i-wrench"/></svg></span><div><h4><span class="es">Hecho para servicio técnico real</span><span class="en">Built for real technical service</span></h4><p><span class="es">Diseñado para trabajos que duran semanas y esperan repuestos, no para un checklist de cinco pasos.</span><span class="en">Designed for jobs that take weeks and wait on parts, not a five-step checklist.</span></p></div></li>
+            <li><span class="ic"><svg><use href="#i-steps"/></svg></span><div><h4><span class="es">Paso a paso, como lo pidieron</span><span class="en">Step by step, as you asked</span></h4><p><span class="es">Cada etapa entrega algo que funciona. Nunca pagan por lo que todavía no usan.</span><span class="en">Every stage delivers something that works. You never pay for what you're not using yet.</span></p></div></li>
+            <li><span class="ic"><svg><use href="#i-shield"/></svg></span><div><h4><span class="es">El sistema es suyo</span><span class="en">The system is yours</span></h4><p><span class="es">Sus datos, sus clientes, su historial. Lo monitoreamos y ajustamos cada mes.</span><span class="en">Your data, your customers, your history. We monitor and tune it every month.</span></p></div></li>
+          </ul>
+        </div>
+        <div class="us__img"><img src="img/tech.jpg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+
+    <!-- TAB: PLAN -->
+    <div class="pane" role="tabpanel" id="plan" aria-labelledby="t-plan" hidden>
+      <div class="pane__intro">
+        <h3 class="h-sub"><span class="es">Del primer día a la mesa de servicio funcionando, en unas nueve semanas.</span><span class="en">From day one to a working service desk in about nine weeks.</span></h3>
+        <p class="lead"><span class="es">Calendario estimado para la opción 2, con la etapa 3 como extensión. Se ajusta después de la sesión Blueprint.</span><span class="en">Estimated schedule for option 2, with stage 3 as an extension. Adjusted after the Blueprint session.</span></p>
+      </div>
+      <div class="gantt" role="img" aria-label="Calendario estimado por semanas">
+        <div class="gantt__in">
+          <div class="gantt__row gantt__row--head mono num"><span></span><span>S1</span><span>S2</span><span>S3</span><span>S4</span><span>S5</span><span>S6</span><span>S7</span><span>S8</span><span>S9</span><span>S10</span><span>S11</span><span>S12</span><span>S13</span><span>S14</span></div>
+          <div class="gantt__row"><div class="gantt__label"><span class="es">Sesión Blueprint</span><span class="en">Blueprint session</span><small><span class="es">Hojas de cálculo, flujos, plan final</span><span class="en">Spreadsheets, flows, final plan</span></small></div><div class="bar" style="grid-column:2/3"></div></div>
+          <div class="gantt__row"><div class="gantt__label"><span class="es">Sitio web</span><span class="en">Website</span><small><span class="es">Diseño, bilingüe, panel, formularios</span><span class="en">Design, bilingual, panel, forms</span></small></div><div class="bar" style="grid-column:3/7;animation-delay:.1s"></div></div>
+          <div class="gantt__row"><div class="gantt__label"><span class="es">Mesa de servicio</span><span class="en">Service desk</span><small><span class="es">Tickets, agente, biblioteca, registro</span><span class="en">Tickets, agent, library, registry</span></small></div><div class="bar" style="grid-column:5/11;animation-delay:.2s"></div></div>
+          <div class="gantt__row"><div class="gantt__label"><span class="es">Pruebas con su equipo</span><span class="en">Testing with your team</span><small><span class="es">Ustedes lo prueban antes de salir</span><span class="en">You test it before go-live</span></small></div><div class="bar bar--soft" style="grid-column:9/11;animation-delay:.3s"></div></div>
+          <div class="gantt__row"><div class="gantt__label"><span class="es">Etapa 3 · CRM</span><span class="en">Stage 3 · CRM</span><small><span class="es">Opción 3 o extensión posterior</span><span class="en">Option 3 or a later extension</span></small></div><div class="bar bar--outline" style="grid-column:10/16;animation-delay:.4s"></div></div>
+        </div>
+      </div>
+      <ol class="next">
+        <li class="is-date"><span class="next__n mono num"><span class="es">VIE 23 OCT · 11:00 BOG</span><span class="en">FRI OCT 23 · 11:00 BOG</span></span><h4><span class="es">Reunión con Esteban</span><span class="en">Meeting with Esteban</span></h4><p><span class="es">Google Meet. Revisamos esta propuesta juntos y resolvemos preguntas.</span><span class="en">Google Meet. We review this proposal together and answer questions.</span></p></li>
+        <li><span class="next__n"><span class="es">Paso 2</span><span class="en">Step 2</span></span><h4><span class="es">Comparten hojas e informes</span><span class="en">You share spreadsheets and reports</span></h4><p><span class="es">Las cuatro hojas de cálculo y un par de reportes de servicio actuales.</span><span class="en">The four spreadsheets and a couple of current service reports.</span></p></li>
+        <li><span class="next__n"><span class="es">Paso 3</span><span class="en">Step 3</span></span><h4><span class="es">Sesión Blueprint</span><span class="en">Blueprint session</span></h4><p><span class="es">Con ustedes y el equipo comercial. Salimos con alcance y precio final.</span><span class="en">With you and the sales team. We leave with final scope and price.</span></p></li>
+        <li><span class="next__n"><span class="es">Paso 4</span><span class="en">Step 4</span></span><h4><span class="es">Firma y arranque</span><span class="en">Sign and kick off</span></h4><p><span class="es">Anticipo del 50% y empezamos por el sitio web.</span><span class="en">50% deposit and we start with the website.</span></p></li>
+      </ol>
+      <div class="need">
+        <div><h4 class="h-sub" style="font-size:24px"><span class="es">Lo que nos ayuda a afinar el precio</span><span class="en">What helps us finalize the price</span></h4><p class="lead" style="margin-top:12px;font-size:16px"><span class="es">Si pueden traer estas respuestas al viernes, la sesión Blueprint será más corta.</span><span class="en">If you can bring these answers on Friday, the Blueprint session gets shorter.</span></p></div>
+        <ul>
+          <li><span class="es">¿Cuántos técnicos y cuántas solicitudes al mes?</span><span class="en">How many techs and requests per month?</span></li>
+          <li><span class="es">¿Cuántas máquinas instaladas en campo?</span><span class="en">How many machines installed in the field?</span></li>
+          <li><span class="es">¿Qué registra cada hoja de cálculo?</span><span class="en">What does each spreadsheet track?</span></li>
+          <li><span class="es">¿Cómo avanza un pedido y quién lo toca?</span><span class="en">How does an order move and who touches it?</span></li>
+          <li><span class="es">¿Venden hoy en Venezuela y las Guayanas?</span><span class="en">Do you sell in Venezuela and the Guianas today?</span></li>
+          <li><span class="es">¿El inglés es para clientes, para Okuma o ambos?</span><span class="en">Is English for customers, for Okuma, or both?</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="confirm" id="confirm" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" hidden>
+  <div class="confirm__box">
+    <h3 id="confirmTitle"><span class="es">¿Confirmar esta opción?</span><span class="en">Confirm this option?</span></h3>
+    <div class="confirm__sum"><b id="confirmName"></b><span id="confirmPrice" class="num"></span></div>
+    <p><span class="es">Le avisaremos al equipo de Neuromatic y empezaremos a preparar la propuesta formal con esta opción.</span><span class="en">We'll let the Neuromatic team know and start preparing the formal proposal around this option.</span></p>
+    <div class="confirm__act">
+      <button class="btn btn--primary" type="button" id="confirmYes"><span class="es">Confirmar</span><span class="en">Confirm</span></button>
+      <button class="btn btn--ghost" type="button" id="confirmNo"><span class="es">Volver</span><span class="en">Go back</span></button>
+    </div>
+  </div>
+</div>
+
+<section class="thanks" id="gracias" aria-labelledby="thanksTitle" hidden>
+  <div class="wrap thanks__in">
+    <div class="thanks__mark" aria-hidden="true"><svg><use href="#i-check"/></svg></div>
+    <h2 id="thanksTitle" tabindex="-1"><span class="es">Gracias. Recibimos su elección.</span><span class="en">Thank you. We received your choice.</span></h2>
+    <div class="thanks__choice">
+      <small><span class="es">Opción elegida</span><span class="en">Chosen option</span></small>
+      <b id="thanksName"></b>
+      <span id="thanksPrice" class="num"></span>
+    </div>
+    <p class="lead"><span class="es">Con esto en mente empezamos a preparar una propuesta formal con el alcance y el precio final. Les escribiremos muy pronto.</span><span class="en">With this in mind, we'll start preparing a formal proposal with the final scope and price. We'll be in touch very soon.</span></p>
+    <p class="thanks__fallback" id="thanksFallback" hidden><span class="es">Si no recibe noticias nuestras en un día hábil, escríbanos a </span><span class="en">If you don't hear from us within one business day, write to </span><b class="mono" id="thanksMail"></b></p>
+    <button class="btn btn--ghost" type="button" id="thanksBack"><svg style="transform:scaleX(-1)"><use href="#i-arrow"/></svg><span class="es">Volver a la propuesta</span><span class="en">Back to the proposal</span></button>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a class="wordmark" href="#inicio" style="font-size:20px">neuromatic<i></i></a>
+    <div class="foot__links">
+      <span id="footMail" class="mono"></span>
+      <a href="https://neuromatic.agency" target="_blank" rel="noopener">neuromatic.agency</a>
+      <span><span class="es">Propuesta confidencial para Mecanizados Group · válida 30 días</span><span class="en">Confidential proposal for Mecanizados Group · valid 30 days</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- edit these before sending ---------- */
+const CONFIG = {
+  email: "connect@neuromatic.agency",
+  // where a confirmed choice is sent; FormSubmit relays it to the inbox above
+  // (the first submission triggers a one-time activation email to that inbox)
+  formEndpoint: "https://formsubmit.co/ajax/connect@neuromatic.agency",
+  prices: { blueprint: 997 }               // tier prices live in data-money attributes
+};
+/* ----------------------------------------------- */
+
+document.documentElement.classList.add('js');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
+let lang = 'es';
+
+function money(n){
+  return lang === 'es' ? 'US$' + Math.round(n).toLocaleString('es-CO') : '$' + Math.round(n).toLocaleString('en-US');
+}
+function paintMoney(){ $$('[data-money]').forEach(el => el.textContent = money(+el.dataset.money)); }
+
+/* language */
+function setLang(l){
+  lang = l;
+  document.body.dataset.lang = l;
+  document.documentElement.lang = l;
+  $$('[data-set-lang]').forEach(b => b.setAttribute('aria-pressed', b.dataset.setLang === l));
+  paintMoney(); calc(); renderStory(curBeat, true); renderLib();
+  try{ localStorage.setItem('mg-lang', l); }catch(e){}
+}
+$$('[data-set-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.setLang)));
+
+/* header */
+const hdr = $('#top'), prog = $('#progress');
+function onScroll(){
+  const h = document.documentElement.scrollHeight - innerHeight;
+  prog.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`;
+  hdr.classList.toggle('scrolled', scrollY > 10);
+}
+addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+/* reveal */
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
+$$('.reveal').forEach(el => io.observe(el));
+
+/* ---------- HERO BEATS (scrubbed by scroll, works with or without WebGL) ---------- */
+(function heroBeats(){
+  const hero = $('.hero3d'), beats = $$('[data-hb]'), n = beats.length, num = $('#hbN');
+  function update(){
+    const r = hero.getBoundingClientRect(), span = r.height - innerHeight;
+    const p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 0;
+    hero.style.setProperty('--p', p.toFixed(4));
+    const f = p * (n - 1);
+    beats.forEach((b, i) => {
+      const d = f - i, o = Math.max(0, 1 - Math.abs(d) * 2.2);
+      b.style.setProperty('--o', (i === 0 && d < 0) || (i === n - 1 && d > 0) ? 1 : o.toFixed(3));
+      b.style.setProperty('--dy', (reduce ? 0 : -d * 40).toFixed(1) + 'px');
+      b.inert = o < 0.5;
+    });
+    if (num) num.textContent = String(Math.min(n, Math.round(f) + 1)).padStart(2, '0');
+    scrub(p);
+  }
+
+  /* the film: loaded as a Blob (works on hosts without HTTP Range), scrubbed with gated seeks */
+  const film = $('#film');
+  let busy = false, pending = null, lastT = -1, ready = false;
+  function seek(t){
+    if (Math.abs(t - lastT) < 0.008) return;
+    if (busy) { pending = t; return; }
+    busy = true; lastT = t; film.currentTime = t;
+  }
+  film.addEventListener('seeked', () => { busy = false; if (pending !== null) { const t = pending; pending = null; seek(t); } });
+  film.addEventListener('error', () => { busy = false; hero.classList.add('film-failed'); });
+  function scrub(p){ if (ready && film.duration) seek(p * (film.duration - 0.05)); }
+  async function loadFilm(){
+    if (reduce) return;                          // reduced motion: poster only
+    try {
+      const res = await fetch('film.mp4');
+      if (!res.ok) throw 0;
+      const total = +res.headers.get('content-length') || 0, reader = res.body.getReader(), parts = []; let got = 0;
+      for (;;) { const {done, value} = await reader.read(); if (done) break; parts.push(value); got += value.length; if (total) hero.style.setProperty('--load', (got / total).toFixed(3)); }
+      film.src = URL.createObjectURL(new Blob(parts, {type: 'video/mp4'}));
+      film.addEventListener('loadeddata', () => { ready = true; update(); hero.classList.add('film-ready'); }, {once: true});
+      film.load();
+    } catch { hero.classList.add('film-failed'); }
+  }
+
+  addEventListener('scroll', update, {passive:true}); addEventListener('resize', update); update();
+  loadFilm();
+  window.__film = film;
+})();
+
+/* ---------- STORY ---------- */
+const T = (es, en) => lang === 'es' ? es : en;
+function panel(n){
+  const hd = (left, right) => `<div class="tk__hd mono"><span>${left}</span>${right}</div>`;
+  if(n === 0) return `<div class="tk">${hd('MB-4000H · S/N 2214-0371', `<span class="chip chip--amber">${T('Alarma','Alarm')}</span>`)}
+    <div class="tk__bd"><dl class="kv mono"><dt>ALARM</dt><dd>${T('Servo eje Z · sobrecarga','Z-axis servo · overload')}</dd><dt>${T('Cliente','Customer')}</dt><dd>${T('Taller de ejemplo, Medellín','Example shop, Medellín')}</dd><dt>${T('Hora','Time')}</dt><dd>${T('Vie','Fri')} 21:47</dd></dl>
+    <div class="msg msg--in">${T('Hola, la máquina se paró con una alarma, ¿alguien me puede ayudar?','Hi, the machine stopped with an alarm, can anyone help?')}<small>WhatsApp · 21:48</small></div>
+    <div class="row" style="color:var(--dim);font-size:13px"><span>${T('Hoy: sin respuesta hasta el lunes','Today: no reply until Monday')}</span><span class="mono">0 ${T('tickets','tickets')}</span></div></div></div>`;
+  if(n === 1) return `<div class="tk">${hd('TICKET #MG-1047', `<span class="chip chip--white">${T('Pendiente','Pending')}</span>`)}
+    <div class="tk__bd"><div class="photo" role="img" aria-label=""></div>
+    <dl class="kv mono"><dt>${T('Modelo','Model')}</dt><dd>MB-4000H</dd><dt>${T('Serie','Serial')}</dt><dd>2214-0371</dd><dt>${T('Control','Control')}</dt><dd>OSP-P300</dd><dt>${T('Alarma','Alarm')}</dt><dd>1062 · Z ${T('sobrecarga','overload')}</dd><dt>${T('Canal','Channel')}</dt><dd>WhatsApp</dd></dl>
+    <div class="row" style="font-size:13px;color:var(--dim)"><span>${T('Creado automáticamente','Created automatically')}</span><span class="mono">21:48</span></div></div></div>`;
+  if(n === 2) return `<div class="tk">${hd('TICKET #MG-1047', `<span class="chip chip--white">${T('Asignado','Assigned')}</span>`)}
+    <div class="tk__bd"><div class="msg msg--out">${T('Recibimos su caso #MG-1047. Andrés, técnico de turno, lo tiene asignado y lo contacta mañana a las 8:00.','We received case #MG-1047. Andrés, the on-call tech, has it and will contact you tomorrow at 8:00.')}<small>${T('Agente IA · español','AI agent · Spanish')} · 21:49</small></div>
+    <div class="match"><span class="row"><b>${T('3 casos similares','3 similar cases')}</b><span class="chip">${T('Biblioteca','Library')}</span></span><small class="mono">1062 · OSP-P300 · MB-4000H</small><small>${T('Último: encoder Z con cable dañado, resuelto en 1 visita.','Last: Z encoder with damaged cable, fixed in 1 visit.')}</small></div>
+    <div class="row" style="font-size:13px;color:var(--dim)"><span>${T('Técnico más cercano: Andrés · 14 km','Closest tech: Andrés · 14 km')}</span></div></div></div>`;
+  if(n === 3) return `<div class="tk">${hd('TICKET #MG-1047', `<span class="chip chip--amber">${T('En espera','On hold')}</span>`)}
+    <div class="tk__bd"><ul class="tl">
+      <li>${T('Visita y diagnóstico','Visit and diagnosis')}<small>${T('Lun 08:10 · 6 fotos, 1 video','Mon 08:10 · 6 photos, 1 video')}</small></li>
+      <li class="now">${T('Esperando repuesto','Waiting on part')} · ${T('Japón','Japan')}<small class="mono">${T('Encoder Z · llega jue','Z encoder · arrives Thu')}</small></li>
+      <li>${T('Instalación y prueba','Install and test')}<small>${T('Programada','Scheduled')}</small></li></ul>
+    <div class="msg msg--in" style="max-width:100%">${T('Cliente notificado: "Su repuesto llega el jueves. Le confirmamos la visita."','Customer notified: "Your part arrives Thursday. We\'ll confirm the visit."')}<small>SMS · ${T('automático','automatic')}</small></div></div></div>`;
+  return `<div class="tk">${hd('TICKET #MG-1047', `<span class="chip chip--lime">${T('Terminado','Done')}</span>`)}
+    <div class="tk__bd"><dl class="kv"><dt>${T('Reporte','Report')}</dt><dd class="mono">MG-1047.pdf · 8 ${T('fotos','photos')}</dd><dt>${T('Factura','Invoice')}</dt><dd>${T('Lista para emitir','Ready to issue')}</dd><dt>${T('Biblioteca','Library')}</dt><dd>${T('Solución guardada','Fix saved')}</dd><dt>${T('Próximo preventivo','Next preventive')}</dt><dd class="mono">2027-04-22</dd></dl>
+    <div class="sig"><svg viewBox="0 0 150 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 30c10-18 16-24 18-18s-6 20 0 16 10-18 16-14-2 14 4 12 8-10 14-8 4 8 10 6 10-10 16-8 6 6 14 4 12-6 24-4"/></svg></div>
+    <small style="color:var(--dim)">${T('Firmado por el cliente · jue 15:30','Signed by customer · Thu 15:30')}</small></div></div>`;
+}
+let curBeat = 0;
+const stageUi = $('#stageUi'), bgs = $$('.stage__bg img');
+const bgFor = [0,1,1,1,3];
+function renderStory(n, force){
+  if(n === curBeat && !force && stageUi.innerHTML) return;
+  curBeat = n;
+  stageUi.innerHTML = panel(n);
+  bgs.forEach(img => img.classList.toggle('on', +img.dataset.bg === bgFor[n]));
+  $$('.beat').forEach(b => b.classList.toggle('is-on', +b.dataset.beat === n));
+  $$('.mini').forEach(m => m.innerHTML = panel(+m.dataset.mini));
+}
+const beatIO = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting) renderStory(+e.target.dataset.beat); });
+}, {rootMargin:'-45% 0px -45% 0px'});
+$$('.beat').forEach(b => beatIO.observe(b));
+
+/* ---------- FIX LIBRARY ---------- */
+const LIB = [
+  {t:{es:'Sobrecarga servo eje Z',en:'Z-axis servo overload'}, m:'MB-4000H', c:'OSP-P300', a:'1062', cl:{es:'Taller de ejemplo A',en:'Example shop A'}, d:{es:'Cable de encoder dañado. 1 visita.',en:'Damaged encoder cable. 1 visit.'}},
+  {t:{es:'Error de referencia del husillo',en:'Spindle orientation error'}, m:'LB 4000 EX', c:'OSP-P300L', a:'2054', cl:{es:'Taller de ejemplo B',en:'Example shop B'}, d:{es:'Sensor de proximidad desajustado. 2 h.',en:'Proximity sensor out of adjustment. 2 h.'}},
+  {t:{es:'Alarma de presión hidráulica',en:'Hydraulic pressure alarm'}, m:'LB 4000 EX', c:'OSP-P300L', a:'1210', cl:{es:'Taller de ejemplo C',en:'Example shop C'}, d:{es:'Filtro obstruido, cambio de aceite. 3 h.',en:'Clogged filter, oil change. 3 h.'}},
+  {t:{es:'Torreta no indexa',en:'Turret won\'t index'}, m:'LB 3000 EX II', c:'OSP-P300L', a:'1335', cl:{es:'Taller de ejemplo D',en:'Example shop D'}, d:{es:'Repuesto desde Japón. 9 días.',en:'Part from Japan. 9 days.'}},
+  {t:{es:'Cambiador de herramientas detenido',en:'Tool changer stopped'}, m:'GENOS M560-V', c:'OSP-P300M', a:'1471', cl:{es:'Taller de ejemplo E',en:'Example shop E'}, d:{es:'Ajuste del brazo ATC. 1 visita.',en:'ATC arm adjustment. 1 visit.'}}
+];
+function renderLib(){
+  const q = ($('#libq').value || '').toLowerCase().replace(/\s+/g,'');
+  const hits = LIB.filter(r => !q || [r.m, r.c, r.a, r.t[lang], r.cl[lang]].join(' ').toLowerCase().replace(/\s+/g,'').includes(q));
+  $('#libtags').innerHTML = [T('Cliente','Customer'), T('Máquina','Machine'), T('Modelo','Model'), T('Serie','Serial'), 'Control', T('Alarma','Alarm')].map(t => `<span>${t}</span>`).join('');
+  $('#libres').innerHTML = hits.length ? hits.map(r => `<div><b>${r.t[lang]}</b><em class="mono">${r.a}</em><small class="mono">${r.m} · ${r.c} · ${r.cl[lang]}</small><small>${r.d[lang]}</small></div>`).join('')
+    : `<p class="lib__empty">${T('Sin resultados. Pruebe con LB 4000, 1062 u OSP.','No results. Try LB 4000, 1062 or OSP.')}</p>`;
+}
+$('#libq').addEventListener('input', renderLib);
+
+/* ---------- CALCULATOR ---------- */
+const OPTS = {1:{setup:5000, fee:300}, 2:{setup:9000, fee:800}, 3:{setup:12500, fee:1100}};
+let opt = 2;
+function calc(){
+  const v = id => +$('#c-'+id).value;
+  const req=v('req'), lost=v('lost'), val=v('val'), mach=v('mach'), pm=v('pm'), pmv=v('pmv');
+  $('#o-req').textContent = req; $('#o-lost').textContent = lost + '%'; $('#o-val').textContent = money(val);
+  $('#o-mach').textContent = mach; $('#o-pm').textContent = pm + '%'; $('#o-pmv').textContent = money(pmv);
+  const svc = req * lost/100 * val;
+  const pmMo = mach * pm/100 * pmv / 12;
+  const total = svc + pmMo;
+  const o = OPTS[opt];
+  $('#r-total').textContent = money(total);
+  $('#r-svc').textContent = money(svc) + T(' /mes',' /mo');
+  $('#r-pm').textContent = money(pmMo) + T(' /mes',' /mo');
+  $('#r-fee').textContent = '− ' + money(o.fee) + T(' /mes',' /mo');
+  $('#r-setup').textContent = (opt===3 ? T('aprox. ','about ') : '') + money(o.setup);
+  const net = total - o.fee;
+  const pay = $('#r-pay');
+  if(net <= 0){ pay.innerHTML = T('Con estas cifras la opción no se paga sola. Probemos otros números juntos el viernes.','With these numbers the option doesn\'t pay for itself. Let\'s try other numbers together on Friday.'); }
+  else{
+    const months = o.setup / net;
+    const m = months < 1 ? T('menos de un mes','under a month') : (Math.ceil(months*10)/10).toLocaleString(lang==='es'?'es-CO':'en-US') + T(' meses',' months');
+    pay.innerHTML = T(`Con estos números, la inversión inicial se recupera en <b>${m}</b>.`, `With these numbers, the setup investment pays back in <b>${m}</b>.`);
+  }
+}
+$$('.calc input[type=range]').forEach(r => r.addEventListener('input', calc));
+$$('#c-opt button').forEach(b => b.addEventListener('click', () => { opt = +b.dataset.opt; $$('#c-opt button').forEach(x => x.setAttribute('aria-pressed', x === b)); calc(); }));
+
+/* ---------- TABS ---------- */
+const TABS = ['propuesta','valor','inversion','nosotros','plan'];
+function showTab(id, focus, scroll){
+  if(!TABS.includes(id)) return;
+  $$('.tab').forEach(t => { const on = t.dataset.tab === id; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; if(on && focus) t.focus(); });
+  $$('.pane').forEach(p => p.hidden = p.id !== id);
+  if(scroll) $('#propuesta-hub').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+  try{ history.replaceState(null, '', '#' + id); }catch(e){}
+}
+$$('.tab').forEach(t => t.addEventListener('click', () => {
+  showTab(t.dataset.tab);
+  const bar = $('.tabs'), paneTop = $('#' + t.dataset.tab).getBoundingClientRect().top;
+  if(paneTop < bar.getBoundingClientRect().bottom) window.scrollTo({top: scrollY + paneTop - bar.getBoundingClientRect().bottom - 24, behavior: reduce ? 'auto' : 'smooth'});
+}));
+$('.tabs__list').addEventListener('keydown', e => {
+  const i = TABS.indexOf($('.tab[aria-selected="true"]').dataset.tab);
+  if(e.key === 'ArrowRight'){ e.preventDefault(); showTab(TABS[(i+1)%TABS.length], true); }
+  if(e.key === 'ArrowLeft'){ e.preventDefault(); showTab(TABS[(i-1+TABS.length)%TABS.length], true); }
+});
+$$('[data-tab-link]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); showTab(a.dataset.tabLink, false, true); }));
+
+/* choose a tier -> confirm -> email the choice to CONFIG.email -> thank-you screen */
+const confirmBox = $('#confirm'), thanks = $('#gracias');
+let pick = null, lastFocus = null;
+const visibleText = el => (el ? el.innerText.replace(/\s+/g, ' ').trim() : '');
+function tierInfo(tier){
+  const n = tier.dataset.tier;
+  return { n, name: `${T('Opción', 'Option')} ${n} · ${visibleText(tier.querySelector('h3'))}`, price: visibleText(tier.querySelector('.tier__price')) };
+}
+function openConfirm(tier){
+  pick = tierInfo(tier); lastFocus = document.activeElement;
+  $$('.tier').forEach(t => t.classList.toggle('chosen', t === tier));
+  $('#confirmName').textContent = pick.name; $('#confirmPrice').textContent = pick.price;
+  confirmBox.hidden = false; $('#confirmYes').focus();
+}
+function closeConfirm(){ confirmBox.hidden = true; lastFocus?.focus(); }
+async function sendChoice(p){
+  const body = {
+    _subject: `Mecanizados Group eligió la Opción ${p.n}`,
+    _template: 'table', _captcha: 'false',
+    'Cliente': 'Mecanizados Group',
+    'Opción elegida': p.name,
+    'Inversión': p.price,
+    'Idioma de la página': lang === 'es' ? 'Español' : 'English',
+    'Fecha (Bogotá)': new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' })
+  };
+  const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 25000);   // FormSubmit can be slow to answer
+  try {
+    const res = await fetch(CONFIG.formEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body), signal: ctrl.signal });
+    const data = await res.json().catch(() => ({}));
+    return res.ok && String(data.success) !== 'false';
+  } catch { return false; } finally { clearTimeout(timer); }
+}
+function showThanks(p, sent){
+  $('#thanksName').textContent = p.name; $('#thanksPrice').textContent = p.price;
+  $('#thanksMail').textContent = CONFIG.email;
+  $('#thanksFallback').hidden = sent;
+  confirmBox.hidden = true; thanks.hidden = false; document.body.style.overflow = 'hidden';
+  thanks.scrollTop = 0; $('#thanksTitle').focus({ preventScroll: true });
+}
+$$('[data-choose]').forEach(b => b.addEventListener('click', () => openConfirm(b.closest('.tier'))));
+$('#confirmNo').addEventListener('click', closeConfirm);
+confirmBox.addEventListener('click', e => { if (e.target === confirmBox) closeConfirm(); });
+addEventListener('keydown', e => { if (e.key === 'Escape' && !confirmBox.hidden) closeConfirm(); });
+$('#confirmYes').addEventListener('click', async () => {
+  if (!pick) return;
+  const btn = $('#confirmYes'); btn.setAttribute('aria-busy', 'true');
+  const sent = await sendChoice(pick);
+  btn.removeAttribute('aria-busy');
+  showThanks(pick, sent);
+});
+$('#thanksBack').addEventListener('click', () => {
+  thanks.hidden = true; document.body.style.overflow = '';
+  showTab('inversion', false, true);
+});
+$('#footMail').textContent = CONFIG.email;
+
+/* ---------- init ---------- */
+let saved = null; try{ saved = localStorage.getItem('mg-lang'); }catch(e){}
+setLang(saved === 'en' ? 'en' : 'es');
+const h = (location.hash || '').slice(1);
+if(TABS.includes(h)) showTab(h, false, true);
+</script>
+</body>
+</html>
