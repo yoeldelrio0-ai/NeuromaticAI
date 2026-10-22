@@ -303,7 +303,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .tier__price{display:grid;gap:4px;padding-block:16px;border-block:1px solid var(--line)}
 .tier__price b{font-size:clamp(30px,3vw,40px);line-height:1;letter-spacing:-.035em;font-weight:800}
 .tier__price>span{font-size:15px;color:var(--muted)}
-.tier__to{font-size:.6em;font-weight:500;color:var(--dim);letter-spacing:0}
 .tier ul{display:grid;gap:10px;flex:1}
 .tier li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:14.5px;color:var(--muted);line-height:1.5}
 .tier li svg{width:16px;height:16px;margin-top:3px;color:var(--fg)}
@@ -713,8 +712,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
           <div class="lines">
             <div><span><span class="es">Servicios recuperados</span><span class="en">Recovered service jobs</span></span><b class="num" id="r-svc"></b></div>
             <div><span><span class="es">Planes preventivos nuevos</span><span class="en">New preventive plans</span></span><b class="num" id="r-pm"></b></div>
-            <div><span><span class="es">Mensualidad de la opción</span><span class="en">Option monthly fee</span></span><b class="num" id="r-fee"></b></div>
-            <div><span><span class="es">Inversión inicial</span><span class="en">Setup investment</span></span><b class="num" id="r-setup"></b></div>
+            <div><span><span class="es">Inversión (pago único)</span><span class="en">Investment (one-time)</span></span><b class="num" id="r-setup"></b></div>
           </div>
           <p class="payback" id="r-pay"></p>
         </div>
@@ -743,13 +741,13 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
         <article class="tier" data-tier="1">
           <p class="tier__opt"><span class="es">Opción 1</span><span class="en">Option 1</span></p>
           <h3><span class="es">Sitio web</span><span class="en">Website</span></h3>
-          <div class="tier__price"><b class="num" data-money="5000"></b><span class="num"><span class="es">inicial · </span><span class="en">setup · </span><span data-money="300"></span><span class="es"> al mes</span><span class="en"> per month</span></span></div>
+          <div class="tier__price"><b class="num" data-money="6500"></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
           <ul>
             <li><svg><use href="#i-check"/></svg><span class="es">Sitio bilingüe a la medida</span><span class="en">Custom bilingual site</span></li>
             <li><svg><use href="#i-check"/></svg><span class="es">Panel de administración semanal</span><span class="en">Weekly admin panel</span></li>
             <li><svg><use href="#i-check"/></svg><span class="es">Formularios de servicio, repuestos y cotización</span><span class="en">Service, parts and quote forms</span></li>
             <li><svg><use href="#i-check"/></svg><span class="es">SEO y acceso para buscadores con IA</span><span class="en">SEO and AI search access</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Hosting, soporte y cambios menores</span><span class="en">Hosting, support and small changes</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Hosting configurado y lanzamiento</span><span class="en">Hosting setup and launch</span></li>
           </ul>
           <button class="btn btn--ghost" type="button" data-choose="1"><span class="es">Elegir opción 1</span><span class="en">Choose option 1</span></button>
         </article>
@@ -757,7 +755,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
           <span class="tier__tag"><span class="es">Recomendada</span><span class="en">Recommended</span></span>
           <p class="tier__opt"><span class="es">Opción 2</span><span class="en">Option 2</span></p>
           <h3><span class="es">Sitio web + mesa de servicio</span><span class="en">Website + service desk</span></h3>
-          <div class="tier__price"><b class="num"><span class="es">aprox. </span><span class="en">about </span><span data-money="9000"></span></b><span class="num"><span class="es">inicial · aprox. </span><span class="en">setup · about </span><span data-money="800"></span><span class="es"> al mes</span><span class="en"> per month</span></span></div>
+          <div class="tier__price"><b class="num" data-money="12500"></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
           <ul>
             <li class="plus"><svg><use href="#i-check"/></svg><span class="es">Todo lo de la opción 1, más:</span><span class="en">Everything in option 1, plus:</span></li>
             <li><svg><use href="#i-check"/></svg><span class="es">Tickets desde WhatsApp y la web, con estado</span><span class="en">Tickets from WhatsApp and web, with status</span></li>
@@ -772,7 +770,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
         <article class="tier" data-tier="3">
           <p class="tier__opt"><span class="es">Opción 3</span><span class="en">Option 3</span></p>
           <h3><span class="es">Sistema completo</span><span class="en">Full system</span></h3>
-          <div class="tier__price"><b class="num"><span data-money="10000"></span><span class="tier__to"><span class="es"> a </span><span class="en"> to </span></span><span data-money="15000"></span></b><span class="num"><span class="es">inicial · aprox. </span><span class="en">setup · about </span><span data-money="1100"></span><span class="es"> al mes</span><span class="en"> per month</span></span></div>
+          <div class="tier__price"><b class="num" data-money="19500"></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
           <ul>
             <li class="plus"><svg><use href="#i-check"/></svg><span class="es">Todo lo de la opción 2, más:</span><span class="en">Everything in option 2, plus:</span></li>
             <li><svg><use href="#i-check"/></svg><span class="es">CRM y embudo de ventas con licitaciones</span><span class="en">CRM and sales pipeline with tenders</span></li>
@@ -786,8 +784,8 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
       </div>
       <div class="terms">
         <div><b><span class="es">Pagos</span><span class="en">Payments</span></b><p><span class="es">50% de anticipo al firmar, 25% a mitad del proyecto y 25% al lanzar. En USD.</span><span class="en">50% deposit at signing, 25% at the project midpoint and 25% at launch. In USD.</span></p></div>
-        <div><b><span class="es">Sin permanencia</span><span class="en">No lock-in</span></b><p><span class="es">Mes a mes después del lanzamiento, con 30 días de aviso.</span><span class="en">Month to month after launch, 30 days notice.</span></p></div>
-        <div><b><span class="es">Uso al costo</span><span class="en">Usage at cost</span></b><p><span class="es">WhatsApp, IA y hosting se cobran a precio de costo, sin margen.</span><span class="en">WhatsApp, AI and hosting billed at cost, no markup.</span></p></div>
+        <div><b><span class="es">Sin mensualidades</span><span class="en">No monthly fees</span></b><p><span class="es">Un solo pago por el proyecto. Sin contratos de permanencia.</span><span class="en">One payment for the project. No retainer, no lock-in.</span></p></div>
+        <div><b><span class="es">Servicios de terceros</span><span class="en">Third-party services</span></b><p><span class="es">WhatsApp, IA y hosting los pagan directo al proveedor, sin margen nuestro.</span><span class="en">WhatsApp, AI and hosting are paid straight to the provider, with no markup from us.</span></p></div>
         <div><b><span class="es">Fuera de alcance</span><span class="en">Out of scope</span></b><p><span class="es">Cualquier extra se cotiza aparte antes de hacerlo.</span><span class="en">Any extra is quoted separately before we do it.</span></p></div>
       </div>
     </div>
@@ -796,12 +794,12 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
     <div class="pane" role="tabpanel" id="nosotros" aria-labelledby="t-nosotros" hidden>
       <div class="us">
         <div>
-          <h3 class="h-sub" style="margin-bottom:28px"><span class="es">Construimos el sistema, lo conectamos y nos quedamos después del lanzamiento.</span><span class="en">We build the system, connect it, and stay on after launch.</span></h3>
+          <h3 class="h-sub" style="margin-bottom:28px"><span class="es">Construimos el sistema, lo conectamos y lo entregamos funcionando.</span><span class="en">We build the system, connect it, and hand it over working.</span></h3>
           <ul class="us__list">
             <li><span class="ic"><svg><use href="#i-msg"/></svg></span><div><h4><span class="es">Bilingüe, español e inglés</span><span class="en">Bilingual, Spanish and English</span></h4><p><span class="es">Reuniones, soporte y el agente con IA en el idioma que prefiera cada cliente. Reportes en inglés cuando los necesiten para Okuma.</span><span class="en">Meetings, support and the AI agent in whichever language each customer prefers. English reports when you need them for Okuma.</span></p></div></li>
             <li><span class="ic"><svg><use href="#i-wrench"/></svg></span><div><h4><span class="es">Hecho para servicio técnico real</span><span class="en">Built for real technical service</span></h4><p><span class="es">Diseñado para trabajos que duran semanas y esperan repuestos, no para un checklist de cinco pasos.</span><span class="en">Designed for jobs that take weeks and wait on parts, not a five-step checklist.</span></p></div></li>
             <li><span class="ic"><svg><use href="#i-steps"/></svg></span><div><h4><span class="es">Paso a paso, como lo pidieron</span><span class="en">Step by step, as you asked</span></h4><p><span class="es">Cada etapa entrega algo que funciona. Nunca pagan por lo que todavía no usan.</span><span class="en">Every stage delivers something that works. You never pay for what you're not using yet.</span></p></div></li>
-            <li><span class="ic"><svg><use href="#i-shield"/></svg></span><div><h4><span class="es">El sistema es suyo</span><span class="en">The system is yours</span></h4><p><span class="es">Sus datos, sus clientes, su historial. Lo monitoreamos y ajustamos cada mes.</span><span class="en">Your data, your customers, your history. We monitor and tune it every month.</span></p></div></li>
+            <li><span class="ic"><svg><use href="#i-shield"/></svg></span><div><h4><span class="es">El sistema es suyo</span><span class="en">The system is yours</span></h4><p><span class="es">Sus datos, sus clientes, su historial. Se lo entregamos documentado para que su equipo lo maneje.</span><span class="en">Your data, your customers, your history. We hand it over documented so your team can run it.</span></p></div></li>
           </ul>
         </div>
         <div class="us__img"><img src="img/tech.jpg" alt="" loading="lazy"></div>
@@ -811,7 +809,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
     <!-- TAB: PLAN -->
     <div class="pane" role="tabpanel" id="plan" aria-labelledby="t-plan" hidden>
       <div class="pane__intro">
-        <h3 class="h-sub"><span class="es">Del primer día a la mesa de servicio funcionando, en unas nueve semanas.</span><span class="en">From day one to a working service desk in about nine weeks.</span></h3>
+        <h3 class="h-sub"><span class="es">Del primer día a la mesa de servicio funcionando, en nueve semanas.</span><span class="en">From day one to a working service desk in nine weeks.</span></h3>
         <p class="lead"><span class="es">Calendario estimado para la opción 2, con la etapa 3 como extensión. Se ajusta después de la sesión Blueprint.</span><span class="en">Estimated schedule for option 2, with stage 3 as an extension. Adjusted after the Blueprint session.</span></p>
       </div>
       <div class="gantt" role="img" aria-label="Calendario estimado por semanas">
@@ -1038,7 +1036,7 @@ function renderLib(){
 $('#libq').addEventListener('input', renderLib);
 
 /* ---------- CALCULATOR ---------- */
-const OPTS = {1:{setup:5000, fee:300}, 2:{setup:9000, fee:800}, 3:{setup:12500, fee:1100}};
+const OPTS = {1:{setup:6500}, 2:{setup:12500}, 3:{setup:19500}};
 let opt = 2;
 function calc(){
   const v = id => +$('#c-'+id).value;
@@ -1052,15 +1050,14 @@ function calc(){
   $('#r-total').textContent = money(total);
   $('#r-svc').textContent = money(svc) + T(' /mes',' /mo');
   $('#r-pm').textContent = money(pmMo) + T(' /mes',' /mo');
-  $('#r-fee').textContent = '− ' + money(o.fee) + T(' /mes',' /mo');
-  $('#r-setup').textContent = (opt===3 ? T('aprox. ','about ') : '') + money(o.setup);
-  const net = total - o.fee;
+  $('#r-setup').textContent = money(o.setup);
+  const net = total;
   const pay = $('#r-pay');
   if(net <= 0){ pay.innerHTML = T('Con estas cifras la opción no se paga sola. Probemos otros números juntos el viernes.','With these numbers the option doesn\'t pay for itself. Let\'s try other numbers together on Friday.'); }
   else{
     const months = o.setup / net;
     const m = months < 1 ? T('menos de un mes','under a month') : (Math.ceil(months*10)/10).toLocaleString(lang==='es'?'es-CO':'en-US') + T(' meses',' months');
-    pay.innerHTML = T(`Con estos números, la inversión inicial se recupera en <b>${m}</b>.`, `With these numbers, the setup investment pays back in <b>${m}</b>.`);
+    pay.innerHTML = T(`Con estos números, la inversión se recupera en <b>${m}</b>.`, `With these numbers, the investment pays back in <b>${m}</b>.`);
   }
 }
 $$('.calc input[type=range]').forEach(r => r.addEventListener('input', calc));
