@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/mecanizados", "destination": "/mecanizados/", "permanent": true }
+  ]
+}
