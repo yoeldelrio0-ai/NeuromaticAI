@@ -220,6 +220,8 @@ body[data-lang="en"] .es{display:none!important}
 .tab[aria-selected="true"]{color:var(--bg);background:var(--fg)}
 .pane{animation:paneIn .45s cubic-bezier(.2,.7,.1,1)}
 @keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.invest{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 160px);padding-bottom:96px;margin-bottom:96px;border-bottom:1px solid var(--line)}
+@media (max-width:900px){.invest{padding-bottom:64px;margin-bottom:64px}}
 .pane__intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:48px}
 @media (max-width:900px){.pane__intro{grid-template-columns:1fr;gap:18px}}
 
@@ -303,6 +305,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .tier__price{display:grid;gap:4px;padding-block:16px;border-block:1px solid var(--line)}
 .tier__price b{font-size:clamp(30px,3vw,40px);line-height:1;letter-spacing:-.035em;font-weight:800}
 .tier__price>span{font-size:15px;color:var(--muted)}
+.tier__from{font-size:.5em;font-weight:500;color:var(--muted);letter-spacing:0}
 .tier ul{display:grid;gap:10px;flex:1}
 .tier li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:14.5px;color:var(--muted);line-height:1.5}
 .tier li svg{width:16px;height:16px;margin-top:3px;color:var(--fg)}
@@ -317,42 +320,8 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 @media (max-width:520px){.terms{grid-template-columns:1fr}}
 
 /* why us */
-.us{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
-.us__img{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);min-height:320px;position:relative}
-.us__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.us__list{display:grid;gap:0;border-top:1px solid var(--line)}
-.us__list li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
-.us__list .ic{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center}
-.us__list .ic svg{width:20px;height:20px}
-.us__list h4{font-size:18px;margin-bottom:4px}
-.us__list p{color:var(--muted);font-size:15px}
-@media (max-width:900px){.us{grid-template-columns:1fr}}
 
 /* plan */
-.gantt{border:1px solid var(--line);border-radius:var(--r);background:var(--bg);overflow-x:auto}
-.gantt__in{min-width:720px}
-.gantt__row{display:grid;grid-template-columns:220px repeat(14,minmax(0,1fr));align-items:center;border-bottom:1px solid var(--line);min-height:58px}
-.gantt__row:last-child{border-bottom:0}
-.gantt__row--head{min-height:42px;font-size:12px;color:var(--dim)}
-.gantt__row--head span{text-align:center}
-.gantt__label{padding:10px 18px;font-size:14.5px;font-weight:600;line-height:1.3}
-.gantt__label small{display:block;font-weight:400;color:var(--dim);font-size:12.5px}
-.bar{height:22px;border-radius:999px;background:var(--fg);transform-origin:0 50%;animation:barIn .9s cubic-bezier(.2,.7,.1,1) both}
-.bar--soft{background:var(--line-2)}
-.bar--outline{background:transparent;border:1.5px dashed var(--dim)}
-@keyframes barIn{from{transform:scaleX(0)}to{transform:none}}
-.next{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
-.next li{border:1px solid var(--line);border-radius:var(--r);padding:22px;background:var(--bg);display:grid;gap:10px;align-content:start}
-.next__n{font-size:13px;color:var(--dim);font-weight:600}
-.next li h4{font-size:17px;line-height:1.3}
-.next li p{font-size:14px;color:var(--muted)}
-.next li.is-date{border-color:var(--fg)}
-.need{margin-top:24px;border:1px solid var(--line);border-radius:var(--r);padding:28px;background:var(--bg);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:32px}
-.need ul{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}
-.need li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:14.5px;color:var(--muted)}
-.need li::before{content:"";width:12px;height:12px;border:1.5px solid var(--dim);border-radius:3px;margin-top:5px}
-@media (max-width:980px){.next{grid-template-columns:1fr 1fr}.need{grid-template-columns:1fr}}
-@media (max-width:560px){.next{grid-template-columns:1fr}.need ul{grid-template-columns:1fr}}
 
 /* confirm a choice, then the thank-you screen */
 .confirm{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));background:rgba(10,10,10,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
@@ -609,9 +578,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
       <div class="tabs__list" role="tablist" aria-label="Propuesta">
         <button class="tab" role="tab" id="t-propuesta" aria-controls="propuesta" aria-selected="true" data-tab="propuesta"><span class="es">La propuesta</span><span class="en">The proposal</span></button>
         <button class="tab" role="tab" id="t-valor" aria-controls="valor" aria-selected="false" tabindex="-1" data-tab="valor"><span class="es">Por qué vale la pena</span><span class="en">Why it's worth it</span></button>
-        <button class="tab" role="tab" id="t-inversion" aria-controls="inversion" aria-selected="false" tabindex="-1" data-tab="inversion"><span class="es">Inversión</span><span class="en">Investment</span></button>
-        <button class="tab" role="tab" id="t-nosotros" aria-controls="nosotros" aria-selected="false" tabindex="-1" data-tab="nosotros"><span class="es">Por qué Neuromatic</span><span class="en">Why Neuromatic</span></button>
-        <button class="tab" role="tab" id="t-plan" aria-controls="plan" aria-selected="false" tabindex="-1" data-tab="plan"><span class="es">Plan y próximos pasos</span><span class="en">Plan and next steps</span></button>
       </div>
     </div>
   </div>
@@ -619,6 +585,72 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
   <div class="wrap">
     <!-- TAB: PROPOSAL -->
     <div class="pane" role="tabpanel" id="propuesta" aria-labelledby="t-propuesta">
+      <!-- INVESTMENT: first, so the options are seen before anything else -->
+      <div class="invest" id="inversion">
+      <div class="pane__intro">
+        <h3 class="h-sub"><span class="es">Tres opciones. Empiecen donde tenga sentido y crezcan después.</span><span class="en">Three options. Start where it makes sense and grow from there.</span></h3>
+        <p class="lead"><span class="es">Precios en dólares, antes de impuestos. Las cifras finales se confirman en la sesión Blueprint, cuando veamos sus hojas de cálculo y procesos.</span><span class="en">Prices in USD, before taxes. Final figures are confirmed in the Blueprint session, once we've seen your spreadsheets and processes.</span></p>
+      </div>
+      <div class="blue">
+        <div>
+          <h3><span class="es">Sesión Blueprint</span><span class="en">Blueprint session</span></h3>
+          <p><span class="es">Revisamos sus cuatro hojas de cálculo, el flujo de servicio y de pedidos, y salimos con el plan exacto y el precio final. Se abona al proyecto. El plan es suyo, trabajen con nosotros o no.</span><span class="en">We review your four spreadsheets and your service and order flow, and leave with the exact plan and final price. Credited to the project. The plan is yours whether you work with us or not.</span></p>
+        </div>
+        <span class="blue__price num" data-money="997"></span>
+      </div>
+      <div class="tiers">
+        <article class="tier" data-tier="1">
+          <p class="tier__opt"><span class="es">Opción 1</span><span class="en">Option 1</span></p>
+          <h3><span class="es">Sitio web</span><span class="en">Website</span></h3>
+          <div class="tier__price"><b class="num" data-money="5500"></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
+          <ul>
+            <li><svg><use href="#i-check"/></svg><span class="es">Sitio bilingüe a la medida</span><span class="en">Custom bilingual site</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Panel de administración semanal</span><span class="en">Weekly admin panel</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Formularios de servicio, repuestos y cotización</span><span class="en">Service, parts and quote forms</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">SEO y acceso para buscadores con IA</span><span class="en">SEO and AI search access</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Hosting configurado y lanzamiento</span><span class="en">Hosting setup and launch</span></li>
+          </ul>
+          <button class="btn btn--ghost" type="button" data-choose="1"><span class="es">Elegir opción 1</span><span class="en">Choose option 1</span></button>
+        </article>
+        <article class="tier tier--rec" data-tier="2">
+          <span class="tier__tag"><span class="es">Recomendada</span><span class="en">Recommended</span></span>
+          <p class="tier__opt"><span class="es">Opción 2</span><span class="en">Option 2</span></p>
+          <h3><span class="es">Sitio web + mesa de servicio</span><span class="en">Website + service desk</span></h3>
+          <div class="tier__price"><b class="num" data-money="9500"></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
+          <ul>
+            <li class="plus"><svg><use href="#i-check"/></svg><span class="es">Todo lo de la opción 1, más:</span><span class="en">Everything in option 1, plus:</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Tickets desde WhatsApp y la web, con estado</span><span class="en">Tickets from WhatsApp and web, with status</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Agente con IA bilingüe fuera de horario</span><span class="en">Bilingual AI agent after hours</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Fotos, video y reportes PDF firmados</span><span class="en">Photos, video and signed PDF reports</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Biblioteca de soluciones etiquetada</span><span class="en">Tagged fix library</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Registro de máquinas con próximo preventivo</span><span class="en">Machine registry with next preventive date</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Reemplaza las cuatro hojas de cálculo</span><span class="en">Replaces the four spreadsheets</span></li>
+          </ul>
+          <button class="btn btn--primary" type="button" data-choose="2"><span class="es">Elegir opción 2</span><span class="en">Choose option 2</span></button>
+        </article>
+        <article class="tier" data-tier="3">
+          <p class="tier__opt"><span class="es">Opción 3</span><span class="en">Option 3</span></p>
+          <h3><span class="es">Sistema completo</span><span class="en">Full system</span></h3>
+          <div class="tier__price"><b class="num"><span class="tier__from"><span class="es">desde </span><span class="en">starting at </span></span><span data-money="10000"></span></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
+          <ul>
+            <li class="plus"><svg><use href="#i-check"/></svg><span class="es">Todo lo de la opción 2, más:</span><span class="en">Everything in option 2, plus:</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">CRM y embudo de ventas con licitaciones</span><span class="en">CRM and sales pipeline with tenders</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Seguimiento de pedidos</span><span class="en">Order tracking</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Asignación por cercanía y avisos al cliente</span><span class="en">Closest-tech assignment and customer updates</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Conexión con facturación</span><span class="en">Invoicing hooks</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Web app para técnicos con firma</span><span class="en">Tech web app with signature</span></li>
+          </ul>
+          <button class="btn btn--ghost" type="button" data-choose="3"><span class="es">Elegir opción 3</span><span class="en">Choose option 3</span></button>
+        </article>
+      </div>
+      <div class="terms">
+        <div><b><span class="es">Pagos</span><span class="en">Payments</span></b><p><span class="es">50% de anticipo al firmar, 25% a mitad del proyecto y 25% al lanzar. En USD.</span><span class="en">50% deposit at signing, 25% at the project midpoint and 25% at launch. In USD.</span></p></div>
+        <div><b><span class="es">Sin mensualidades</span><span class="en">No monthly fees</span></b><p><span class="es">Un solo pago por el proyecto. Sin contratos de permanencia.</span><span class="en">One payment for the project. No retainer, no lock-in.</span></p></div>
+        <div><b><span class="es">Servicios de terceros</span><span class="en">Third-party services</span></b><p><span class="es">WhatsApp, IA y hosting los pagan directo al proveedor, sin margen nuestro.</span><span class="en">WhatsApp, AI and hosting are paid straight to the provider, with no markup from us.</span></p></div>
+        <div><b><span class="es">Fuera de alcance</span><span class="en">Out of scope</span></b><p><span class="es">Cualquier extra se cotiza aparte antes de hacerlo.</span><span class="en">Any extra is quoted separately before we do it.</span></p></div>
+      </div>
+      </div>
+
       <div class="pane__intro">
         <h3 class="h-sub"><span class="es">Tres etapas, en el orden que pidió Oscar. Cada una funciona sola y prepara la siguiente.</span><span class="en">Three stages, in the order Oscar asked for. Each one works on its own and sets up the next.</span></h3>
         <p class="lead"><span class="es">Recomendamos empezar por el sitio y la mesa de servicio juntos, porque ahí es donde hoy se pierden solicitudes y horas. El CRM completo llega cuando la base ya esté funcionando.</span><span class="en">We recommend starting with the website and service desk together, since that's where requests and hours get lost today. The full CRM comes once the foundation is running.</span></p>
@@ -657,7 +689,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
             <li><span class="es">Seguimiento de pedidos para quien maneja las órdenes</span><span class="en">Order tracking for whoever runs orders</span></li>
             <li><span class="es">Asignación al técnico más cercano y avisos al cliente</span><span class="en">Assignment to the closest tech and customer notifications</span></li>
             <li><span class="es">Conexión con facturación</span><span class="en">Invoicing hooks</span></li>
-            <li><span class="es">App para técnicos en iOS y Android, si el diagnóstico lo justifica</span><span class="en">iOS and Android tech app, if discovery shows it's needed</span></li>
+            <li><span class="es">Web app para técnicos con firma, sin instalar nada</span><span class="en">Tech web app with signature, nothing to install</span></li>
           </ul>
         </div>
       </div>
@@ -678,7 +710,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
             <li><svg><use href="#i-check"/></svg><span class="es">Reemplaza las cuatro hojas de cálculo con una sola base de datos.</span><span class="en">Replaces the four spreadsheets with one database.</span></li>
             <li><svg><use href="#i-check"/></svg><span class="es">Sin plataformas genéricas que haya que mantener hablando entre sí.</span><span class="en">No generic platforms that have to be kept talking to each other.</span></li>
             <li><svg><use href="#i-check"/></svg><span class="es">Dimensionado para un equipo de menos de 50 personas, listo para crecer.</span><span class="en">Sized for a team under 50, ready to grow.</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Empieza con avisos por mensaje de texto. La app llega solo si hace falta.</span><span class="en">Starts with text notifications. The app comes only if it's needed.</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Empieza con avisos por mensaje de texto. La web app para técnicos llega con la opción 3.</span><span class="en">Starts with text notifications. The tech web app comes with option 3.</span></li>
           </ul>
         </div>
       </div>
@@ -724,122 +756,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
       </div>
     </div>
 
-    <!-- TAB: INVESTMENT -->
-    <div class="pane" role="tabpanel" id="inversion" aria-labelledby="t-inversion" hidden>
-      <div class="pane__intro">
-        <h3 class="h-sub"><span class="es">Tres opciones. Empiecen donde tenga sentido y crezcan después.</span><span class="en">Three options. Start where it makes sense and grow from there.</span></h3>
-        <p class="lead"><span class="es">Precios en dólares, antes de impuestos. Las cifras finales se confirman en la sesión Blueprint, cuando veamos sus hojas de cálculo y procesos.</span><span class="en">Prices in USD, before taxes. Final figures are confirmed in the Blueprint session, once we've seen your spreadsheets and processes.</span></p>
-      </div>
-      <div class="blue">
-        <div>
-          <h3><span class="es">Sesión Blueprint</span><span class="en">Blueprint session</span></h3>
-          <p><span class="es">Revisamos sus cuatro hojas de cálculo, el flujo de servicio y de pedidos, y salimos con el plan exacto y el precio final. Se abona al proyecto. El plan es suyo, trabajen con nosotros o no.</span><span class="en">We review your four spreadsheets and your service and order flow, and leave with the exact plan and final price. Credited to the project. The plan is yours whether you work with us or not.</span></p>
-        </div>
-        <span class="blue__price num" data-money="997"></span>
-      </div>
-      <div class="tiers">
-        <article class="tier" data-tier="1">
-          <p class="tier__opt"><span class="es">Opción 1</span><span class="en">Option 1</span></p>
-          <h3><span class="es">Sitio web</span><span class="en">Website</span></h3>
-          <div class="tier__price"><b class="num" data-money="6500"></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
-          <ul>
-            <li><svg><use href="#i-check"/></svg><span class="es">Sitio bilingüe a la medida</span><span class="en">Custom bilingual site</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Panel de administración semanal</span><span class="en">Weekly admin panel</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Formularios de servicio, repuestos y cotización</span><span class="en">Service, parts and quote forms</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">SEO y acceso para buscadores con IA</span><span class="en">SEO and AI search access</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Hosting configurado y lanzamiento</span><span class="en">Hosting setup and launch</span></li>
-          </ul>
-          <button class="btn btn--ghost" type="button" data-choose="1"><span class="es">Elegir opción 1</span><span class="en">Choose option 1</span></button>
-        </article>
-        <article class="tier tier--rec" data-tier="2">
-          <span class="tier__tag"><span class="es">Recomendada</span><span class="en">Recommended</span></span>
-          <p class="tier__opt"><span class="es">Opción 2</span><span class="en">Option 2</span></p>
-          <h3><span class="es">Sitio web + mesa de servicio</span><span class="en">Website + service desk</span></h3>
-          <div class="tier__price"><b class="num" data-money="12500"></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
-          <ul>
-            <li class="plus"><svg><use href="#i-check"/></svg><span class="es">Todo lo de la opción 1, más:</span><span class="en">Everything in option 1, plus:</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Tickets desde WhatsApp y la web, con estado</span><span class="en">Tickets from WhatsApp and web, with status</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Agente con IA bilingüe fuera de horario</span><span class="en">Bilingual AI agent after hours</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Fotos, video y reportes PDF firmados</span><span class="en">Photos, video and signed PDF reports</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Biblioteca de soluciones etiquetada</span><span class="en">Tagged fix library</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Registro de máquinas con próximo preventivo</span><span class="en">Machine registry with next preventive date</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Reemplaza las cuatro hojas de cálculo</span><span class="en">Replaces the four spreadsheets</span></li>
-          </ul>
-          <button class="btn btn--primary" type="button" data-choose="2"><span class="es">Elegir opción 2</span><span class="en">Choose option 2</span></button>
-        </article>
-        <article class="tier" data-tier="3">
-          <p class="tier__opt"><span class="es">Opción 3</span><span class="en">Option 3</span></p>
-          <h3><span class="es">Sistema completo</span><span class="en">Full system</span></h3>
-          <div class="tier__price"><b class="num" data-money="19500"></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
-          <ul>
-            <li class="plus"><svg><use href="#i-check"/></svg><span class="es">Todo lo de la opción 2, más:</span><span class="en">Everything in option 2, plus:</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">CRM y embudo de ventas con licitaciones</span><span class="en">CRM and sales pipeline with tenders</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Seguimiento de pedidos</span><span class="en">Order tracking</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Asignación por cercanía y avisos al cliente</span><span class="en">Closest-tech assignment and customer updates</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Conexión con facturación</span><span class="en">Invoicing hooks</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">App para técnicos iOS y Android con firma</span><span class="en">iOS and Android tech app with signature</span></li>
-          </ul>
-          <button class="btn btn--ghost" type="button" data-choose="3"><span class="es">Elegir opción 3</span><span class="en">Choose option 3</span></button>
-        </article>
-      </div>
-      <div class="terms">
-        <div><b><span class="es">Pagos</span><span class="en">Payments</span></b><p><span class="es">50% de anticipo al firmar, 25% a mitad del proyecto y 25% al lanzar. En USD.</span><span class="en">50% deposit at signing, 25% at the project midpoint and 25% at launch. In USD.</span></p></div>
-        <div><b><span class="es">Sin mensualidades</span><span class="en">No monthly fees</span></b><p><span class="es">Un solo pago por el proyecto. Sin contratos de permanencia.</span><span class="en">One payment for the project. No retainer, no lock-in.</span></p></div>
-        <div><b><span class="es">Servicios de terceros</span><span class="en">Third-party services</span></b><p><span class="es">WhatsApp, IA y hosting los pagan directo al proveedor, sin margen nuestro.</span><span class="en">WhatsApp, AI and hosting are paid straight to the provider, with no markup from us.</span></p></div>
-        <div><b><span class="es">Fuera de alcance</span><span class="en">Out of scope</span></b><p><span class="es">Cualquier extra se cotiza aparte antes de hacerlo.</span><span class="en">Any extra is quoted separately before we do it.</span></p></div>
-      </div>
-    </div>
-
-    <!-- TAB: WHY US -->
-    <div class="pane" role="tabpanel" id="nosotros" aria-labelledby="t-nosotros" hidden>
-      <div class="us">
-        <div>
-          <h3 class="h-sub" style="margin-bottom:28px"><span class="es">Construimos el sistema, lo conectamos y lo entregamos funcionando.</span><span class="en">We build the system, connect it, and hand it over working.</span></h3>
-          <ul class="us__list">
-            <li><span class="ic"><svg><use href="#i-msg"/></svg></span><div><h4><span class="es">Bilingüe, español e inglés</span><span class="en">Bilingual, Spanish and English</span></h4><p><span class="es">Reuniones, soporte y el agente con IA en el idioma que prefiera cada cliente. Reportes en inglés cuando los necesiten para Okuma.</span><span class="en">Meetings, support and the AI agent in whichever language each customer prefers. English reports when you need them for Okuma.</span></p></div></li>
-            <li><span class="ic"><svg><use href="#i-wrench"/></svg></span><div><h4><span class="es">Hecho para servicio técnico real</span><span class="en">Built for real technical service</span></h4><p><span class="es">Diseñado para trabajos que duran semanas y esperan repuestos, no para un checklist de cinco pasos.</span><span class="en">Designed for jobs that take weeks and wait on parts, not a five-step checklist.</span></p></div></li>
-            <li><span class="ic"><svg><use href="#i-steps"/></svg></span><div><h4><span class="es">Paso a paso, como lo pidieron</span><span class="en">Step by step, as you asked</span></h4><p><span class="es">Cada etapa entrega algo que funciona. Nunca pagan por lo que todavía no usan.</span><span class="en">Every stage delivers something that works. You never pay for what you're not using yet.</span></p></div></li>
-            <li><span class="ic"><svg><use href="#i-shield"/></svg></span><div><h4><span class="es">El sistema es suyo</span><span class="en">The system is yours</span></h4><p><span class="es">Sus datos, sus clientes, su historial. Se lo entregamos documentado para que su equipo lo maneje.</span><span class="en">Your data, your customers, your history. We hand it over documented so your team can run it.</span></p></div></li>
-          </ul>
-        </div>
-        <div class="us__img"><img src="img/tech.jpg" alt="" loading="lazy"></div>
-      </div>
-    </div>
-
-    <!-- TAB: PLAN -->
-    <div class="pane" role="tabpanel" id="plan" aria-labelledby="t-plan" hidden>
-      <div class="pane__intro">
-        <h3 class="h-sub"><span class="es">Del primer día a la mesa de servicio funcionando, en nueve semanas.</span><span class="en">From day one to a working service desk in nine weeks.</span></h3>
-        <p class="lead"><span class="es">Calendario estimado para la opción 2, con la etapa 3 como extensión. Se ajusta después de la sesión Blueprint.</span><span class="en">Estimated schedule for option 2, with stage 3 as an extension. Adjusted after the Blueprint session.</span></p>
-      </div>
-      <div class="gantt" role="img" aria-label="Calendario estimado por semanas">
-        <div class="gantt__in">
-          <div class="gantt__row gantt__row--head mono num"><span></span><span>S1</span><span>S2</span><span>S3</span><span>S4</span><span>S5</span><span>S6</span><span>S7</span><span>S8</span><span>S9</span><span>S10</span><span>S11</span><span>S12</span><span>S13</span><span>S14</span></div>
-          <div class="gantt__row"><div class="gantt__label"><span class="es">Sesión Blueprint</span><span class="en">Blueprint session</span><small><span class="es">Hojas de cálculo, flujos, plan final</span><span class="en">Spreadsheets, flows, final plan</span></small></div><div class="bar" style="grid-column:2/3"></div></div>
-          <div class="gantt__row"><div class="gantt__label"><span class="es">Sitio web</span><span class="en">Website</span><small><span class="es">Diseño, bilingüe, panel, formularios</span><span class="en">Design, bilingual, panel, forms</span></small></div><div class="bar" style="grid-column:3/7;animation-delay:.1s"></div></div>
-          <div class="gantt__row"><div class="gantt__label"><span class="es">Mesa de servicio</span><span class="en">Service desk</span><small><span class="es">Tickets, agente, biblioteca, registro</span><span class="en">Tickets, agent, library, registry</span></small></div><div class="bar" style="grid-column:5/11;animation-delay:.2s"></div></div>
-          <div class="gantt__row"><div class="gantt__label"><span class="es">Pruebas con su equipo</span><span class="en">Testing with your team</span><small><span class="es">Ustedes lo prueban antes de salir</span><span class="en">You test it before go-live</span></small></div><div class="bar bar--soft" style="grid-column:9/11;animation-delay:.3s"></div></div>
-          <div class="gantt__row"><div class="gantt__label"><span class="es">Etapa 3 · CRM</span><span class="en">Stage 3 · CRM</span><small><span class="es">Opción 3 o extensión posterior</span><span class="en">Option 3 or a later extension</span></small></div><div class="bar bar--outline" style="grid-column:10/16;animation-delay:.4s"></div></div>
-        </div>
-      </div>
-      <ol class="next">
-        <li class="is-date"><span class="next__n mono num"><span class="es">VIE 23 OCT · 11:00 BOG</span><span class="en">FRI OCT 23 · 11:00 BOG</span></span><h4><span class="es">Reunión con Esteban</span><span class="en">Meeting with Esteban</span></h4><p><span class="es">Google Meet. Revisamos esta propuesta juntos y resolvemos preguntas.</span><span class="en">Google Meet. We review this proposal together and answer questions.</span></p></li>
-        <li><span class="next__n"><span class="es">Paso 2</span><span class="en">Step 2</span></span><h4><span class="es">Comparten hojas e informes</span><span class="en">You share spreadsheets and reports</span></h4><p><span class="es">Las cuatro hojas de cálculo y un par de reportes de servicio actuales.</span><span class="en">The four spreadsheets and a couple of current service reports.</span></p></li>
-        <li><span class="next__n"><span class="es">Paso 3</span><span class="en">Step 3</span></span><h4><span class="es">Sesión Blueprint</span><span class="en">Blueprint session</span></h4><p><span class="es">Con ustedes y el equipo comercial. Salimos con alcance y precio final.</span><span class="en">With you and the sales team. We leave with final scope and price.</span></p></li>
-        <li><span class="next__n"><span class="es">Paso 4</span><span class="en">Step 4</span></span><h4><span class="es">Firma y arranque</span><span class="en">Sign and kick off</span></h4><p><span class="es">Anticipo del 50% y empezamos por el sitio web.</span><span class="en">50% deposit and we start with the website.</span></p></li>
-      </ol>
-      <div class="need">
-        <div><h4 class="h-sub" style="font-size:24px"><span class="es">Lo que nos ayuda a afinar el precio</span><span class="en">What helps us finalize the price</span></h4><p class="lead" style="margin-top:12px;font-size:16px"><span class="es">Si pueden traer estas respuestas al viernes, la sesión Blueprint será más corta.</span><span class="en">If you can bring these answers on Friday, the Blueprint session gets shorter.</span></p></div>
-        <ul>
-          <li><span class="es">¿Cuántos técnicos y cuántas solicitudes al mes?</span><span class="en">How many techs and requests per month?</span></li>
-          <li><span class="es">¿Cuántas máquinas instaladas en campo?</span><span class="en">How many machines installed in the field?</span></li>
-          <li><span class="es">¿Qué registra cada hoja de cálculo?</span><span class="en">What does each spreadsheet track?</span></li>
-          <li><span class="es">¿Cómo avanza un pedido y quién lo toca?</span><span class="en">How does an order move and who touches it?</span></li>
-          <li><span class="es">¿Venden hoy en Venezuela y las Guayanas?</span><span class="en">Do you sell in Venezuela and the Guianas today?</span></li>
-          <li><span class="es">¿El inglés es para clientes, para Okuma o ambos?</span><span class="en">Is English for customers, for Okuma, or both?</span></li>
-        </ul>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1036,7 +952,7 @@ function renderLib(){
 $('#libq').addEventListener('input', renderLib);
 
 /* ---------- CALCULATOR ---------- */
-const OPTS = {1:{setup:6500}, 2:{setup:12500}, 3:{setup:19500}};
+const OPTS = {1:{setup:5500}, 2:{setup:9500}, 3:{setup:10000, from:true}};
 let opt = 2;
 function calc(){
   const v = id => +$('#c-'+id).value;
@@ -1050,7 +966,7 @@ function calc(){
   $('#r-total').textContent = money(total);
   $('#r-svc').textContent = money(svc) + T(' /mes',' /mo');
   $('#r-pm').textContent = money(pmMo) + T(' /mes',' /mo');
-  $('#r-setup').textContent = money(o.setup);
+  $('#r-setup').textContent = (o.from ? T('desde ','starting at ') : '') + money(o.setup);
   const net = total;
   const pay = $('#r-pay');
   if(net <= 0){ pay.innerHTML = T('Con estas cifras la opción no se paga sola. Probemos otros números juntos el viernes.','With these numbers the option doesn\'t pay for itself. Let\'s try other numbers together on Friday.'); }
@@ -1064,8 +980,10 @@ $$('.calc input[type=range]').forEach(r => r.addEventListener('input', calc));
 $$('#c-opt button').forEach(b => b.addEventListener('click', () => { opt = +b.dataset.opt; $$('#c-opt button').forEach(x => x.setAttribute('aria-pressed', x === b)); calc(); }));
 
 /* ---------- TABS ---------- */
-const TABS = ['propuesta','valor','inversion','nosotros','plan'];
+const TABS = ['propuesta','valor'];
 function showTab(id, focus, scroll){
+  // the options live at the top of the proposal tab
+  if(id === 'inversion'){ showTab('propuesta'); if(scroll) $('#inversion').scrollIntoView({behavior: reduce || scroll === 'instant' ? 'auto' : 'smooth'}); try{ history.replaceState(null, '', '#inversion'); }catch(e){} return; }
   if(!TABS.includes(id)) return;
   $$('.tab').forEach(t => { const on = t.dataset.tab === id; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; if(on && focus) t.focus(); });
   $$('.pane').forEach(p => p.hidden = p.id !== id);
@@ -1145,6 +1063,8 @@ let saved = null; try{ saved = localStorage.getItem('mg-lang'); }catch(e){}
 setLang(saved === 'en' ? 'en' : 'es');
 const h = (location.hash || '').slice(1);
 if(TABS.includes(h)) showTab(h, false, true);
+// deep link to the options: wait for layout to settle, then jump straight there
+if(h === 'inversion'){ showTab('propuesta'); addEventListener('load', () => showTab('inversion', false, 'instant')); }
 </script>
 </body>
 </html>
