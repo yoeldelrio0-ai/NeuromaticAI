@@ -29,6 +29,8 @@ Always serve from localhost — never screenshot a `file:///` URL. Do not start 
 
 ## Screenshot Workflow
 
+`screenshot.mjs` points at a Windows Puppeteer install. In cloud sessions use Playwright with `/opt/pw-browsers/chromium-1194/chrome-linux/chrome` instead.
+
 ```bash
 node screenshot.mjs http://localhost:3000
 # Optional label: node screenshot.mjs http://localhost:3000 label
@@ -40,11 +42,17 @@ Puppeteer is at `C:/Users/nateh/AppData/Local/Temp/puppeteer-test/`. Chrome cach
 
 ## Architecture
 
-Everything lives in `index.html`. Sections in order: Header → Hero (with animated example call) → Problem (missed-call calculator) → Offer (Answer / Automate / Grow) → How it works → Proof (demo call + founder note) → Who it's for → Free audit → FAQ → Final CTA → Footer. All interactivity is vanilla JS at the bottom of the file.
+Everything page-specific lives in `index.html`. It is built with the **scroll-craft** skill (brief and fingerprint in `scrollcraft/`). The page is one example working day: each scene is a time of day, in order. Hero (6:12 AM) → Problem + missed-call calculator (9:47 AM) → Offer rail, Answer / Automate / Grow (12:30 PM) → silent beat (1:58 PM) → Peak, "The business runs itself" (2:30 PM) → How it works (4:00 PM) → Proof: demo line + founder note (5:15 PM) → Who it's for (6:30 PM) → Free audit + FAQ (7:45 PM) → Close + footer (9:40 PM).
+
+- `assets/js/scrollcraft.js` + `assets/css/scrollcraft.css`: the scroll engine (copied from the skill, never edited per project). Sections opt in with `data-sc-*` attributes (`data-sc-act`, `data-sc-cue`, `data-sc-in`, `data-sc-reveal`, `data-sc-parallax`, `data-sc-pan`).
+- `assets/js/lenis.min.js`: smooth wheel scrolling (off under reduced motion).
+- The day log (signature move) is vanilla JS at the bottom of `index.html`: every scene carries `data-scene="HH:MM"`, the header clock runs between scenes with scroll, and `LOG` entries stamp in when their time passes. All entries are illustrative and labeled "Example day".
+- Photo planes for hero, problem, peak and close are commented blocks pointing at `assets/scenes/*.webp`. Uncomment once the file exists.
 
 Key conventions:
-- Sticky black header with hairline bottom border; nav links collapse into a menu on phones while the CTA stays visible
-- Primary button `.btn` (lime pill, black text); every booking button carries `data-book`. Set `BOOKING_URL` in the script to point them at the booking page; while empty they scroll to `#audit`
+- Fixed black header in two rows: brand row (logo, nav, CTA) and the day bar (clock, latest log line, clickable time ticks). Nav links collapse into a menu at 1024px; the CTA stays visible
+- Primary button `.btn` (lime pill, black text), one label everywhere: "Book a free audit". Every booking button carries `data-book`; `BOOKING_URL` in the script points them at the booking page
+- Scenes are labeled only by their time stamp (`.stamp`); no section numbers
 - Focus states: lime outline
 - Breakpoints: 1024px (tablet) and 768px (mobile)
 

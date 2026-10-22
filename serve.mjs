@@ -20,6 +20,8 @@ const mimeTypes = {
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
   '.json': 'application/json',
+  '.webp': 'image/webp',
+  '.mp4': 'video/mp4',
 };
 
 const server = http.createServer((req, res) => {
