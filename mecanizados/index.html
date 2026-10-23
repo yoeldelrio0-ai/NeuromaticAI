@@ -220,8 +220,8 @@ body[data-lang="en"] .es{display:none!important}
 .tab[aria-selected="true"]{color:var(--bg);background:var(--fg)}
 .pane{animation:paneIn .45s cubic-bezier(.2,.7,.1,1)}
 @keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.invest{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 160px);padding-bottom:96px;margin-bottom:96px;border-bottom:1px solid var(--line)}
-@media (max-width:900px){.invest{padding-bottom:64px;margin-bottom:64px}}
+.invest{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 160px);padding-top:96px;margin-top:96px;border-top:1px solid var(--line)}
+@media (max-width:900px){.invest{padding-top:64px;margin-top:64px}}
 .pane__intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:48px}
 @media (max-width:900px){.pane__intro{grid-template-columns:1fr;gap:18px}}
 
@@ -292,10 +292,15 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 @media (max-width:900px){.why3{grid-template-columns:1fr}}
 
 /* investment */
-.blue{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:var(--r);padding:22px 28px;background:var(--bg);margin-bottom:24px}
-.blue h3{font-size:19px}
-.blue p{color:var(--muted);font-size:15px;max-width:60ch}
-.blue__price{font-size:28px;font-weight:800;letter-spacing:-.03em;white-space:nowrap}
+.audit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 40px;align-items:center;border:1px solid var(--line);border-radius:var(--r);padding:28px;background:var(--bg);margin-bottom:24px}
+.audit__head{display:grid;gap:10px}
+.audit__tag{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
+.audit h3{font-size:22px;letter-spacing:-.02em}
+.audit__val{font-size:.72em;font-weight:500;color:var(--muted);letter-spacing:0;white-space:nowrap}
+.audit p{color:var(--muted);font-size:15px}
+@media (max-width:900px){.audit{grid-template-columns:1fr}}
+.tier__val{color:var(--dim);white-space:nowrap}
+.tier li.audit-li{color:var(--fg)}
 .tiers{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr) minmax(0,.95fr);gap:16px;align-items:stretch}
 .tier{border:1px solid var(--line);border-radius:var(--r);padding:28px;background:var(--bg);display:flex;flex-direction:column;gap:18px}
 .tier--rec{border-color:var(--fg);background:var(--surface-2);padding-block:36px;margin-block:-8px}
@@ -306,7 +311,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .tier__price b{font-size:clamp(30px,3vw,40px);line-height:1;letter-spacing:-.035em;font-weight:800}
 .tier__price>span{font-size:15px;color:var(--muted)}
 .tier__from{font-size:.5em;font-weight:500;color:var(--muted);letter-spacing:0}
-.tier ul{display:grid;gap:10px;flex:1}
+.tier ul{display:grid;gap:10px;flex:1;align-content:start}
 .tier li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:14.5px;color:var(--muted);line-height:1.5}
 .tier li svg{width:16px;height:16px;margin-top:3px;color:var(--fg)}
 .tier li.plus{color:var(--fg);font-weight:600}
@@ -417,20 +422,20 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
             <b><span class="es">Propuesta para Mecanizados Group</span><span class="en">Proposal for Mecanizados Group</span></b>
             <span class="num"><span class="es">Para Oscar Acevedo y Esteban · 22 de octubre de 2026</span><span class="en">For Oscar Acevedo and Esteban · October 22, 2026</span></span>
           </div>
-          <h1><span class="es">Cada alarma, atendida. Cada máquina, con historia.</span><span class="en">Every alarm answered. Every machine on record.</span></h1>
-          <p class="l"><span class="es">Un sistema construido solo para Mecanizados Group, paso a paso: primero un sitio web que capta solicitudes, después una mesa de servicio que no pierde ninguna, y al final un CRM que reúne todo en un solo lugar.</span><span class="en">A system built only for Mecanizados Group, one step at a time: first a website that captures requests, then a service desk that never loses one, and finally a CRM that puts everything in one place.</span></p>
+          <h1><span class="es">Cada alarma atendida. Cada máquina con su historial.</span><span class="en">Every alarm answered. Every machine with its full history.</span></h1>
+          <p class="l"><span class="es">Un sistema diseñado exclusivamente para Mecanizados Group e implementado por etapas: primero, un sitio web que capta solicitudes; después, una mesa de servicio con trazabilidad completa; y finalmente, un CRM que integra toda la operación en una sola plataforma.</span><span class="en">A system designed exclusively for Mecanizados Group and implemented in stages: first, a website that captures requests; then, a service desk with full traceability; and finally, a CRM that brings the entire operation onto one platform.</span></p>
           <div class="hero__cta">
             <a class="btn btn--primary" href="#inversion" data-tab-link="inversion"><span class="es">Ver las tres opciones</span><span class="en">See the three options</span><svg><use href="#i-arrow"/></svg></a>
-            <p class="hero__trust"><span class="es">Empezamos por lo que más dinero les cuesta hoy. Ustedes deciden hasta dónde llegar.</span><span class="en">We start with what costs you the most today. You decide how far to go.</span></p>
+            <p class="hero__trust"><span class="es">Comenzamos por lo que hoy más le cuesta a la operación. Ustedes definen el alcance.</span><span class="en">We start with what costs the operation most today. You define the scope.</span></p>
           </div>
         </div>
         <div class="hb hb--l" data-hb="1">
-          <h2><span class="es">Detrás de cada puerta hay un historial.</span><span class="en">Behind every door there's a history.</span></h2>
-          <p class="l"><span class="es">Alarmas, visitas, repuestos, la solución que funcionó la última vez. Hoy esa historia vive en WhatsApp y en cuatro hojas de cálculo.</span><span class="en">Alarms, visits, parts, the fix that worked last time. Today that history lives in WhatsApp and four spreadsheets.</span></p>
+          <h2><span class="es">Detrás de cada máquina hay un historial.</span><span class="en">Behind every machine there's a history.</span></h2>
+          <p class="l"><span class="es">Alarmas, visitas técnicas, repuestos y la solución que funcionó la última vez. Hoy esa información está dispersa entre WhatsApp y cuatro hojas de cálculo.</span><span class="en">Alarms, service visits, parts and the fix that worked last time. Today that information is scattered across WhatsApp and four spreadsheets.</span></p>
         </div>
         <div class="hb hb--l" data-hb="2">
-          <h2><span class="es">Desde 2011, máquinas instaladas en cinco países.</span><span class="en">Since 2011, machines installed across five countries.</span></h2>
-          <p class="l"><span class="es">Colombia, Ecuador, Venezuela y las Guayanas. Cada una merece un registro propio que el equipo encuentre en segundos.</span><span class="en">Colombia, Ecuador, Venezuela and the Guianas. Each one deserves its own record the team can find in seconds.</span></p>
+          <h2><span class="es">Desde 2011, con máquinas instaladas en cinco países.</span><span class="en">Since 2011, with machines installed across five countries.</span></h2>
+          <p class="l"><span class="es">Colombia, Ecuador, Venezuela y las Guayanas. Cada máquina instalada merece una hoja de vida que su personal técnico pueda consultar en segundos.</span><span class="en">Colombia, Ecuador, Venezuela and the Guianas. Every installed machine deserves a service record your technical staff can pull up in seconds.</span></p>
           <dl class="spec mono">
             <dt>S/N</dt><dd>2214-0371</dd>
             <dt>CONTROL</dt><dd>OSP-P300</dd>
@@ -440,12 +445,12 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
         </div>
         <div class="hb hb--l" data-hb="3">
           <h2><span class="es">Un sistema a la altura de sus máquinas.</span><span class="en">A system that matches your machines.</span></h2>
-          <p class="l"><span class="es">Eso es lo que proponemos. Abajo está lo que escuchamos, lo que encontramos y cómo lo resolvemos.</span><span class="en">That's what we're proposing. Below is what we heard, what we found and how we'd fix it.</span></p>
-          <div class="hero__cta"><a class="btn btn--ghost" href="#escuchamos"><span class="es">Seguir</span><span class="en">Continue</span><svg><use href="#i-arrow"/></svg></a></div>
+          <p class="l"><span class="es">Esa es nuestra propuesta. A continuación: lo que escuchamos, lo que encontramos y cómo lo resolvemos.</span><span class="en">That is our proposal. Below: what we heard, what we found and how we would solve it.</span></p>
+          <div class="hero__cta"><a class="btn btn--ghost" href="#escuchamos"><span class="es">Continuar</span><span class="en">Continue</span><svg><use href="#i-arrow"/></svg></a></div>
         </div>
       </div>
     </div>
-    <p class="hero3d__hint" aria-hidden="true"><span class="es">Baje para entrar a la máquina</span><span class="en">Scroll to go inside the machine</span><i></i></p>
+    <p class="hero3d__hint" aria-hidden="true"><span class="es">Desplácese para entrar a la máquina</span><span class="en">Scroll to go inside the machine</span><i></i></p>
     <p class="hero3d__count mono num" aria-hidden="true"><span id="hbN">01</span> / 04</p>
   </div>
 </section>
@@ -458,7 +463,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
       <p class="heard__quote" style="margin-top:20px">
         <span class="es">"Paso a paso. Primero la página, después el servicio, después el CRM."</span>
         <span class="en">"Step by step. First the website, then service, then the CRM."</span>
-        <small><span class="es">Oscar Acevedo, en nuestra llamada. Esta propuesta sigue ese orden.</span><span class="en">Oscar Acevedo, on our call. This proposal follows that order.</span></small>
+        <small><span class="es">Oscar Acevedo, en nuestra reunión. Esta propuesta respeta ese orden.</span><span class="en">Oscar Acevedo, in our meeting. This proposal follows that order.</span></small>
       </p>
       <div class="steps3">
         <span><svg width="18" height="18"><use href="#i-globe"/></svg><span class="es">Sitio web</span><span class="en">Website</span></span>
@@ -467,11 +472,11 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
       </div>
     </div>
     <ul class="heard__list reveal">
-      <li><svg><use href="#i-check"/></svg><div><b class="es">El servicio no cabe en un checklist.</b><b class="en">Service doesn't fit a checklist.</b> <span class="es">Las máquinas tienen miles de alarmas y un trabajo puede tomar horas, días o semanas esperando repuestos de Estados Unidos o Japón.</span><span class="en">The machines have thousands of alarms and a job can take hours, days or weeks waiting on parts from the US or Japan.</span></div></li>
-      <li><svg><use href="#i-check"/></svg><div><b class="es">Cada trabajo necesita un estado.</b><b class="en">Every job needs a status.</b> <span class="es">Pendiente, en proceso o terminado, y qué lo tiene detenido.</span><span class="en">Pending, in progress or done, and what it's waiting on.</span></div></li>
-      <li><svg><use href="#i-check"/></svg><div><b class="es">Reportes con fotos y video.</b><b class="en">Reports with photos and video.</b> <span class="es">Hoy son solo texto.</span><span class="en">Today they're text only.</span></div></li>
-      <li><svg><use href="#i-check"/></svg><div><b class="es">La idea de Oscar: una biblioteca de soluciones.</b><b class="en">Oscar's idea: a library of past fixes.</b> <span class="es">Buscable por cliente, tipo de máquina, modelo, serie y control (por ejemplo LB 4000), para que el siguiente técnico resuelva la misma alarma más rápido.</span><span class="en">Searchable by customer, machine type, model, serial and control (for example LB 4000), so the next tech solves the same alarm faster.</span></div></li>
-      <li><svg><use href="#i-check"/></svg><div><b class="es">Un sitio que ustedes mismos actualizan.</b><b class="en">A site you update yourselves.</b> <span class="es">Promociones y nuevas tecnologías cada semana, sin pedir ayuda, y que capte clientes.</span><span class="en">Promotions and new technology every week, without help, and it captures leads.</span></div></li>
+      <li><svg><use href="#i-check"/></svg><div><b class="es">El servicio técnico no cabe en un checklist.</b><b class="en">Technical service doesn't fit a checklist.</b> <span class="es">Las máquinas manejan miles de códigos de alarma, y un servicio puede tomar horas, días o semanas a la espera de repuestos de Estados Unidos o Japón.</span><span class="en">The machines carry thousands of alarm codes, and a job can take hours, days or weeks waiting on parts from the US or Japan.</span></div></li>
+      <li><svg><use href="#i-check"/></svg><div><b class="es">Cada servicio necesita un estado.</b><b class="en">Every job needs a status.</b> <span class="es">Pendiente, en proceso o cerrado, y el motivo de cualquier espera.</span><span class="en">Pending, in progress or closed, and the reason for any hold.</span></div></li>
+      <li><svg><use href="#i-check"/></svg><div><b class="es">Reportes con evidencia fotográfica y en video.</b><b class="en">Reports with photo and video evidence.</b> <span class="es">Hoy se entregan únicamente en texto.</span><span class="en">Today they're delivered as text only.</span></div></li>
+      <li><svg><use href="#i-check"/></svg><div><b class="es">La propuesta de Oscar: un registro técnico de soluciones.</b><b class="en">Oscar's proposal: a technical record of solutions.</b> <span class="es">Consultable por cliente, tipo de máquina, modelo, serie y control (por ejemplo, LB 4000), para que el siguiente técnico resuelva la misma alarma en menos tiempo.</span><span class="en">Searchable by customer, machine type, model, serial and control (for example, LB 4000), so the next technician resolves the same alarm faster.</span></div></li>
+      <li><svg><use href="#i-check"/></svg><div><b class="es">Un sitio web que su equipo administra.</b><b class="en">A website your team manages.</b> <span class="es">Publicación semanal de promociones y nuevas tecnologías sin depender de terceros, con captación de clientes potenciales.</span><span class="en">Weekly promotions and new technology published without outside help, with lead capture built in.</span></div></li>
     </ul>
   </div>
 </section>
@@ -482,7 +487,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
     <div class="diag__head">
       <div class="reveal">
         <p class="eyebrow"><span class="es">Diagnóstico</span><span class="en">Diagnosis</span></p>
-        <h2 class="h-title" style="margin-top:16px"><span class="es">Hoy no hay forma de recibir una solicitud en línea, ni un solo lugar donde vivan sus datos.</span><span class="en">Today there's no way to take a request online, and no single place where your data lives.</span></h2>
+        <h2 class="h-title" style="margin-top:16px"><span class="es">Hoy no existe un canal para recibir solicitudes en línea, ni un sistema central donde residan sus datos.</span><span class="en">Today there's no channel for receiving requests online, and no central system where your data lives.</span></h2>
       </div>
       <div class="diag__img reveal"><img src="img/alarm.jpg" alt="" loading="lazy"></div>
     </div>
@@ -490,21 +495,21 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
       <div class="panel__bar mono"><span>DIAG · mecanizadosgroup.com + <span class="es">operación</span><span class="en">operations</span></span><span><b>12</b> <span class="es">alarmas activas</span><span class="en">active alarms</span></span></div>
       <div class="alarms">
         <div class="alarm alarm--group"><span class="es">Sitio web</span><span class="en">Website</span></div>
-        <div class="alarm"><span class="alarm__code mono">AL-1001</span><h4><span class="es">Contacto sin formulario</span><span class="en">Contact page has no form</span></h4><p><span class="es">El enlace de correo abre WhatsApp. Una solicitud no queda registrada en ningún lado.</span><span class="en">The email link opens WhatsApp. A request isn't recorded anywhere.</span></p></div>
-        <div class="alarm"><span class="alarm__code mono">AL-1002</span><h4><span class="es">Ayuda Técnica con Lorem ipsum</span><span class="en">Technical Help page shows Lorem ipsum</span></h4><p><span class="es">Y texto sobre soporte "en toda Europa", cuando su territorio es Colombia, Ecuador, Venezuela y las Guayanas.</span><span class="en">Plus copy about support "across Europe", when your territory is Colombia, Ecuador, Venezuela and the Guianas.</span></p></div>
-        <div class="alarm"><span class="alarm__code mono">AL-1003</span><h4><span class="es">Solo en español, 119 páginas</span><span class="en">Spanish only, 119 pages</span></h4><p><span class="es">La mayoría sin tocar desde 2020.</span><span class="en">Most untouched since 2020.</span></p></div>
-        <div class="alarm"><span class="alarm__code mono">AL-1004</span><h4><span class="es">Botones y redes rotas</span><span class="en">Broken buttons and social links</span></h4><p><span class="es">Botones "Learn More" que no llevan a nada, testimonios vacíos y errores de digitación.</span><span class="en">"Learn More" buttons that go nowhere, an empty testimonials section and typos.</span></p></div>
-        <div class="alarm"><span class="alarm__code mono">AL-1005</span><h4><span class="es">Horarios que no coinciden</span><span class="en">Conflicting hours</span></h4><p><span class="es">De 9 a 12 en una página, de 9 a 6 en otra.</span><span class="en">9 to 12 on one page, 9 to 6 on another.</span></p></div>
-        <div class="alarm"><span class="alarm__code mono">AL-1006</span><h4><span class="es">Invisibles para buscadores con IA</span><span class="en">Invisible to AI search</span></h4><p><span class="es">El robots.txt bloquea a ChatGPT y herramientas similares, así que no los pueden encontrar ni recomendar.</span><span class="en">robots.txt blocks ChatGPT and similar tools, so they can't find or recommend you.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1001</span><h4><span class="es">Página de contacto sin formulario</span><span class="en">Contact page without a form</span></h4><p><span class="es">El enlace de correo abre WhatsApp, por lo que ninguna solicitud queda registrada.</span><span class="en">The email link opens WhatsApp, so no request is ever recorded.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1002</span><h4><span class="es">Página de Ayuda Técnica con texto de relleno</span><span class="en">Technical Help page with placeholder text</span></h4><p><span class="es">Contiene texto provisional (Lorem ipsum) y menciona soporte "en toda Europa", cuando su territorio es Colombia, Ecuador, Venezuela y las Guayanas.</span><span class="en">It shows placeholder text (Lorem ipsum) and mentions support "across Europe", while your territory is Colombia, Ecuador, Venezuela and the Guianas.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1003</span><h4><span class="es">Solo en español, 119 páginas</span><span class="en">Spanish only, 119 pages</span></h4><p><span class="es">La mayoría sin actualizar desde 2020.</span><span class="en">Most not updated since 2020.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1004</span><h4><span class="es">Enlaces y botones sin destino</span><span class="en">Dead links and buttons</span></h4><p><span class="es">Botones "Learn More" que no conducen a ninguna página, una sección de testimonios vacía y errores ortográficos.</span><span class="en">"Learn More" buttons that lead nowhere, an empty testimonials section and spelling errors.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1005</span><h4><span class="es">Horarios de atención inconsistentes</span><span class="en">Inconsistent business hours</span></h4><p><span class="es">De 9:00 a 12:00 en una página y de 9:00 a 18:00 en otra.</span><span class="en">9:00 to 12:00 on one page and 9:00 to 18:00 on another.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-1006</span><h4><span class="es">Invisible para los buscadores con IA</span><span class="en">Invisible to AI search engines</span></h4><p><span class="es">El archivo robots.txt bloquea a ChatGPT y herramientas similares, que por eso no pueden encontrar ni recomendar a la empresa.</span><span class="en">The robots.txt file blocks ChatGPT and similar tools, so they can't find or recommend the company.</span></p></div>
         <div class="alarm alarm--group"><span class="es">Datos y operación</span><span class="en">Data and operations</span></div>
-        <div class="alarm"><span class="alarm__code mono">AL-2001</span><h4><span class="es">Todo pasa por WhatsApp y correo</span><span class="en">Everything runs through WhatsApp and email</span></h4><p><span class="es">Las solicitudes se pierden entre conversaciones y nadie ve el estado completo.</span><span class="en">Requests get lost between chats and no one sees the full picture.</span></p></div>
-        <div class="alarm"><span class="alarm__code mono">AL-2002</span><h4><span class="es">Cuatro hojas de cálculo separadas</span><span class="en">Four separate spreadsheets</span></h4><p><span class="es">La misma información se escribe más de una vez y no se cruza.</span><span class="en">The same information gets typed more than once and never connects.</span></p></div>
-        <div class="alarm"><span class="alarm__code mono">AL-2003</span><h4><span class="es">Sin registro de máquinas instaladas</span><span class="en">No record of installed machines</span></h4><p><span class="es">Después de 14 años vendiendo e instalando máquinas, no hay un mapa de qué máquina está dónde.</span><span class="en">After 14 years selling and installing machines, there's no map of which machine is where.</span></p></div>
-        <div class="alarm"><span class="alarm__code mono">AL-2004</span><h4><span class="es">Sin seguimiento de preventivos</span><span class="en">No preventive maintenance tracking</span></h4><p><span class="es">Ingresos recurrentes de mantenimiento que hoy se quedan en la mesa.</span><span class="en">Recurring maintenance revenue left on the table.</span></p></div>
-        <div class="alarm"><span class="alarm__code mono">AL-2005</span><h4><span class="es">Reportes solo en texto</span><span class="en">Text-only reports</span></h4><p><span class="es">Sin fotos, sin video, sin firma del cliente.</span><span class="en">No photos, no video, no customer signature.</span></p></div>
-        <div class="alarm"><span class="alarm__code mono">AL-2006</span><h4><span class="es">Todo depende de Oscar</span><span class="en">Everything runs through Oscar</span></h4><p><span class="es">Asignar, avisar y hacer seguimiento recae en una persona que ya está al límite.</span><span class="en">Assigning, notifying and following up falls on one person who's already stretched thin.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2001</span><h4><span class="es">Toda la operación pasa por WhatsApp y correo</span><span class="en">All operations run through WhatsApp and email</span></h4><p><span class="es">Las solicitudes se pierden entre conversaciones y nadie tiene una visión completa del estado de cada servicio.</span><span class="en">Requests get lost between conversations, and no one has a full view of each job's status.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2002</span><h4><span class="es">Cuatro hojas de cálculo independientes</span><span class="en">Four independent spreadsheets</span></h4><p><span class="es">La misma información se digita más de una vez y no se cruza entre sí.</span><span class="en">The same information is entered more than once and never cross-referenced.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2003</span><h4><span class="es">Sin registro del parque instalado</span><span class="en">No record of the installed base</span></h4><p><span class="es">Tras 14 años vendiendo e instalando máquinas, no existe un inventario de qué equipo se encuentra en cada cliente.</span><span class="en">After 14 years selling and installing machines, there's no inventory of which machine is at which customer.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2004</span><h4><span class="es">Sin control de mantenimientos preventivos</span><span class="en">No preventive maintenance control</span></h4><p><span class="es">Ingresos recurrentes por mantenimiento que hoy no se están capturando.</span><span class="en">Recurring maintenance revenue that isn't being captured today.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2005</span><h4><span class="es">Reportes únicamente en texto</span><span class="en">Text-only reports</span></h4><p><span class="es">Sin fotografías, sin video y sin firma de conformidad del cliente.</span><span class="en">No photos, no video and no customer sign-off.</span></p></div>
+        <div class="alarm"><span class="alarm__code mono">AL-2006</span><h4><span class="es">La coordinación depende de una sola persona</span><span class="en">Coordination depends on one person</span></h4><p><span class="es">Asignar, notificar y hacer seguimiento recae en Oscar, cuya capacidad ya está al límite.</span><span class="en">Assigning, notifying and following up all fall on Oscar, who is already at capacity.</span></p></div>
       </div>
-      <div class="diag__sum"><span class="es">Ninguna de estas alarmas necesita un equipo nuevo. Necesita un sistema.</span><span class="en">None of these alarms needs new staff. It needs a system.</span> <a class="btn btn--ghost btn--sm" href="#historia"><span class="es">Ver cómo funcionaría</span><span class="en">See how it would work</span><svg><use href="#i-arrow"/></svg></a></div>
+      <div class="diag__sum"><span class="es">Ninguna de estas alarmas requiere más personal. Requiere un sistema.</span><span class="en">None of these alarms requires more staff. It requires a system.</span> <a class="btn btn--ghost btn--sm" href="#historia"><span class="es">Ver cómo funcionaría</span><span class="en">See how it would work</span><svg><use href="#i-arrow"/></svg></a></div>
     </div>
   </div>
 </section>
@@ -514,39 +519,39 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
   <div class="wrap">
     <div class="story__intro reveal">
       <p class="eyebrow"><span class="es">Cómo funciona</span><span class="en">How it works</span></p>
-      <h2 class="h-title" style="margin-top:16px"><span class="es">Viernes, 9:47 p.m. Un torno de un cliente se detiene.</span><span class="en">Friday, 9:47 p.m. A customer's lathe stops.</span></h2>
-      <p class="lead" style="margin-top:18px"><span class="es">Así se ve la misma noche con el sistema funcionando. Baje para seguir el caso de principio a fin.</span><span class="en">Here's the same night with the system running. Scroll to follow the case from start to finish.</span></p>
+      <h2 class="h-title" style="margin-top:16px"><span class="es">Viernes, 9:47 p. m. Se detiene el torno de un cliente.</span><span class="en">Friday, 9:47 p.m. A customer's lathe stops.</span></h2>
+      <p class="lead" style="margin-top:18px"><span class="es">Así se resuelve la misma situación con el sistema en operación. Desplácese para seguir el caso de principio a fin.</span><span class="en">Here's the same situation with the system in operation. Scroll to follow the case from start to finish.</span></p>
     </div>
     <div class="story__grid">
       <div class="beats" id="beats">
         <article class="beat is-on" data-beat="0">
           <p class="beat__time mono"><b>21:47</b> · <span class="es">viernes</span><span class="en">Friday</span></p>
-          <h3><span class="es">La máquina se detiene con una alarma.</span><span class="en">The machine stops with an alarm.</span></h3>
-          <p><span class="es">Fuera de horario. Hoy, el cliente escribe a un WhatsApp que nadie mira hasta el lunes, y el mensaje se pierde entre otros cien.</span><span class="en">After hours. Today, the customer texts a WhatsApp nobody checks until Monday, and the message gets buried under a hundred others.</span></p>
+          <h3><span class="es">La máquina se detiene por una alarma.</span><span class="en">The machine stops on an alarm.</span></h3>
+          <p><span class="es">Fuera del horario de atención. Hoy, el cliente escribe a un WhatsApp que nadie revisa hasta el lunes, y el mensaje queda entre otros cien.</span><span class="en">Outside business hours. Today, the customer writes to a WhatsApp nobody checks until Monday, and the message gets buried among a hundred others.</span></p>
           <div class="mini" data-mini="0"></div>
         </article>
         <article class="beat" data-beat="1">
           <p class="beat__time mono"><b>21:48</b></p>
-          <h3><span class="es">El cliente escribe. Se abre un ticket solo.</span><span class="en">The customer texts. A ticket opens on its own.</span></h3>
-          <p><span class="es">Por WhatsApp o el formulario del sitio, con modelo, serie, código de alarma y una foto. Nada se escribe dos veces.</span><span class="en">By WhatsApp or the website form, with model, serial, alarm code and a photo. Nothing gets typed twice.</span></p>
+          <h3><span class="es">El cliente escribe y el ticket se abre automáticamente.</span><span class="en">The customer writes and a ticket opens automatically.</span></h3>
+          <p><span class="es">Por WhatsApp o desde el formulario del sitio web, con modelo, serie, código de alarma y una fotografía. Nada se digita dos veces.</span><span class="en">By WhatsApp or the website form, with model, serial, alarm code and a photo. Nothing is entered twice.</span></p>
           <div class="mini" data-mini="1"></div>
         </article>
         <article class="beat" data-beat="2">
           <p class="beat__time mono"><b>21:49</b></p>
-          <h3><span class="es">El agente responde en español y busca la solución.</span><span class="en">The agent replies in Spanish and looks up the fix.</span></h3>
-          <p><span class="es">Encuentra la misma alarma en la biblioteca de soluciones y avisa al técnico más cercano. El cliente sabe que alguien ya tiene su caso.</span><span class="en">It finds the same alarm in the fix library and alerts the closest tech. The customer knows someone already has the case.</span></p>
+          <h3><span class="es">El asistente con IA responde y consulta el registro técnico.</span><span class="en">The AI assistant replies and checks the technical record.</span></h3>
+          <p><span class="es">Encuentra la misma alarma en el registro de soluciones y notifica al técnico más cercano. El cliente sabe que su caso ya está asignado.</span><span class="en">It finds the same alarm in the solutions record and notifies the closest technician. The customer knows the case is already assigned.</span></p>
           <div class="mini" data-mini="2"></div>
         </article>
         <article class="beat" data-beat="3">
           <p class="beat__time mono"><b><span class="es">Lun</span><span class="en">Mon</span> 08:10</b></p>
           <h3><span class="es">El técnico documenta con fotos y video.</span><span class="en">The tech documents with photos and video.</span></h3>
-          <p><span class="es">El ticket muestra qué lo tiene detenido: un repuesto que viene de Japón. El cliente recibe cada cambio de estado sin tener que llamar.</span><span class="en">The ticket shows what it's waiting on: a part coming from Japan. The customer gets every status change without calling.</span></p>
+          <p><span class="es">El ticket indica el motivo de la espera: un repuesto que llega desde Japón. El cliente recibe cada cambio de estado sin necesidad de llamar.</span><span class="en">The ticket shows the reason for the hold: a part arriving from Japan. The customer receives every status change without having to call.</span></p>
           <div class="mini" data-mini="3"></div>
         </article>
         <article class="beat" data-beat="4">
           <p class="beat__time mono"><b><span class="es">Jue</span><span class="en">Thu</span> 15:30</b></p>
-          <h3><span class="es">Reporte firmado. El próximo preventivo ya está agendado.</span><span class="en">Signed report. The next preventive visit is already booked.</span></h3>
-          <p><span class="es">PDF con fotos y firma del cliente, listo para facturar. La solución queda en la biblioteca para la próxima vez, y el registro de la máquina programa su siguiente mantenimiento.</span><span class="en">A PDF with photos and the customer's signature, ready to invoice. The fix goes into the library for next time, and the machine's record schedules its next maintenance.</span></p>
+          <h3><span class="es">Reporte firmado y próximo preventivo programado.</span><span class="en">Signed report, next preventive visit scheduled.</span></h3>
+          <p><span class="es">Un PDF con fotografías y la firma del cliente, listo para facturar. La solución queda en el registro técnico para futuras consultas, y la hoja de vida de la máquina programa su siguiente mantenimiento.</span><span class="en">A PDF with photos and the customer's signature, ready to invoice. The solution stays in the technical record for future reference, and the machine's service record schedules its next maintenance.</span></p>
           <div class="mini" data-mini="4"></div>
         </article>
       </div>
@@ -569,7 +574,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
     <div class="hub__head reveal">
       <div>
         <p class="eyebrow"><span class="es">La propuesta</span><span class="en">The proposal</span></p>
-        <h2 class="h-title" style="margin-top:16px"><span class="es">Un solo sistema que atiende, automatiza y crece.</span><span class="en">One system that answers, automates and grows.</span></h2>
+        <h2 class="h-title" style="margin-top:16px"><span class="es">Un solo sistema para atender, automatizar y crecer.</span><span class="en">One system to answer, automate and grow.</span></h2>
       </div>
     </div>
   </div>
@@ -577,7 +582,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
     <div class="wrap">
       <div class="tabs__list" role="tablist" aria-label="Propuesta">
         <button class="tab" role="tab" id="t-propuesta" aria-controls="propuesta" aria-selected="true" data-tab="propuesta"><span class="es">La propuesta</span><span class="en">The proposal</span></button>
-        <button class="tab" role="tab" id="t-valor" aria-controls="valor" aria-selected="false" tabindex="-1" data-tab="valor"><span class="es">Por qué vale la pena</span><span class="en">Why it's worth it</span></button>
+        <button class="tab" role="tab" id="t-valor" aria-controls="valor" aria-selected="false" tabindex="-1" data-tab="valor"><span class="es">Retorno de la inversión</span><span class="en">Return on investment</span></button>
       </div>
     </div>
   </div>
@@ -585,18 +590,88 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
   <div class="wrap">
     <!-- TAB: PROPOSAL -->
     <div class="pane" role="tabpanel" id="propuesta" aria-labelledby="t-propuesta">
-      <!-- INVESTMENT: first, so the options are seen before anything else -->
+      <div class="pane__intro">
+        <h3 class="h-sub"><span class="es">Tres etapas, en el orden que definió Oscar. Cada una opera de forma independiente y prepara la siguiente.</span><span class="en">Three stages, in the order Oscar defined. Each one runs on its own and prepares the next.</span></h3>
+        <p class="lead"><span class="es">Recomendamos implementar el sitio web y la mesa de servicio en conjunto, porque es ahí donde hoy se pierden solicitudes y horas de trabajo. El CRM integral se incorpora cuando esa base esté en operación.</span><span class="en">We recommend implementing the website and service desk together, since that's where requests and working hours are lost today. The full CRM comes in once that foundation is running.</span></p>
+      </div>
+      <div class="road">
+        <div class="road__step">
+          <p class="road__n"><svg><use href="#i-globe"/></svg><span class="es">Etapa 1 · Crecer</span><span class="en">Stage 1 · Grow</span></p>
+          <h3><span class="es">Un sitio web que genera negocio.</span><span class="en">A website that generates business.</span></h3>
+          <p><span class="es">Bilingüe, con todas sus líneas de producto y administrado por su propio equipo.</span><span class="en">Bilingual, covering every product line you carry, and managed by your own team.</span></p>
+          <ul>
+            <li><span class="es">Español e inglés, con selector de idioma</span><span class="en">Spanish and English, with a language toggle</span></li>
+            <li><span class="es">Catálogo por tecnología e industria (aeronáutica, automotriz, moldes, médica, petróleo y gas)</span><span class="en">Catalog by technology and industry (aerospace, automotive, molds, medical, oil and gas)</span></li>
+            <li><span class="es">Panel de administración para publicar promociones y novedades</span><span class="en">Admin panel to publish promotions and news</span></li>
+            <li><span class="es">Formularios de servicio, repuestos y cotización dirigidos al responsable</span><span class="en">Service, parts and quote forms routed to the right person</span></li>
+            <li><span class="es">SEO y AEO: visibilidad en Google y en buscadores con IA</span><span class="en">SEO and AEO: visibility on Google and AI search engines</span></li>
+          </ul>
+        </div>
+        <div class="road__step road__step--lead">
+          <p class="road__n"><svg><use href="#i-phone"/></svg><span class="es">Etapa 2 · Atender</span><span class="en">Stage 2 · Answer</span></p>
+          <h3><span class="es">Una mesa de servicio con trazabilidad completa.</span><span class="en">A service desk with full traceability.</span></h3>
+          <p><span class="es">Cada solicitud, por cualquier canal, se convierte en un ticket con responsable y estado.</span><span class="en">Every request, from any channel, becomes a ticket with an owner and a status.</span></p>
+          <ul>
+            <li><span class="es">Solicitudes por WhatsApp y sitio web, con modelo, serie, alarma y fotografías</span><span class="en">Requests via WhatsApp and the website, with model, serial, alarm and photos</span></li>
+            <li><span class="es">Estados: pendiente, en proceso, cerrado y motivo de espera</span><span class="en">Statuses: pending, in progress, closed and reason for hold</span></li>
+            <li><span class="es">Atención bilingüe 24/7 con IA</span><span class="en">Bilingual 24/7 AI assistant</span></li>
+            <li><span class="es">Fotos, videos y reportes en PDF almacenados en la nube</span><span class="en">Photos, videos and PDF reports stored in the cloud</span></li>
+            <li><span class="es">Registro técnico de soluciones y hoja de vida de cada máquina</span><span class="en">Technical solutions record and a service record for every machine</span></li>
+          </ul>
+        </div>
+        <div class="road__step">
+          <p class="road__n"><svg><use href="#i-bolt"/></svg><span class="es">Etapa 3 · Automatizar</span><span class="en">Stage 3 · Automate</span></p>
+          <h3><span class="es">El CRM integral.</span><span class="en">The full CRM.</span></h3>
+          <p><span class="es">Ventas, pedidos y personal técnico en la misma plataforma del servicio.</span><span class="en">Sales, orders and technical staff on the same platform as service.</span></p>
+          <ul>
+            <li><span class="es">Embudo comercial: prospecto, calificado, cotización, licitación y cierre</span><span class="en">Sales pipeline: lead, qualified, quote, tender and close</span></li>
+            <li><span class="es">Trazabilidad de pedidos de repuestos y despachos de máquinas</span><span class="en">Tracking of parts orders and machine shipments</span></li>
+            <li><span class="es">Asignación automática por cercanía y especialidad, con avisos al cliente</span><span class="en">Automatic assignment by proximity and specialty, with customer notifications</span></li>
+            <li><span class="es">Integración con facturación</span><span class="en">Invoicing integration</span></li>
+            <li><span class="es">Web app de campo con perfil por técnico y firma del cliente</span><span class="en">Field web app with technician profiles and customer signature</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat__card">
+          <h3><span class="es">Registro técnico con búsqueda inteligente. Pruébelo.</span><span class="en">Technical record with smart search. Try it.</span></h3>
+          <p><span class="es">Cada servicio cerrado queda clasificado por cliente, máquina, modelo, serie, control y código de alarma, junto con sus fichas técnicas y reportes. Escriba un control o un código; los casos son ilustrativos.</span><span class="en">Every closed job is classified by customer, machine, model, serial, control and alarm code, along with its technical sheets and reports. Type a control or a code; the cases are illustrative.</span></p>
+          <div class="lib">
+            <label class="lib__search"><svg><use href="#i-search"/></svg><input id="libq" type="text" value="LB 4000" aria-label="Buscar en el registro técnico"></label>
+            <div class="lib__tags" id="libtags"></div>
+            <div class="lib__res" id="libres"></div>
+          </div>
+        </div>
+        <div class="feat__card">
+          <p class="eyebrow"><span class="es">Una sola plataforma</span><span class="en">One platform</span></p>
+          <h3><span class="es">Un sistema a la medida, no cinco plataformas por separado.</span><span class="en">One custom system, not five separate platforms.</span></h3>
+          <ul class="one">
+            <li><svg><use href="#i-check"/></svg><span class="es">CRM, facturación, solicitudes de servicio, registro de máquinas y almacenamiento de datos en un solo lugar.</span><span class="en">CRM, invoicing, service requests, machine registry and data storage in one place.</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Sin Excel, sin un CRM aparte y sin un sistema contable que deba sincronizarse por separado.</span><span class="en">No Excel, no separate CRM and no accounting system to keep in sync on its own.</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Dimensionado para un equipo de menos de 50 personas y preparado para crecer.</span><span class="en">Sized for a team of under 50 people and ready to grow.</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Con la opción 3, los técnicos operan desde el navegador del celular, sin instalar aplicaciones.</span><span class="en">With option 3, technicians work from their phone's browser, with nothing to install.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- INVESTMENT: after the stages and the feature cards -->
       <div class="invest" id="inversion">
       <div class="pane__intro">
-        <h3 class="h-sub"><span class="es">Tres opciones. Empiecen donde tenga sentido y crezcan después.</span><span class="en">Three options. Start where it makes sense and grow from there.</span></h3>
-        <p class="lead"><span class="es">Precios en dólares, antes de impuestos. Las cifras finales se confirman en la sesión Blueprint, cuando veamos sus hojas de cálculo y procesos.</span><span class="en">Prices in USD, before taxes. Final figures are confirmed in the Blueprint session, once we've seen your spreadsheets and processes.</span></p>
+        <h3 class="h-sub"><span class="es">Tres opciones de implementación. Comiencen por la que se ajuste a su operación y amplíen después.</span><span class="en">Three implementation options. Start with the one that fits your operation and expand later.</span></h3>
+        <p class="lead"><span class="es">Valores en dólares estadounidenses, antes de impuestos. El alcance y el valor definitivos se confirman al cierre de la auditoría inicial.</span><span class="en">Prices in US dollars, before taxes. Final scope and price are confirmed at the close of the initial audit.</span></p>
       </div>
-      <div class="blue">
-        <div>
-          <h3><span class="es">Sesión Blueprint</span><span class="en">Blueprint session</span></h3>
-          <p><span class="es">Revisamos sus cuatro hojas de cálculo, el flujo de servicio y de pedidos, y salimos con el plan exacto y el precio final. Se abona al proyecto. El plan es suyo, trabajen con nosotros o no.</span><span class="en">We review your four spreadsheets and your service and order flow, and leave with the exact plan and final price. Credited to the project. The plan is yours whether you work with us or not.</span></p>
+      <div class="audit">
+        <div class="audit__head">
+          <p class="audit__tag"><span class="es">Incluida en las tres opciones</span><span class="en">Included in all three options</span></p>
+          <h3><span class="es">Auditoría inicial</span><span class="en">Initial audit</span> <span class="audit__val num">(<span class="es">valor </span><span class="en">value </span><span data-money="997"></span>)</span></h3>
+          <p><span class="es">Antes de construir, analizamos su operación con su equipo. Al cierre entregamos un mapa de procesos, el alcance exacto del proyecto y la cotización del plan mensual de soporte y mantenimiento.</span><span class="en">Before we build, we analyze your operation with your team. At the close we deliver a process map, the exact project scope and a quote for the monthly support and maintenance plan.</span></p>
         </div>
-        <span class="blue__price num" data-money="997"></span>
+        <ul class="one audit__list">
+          <li><svg><use href="#i-check"/></svg><span class="es">Hojas de cálculo, flujo de solicitudes de servicio y flujo de pedidos.</span><span class="en">Spreadsheets, service request flow and order flow.</span></li>
+          <li><svg><use href="#i-check"/></svg><span class="es">Atención actual por WhatsApp y tiempos de respuesta.</span><span class="en">Current WhatsApp handling and response times.</span></li>
+          <li><svg><use href="#i-check"/></svg><span class="es">Sitio web actual, posicionamiento en Google y visibilidad en buscadores con IA.</span><span class="en">Current website, Google ranking and visibility in AI search.</span></li>
+          <li><svg><use href="#i-check"/></svg><span class="es">Parque instalado y control de mantenimientos preventivos.</span><span class="en">Installed base and preventive maintenance control.</span></li>
+        </ul>
       </div>
       <div class="tiers">
         <article class="tier" data-tier="1">
@@ -604,11 +679,13 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
           <h3><span class="es">Sitio web</span><span class="en">Website</span></h3>
           <div class="tier__price"><b class="num" data-money="5500"></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
           <ul>
-            <li><svg><use href="#i-check"/></svg><span class="es">Sitio bilingüe a la medida</span><span class="en">Custom bilingual site</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Panel de administración semanal</span><span class="en">Weekly admin panel</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Formularios de servicio, repuestos y cotización</span><span class="en">Service, parts and quote forms</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">SEO y acceso para buscadores con IA</span><span class="en">SEO and AI search access</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Hosting configurado y lanzamiento</span><span class="en">Hosting setup and launch</span></li>
+            <li class="audit-li"><svg><use href="#i-check"/></svg><span><span class="es">Auditoría inicial de procesos y sitio web</span><span class="en">Initial audit of processes and website</span> <span class="tier__val num">(<span class="es">valor </span><span class="en">value </span><span data-money="997"></span>)</span></span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Diseño a la medida y bilingüe, con todas sus líneas de producto organizadas por tecnología e industria</span><span class="en">Custom bilingual design, with every product line organized by technology and industry</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Panel de administración para publicar equipos, promociones y novedades sin depender de terceros</span><span class="en">Admin panel to publish machines, promotions and news without outside help</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Formularios de servicio, repuestos y cotización que llegan directamente al responsable</span><span class="en">Service, parts and quote forms that go straight to the right person</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">SEO: estructura, velocidad y contenido para un mejor posicionamiento en Google</span><span class="en">SEO: structure, speed and content for better Google rankings</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">AEO: un sitio visible y legible para ChatGPT, Gemini y Perplexity, que hoy tienen el acceso bloqueado</span><span class="en">AEO: a site that ChatGPT, Gemini and Perplexity can find and read, which today are blocked</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Configuración de hosting y dominio, y puesta en marcha</span><span class="en">Hosting and domain setup, and launch</span></li>
           </ul>
           <button class="btn btn--ghost" type="button" data-choose="1"><span class="es">Elegir opción 1</span><span class="en">Choose option 1</span></button>
         </article>
@@ -618,119 +695,60 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
           <h3><span class="es">Sitio web + mesa de servicio</span><span class="en">Website + service desk</span></h3>
           <div class="tier__price"><b class="num" data-money="9500"></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
           <ul>
+            <li class="audit-li"><svg><use href="#i-check"/></svg><span><span class="es">Auditoría inicial de procesos y sitio web</span><span class="en">Initial audit of processes and website</span> <span class="tier__val num">(<span class="es">valor </span><span class="en">value </span><span data-money="997"></span>)</span></span></li>
             <li class="plus"><svg><use href="#i-check"/></svg><span class="es">Todo lo de la opción 1, más:</span><span class="en">Everything in option 1, plus:</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Tickets desde WhatsApp y la web, con estado</span><span class="en">Tickets from WhatsApp and web, with status</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Agente con IA bilingüe fuera de horario</span><span class="en">Bilingual AI agent after hours</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Fotos, video y reportes PDF firmados</span><span class="en">Photos, video and signed PDF reports</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Biblioteca de soluciones etiquetada</span><span class="en">Tagged fix library</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Registro de máquinas con próximo preventivo</span><span class="en">Machine registry with next preventive date</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Reemplaza las cuatro hojas de cálculo</span><span class="en">Replaces the four spreadsheets</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Solicitudes de servicio automatizadas por WhatsApp y desde el sitio web: cada solicitud genera un ticket con su estado</span><span class="en">Automated service requests via WhatsApp and the website: each request creates a ticket with its status</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Plataforma web de gestión de servicio, integrada a su sitio: el coordinador recibe, asigna y da seguimiento a cada solicitud</span><span class="en">Web-based service management platform, built into your site: the coordinator receives, assigns and tracks every request</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Accesos de usuario para todo el equipo</span><span class="en">User accounts for the whole team</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Atención bilingüe 24/7 con IA, que responde fuera de horario o cuando el equipo está ocupado</span><span class="en">Bilingual 24/7 AI assistant that responds after hours or when the team is busy</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Almacenamiento en la nube de fotos, videos y reportes técnicos y de servicio en PDF</span><span class="en">Cloud storage for photos, videos and technical and service reports in PDF</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Registro técnico con fichas técnicas y reportes de servicio, con búsqueda inteligente por máquina, modelo, serie, control, código de alarma o número de ticket</span><span class="en">Technical record with technical sheets and service reports, with smart search by machine, model, serial, control, alarm code or ticket number</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Registro del parque instalado con programación de mantenimientos preventivos</span><span class="en">Installed-base registry with preventive maintenance scheduling</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Una sola base de datos en lugar de las cuatro hojas de cálculo</span><span class="en">One database instead of the four spreadsheets</span></li>
           </ul>
           <button class="btn btn--primary" type="button" data-choose="2"><span class="es">Elegir opción 2</span><span class="en">Choose option 2</span></button>
         </article>
         <article class="tier" data-tier="3">
           <p class="tier__opt"><span class="es">Opción 3</span><span class="en">Option 3</span></p>
-          <h3><span class="es">Sistema completo</span><span class="en">Full system</span></h3>
+          <h3><span class="es">Sistema integral</span><span class="en">Full system</span></h3>
           <div class="tier__price"><b class="num"><span class="tier__from"><span class="es">desde </span><span class="en">starting at </span></span><span data-money="10000"></span></b><span><span class="es">pago único</span><span class="en">one-time</span></span></div>
           <ul>
+            <li class="audit-li"><svg><use href="#i-check"/></svg><span><span class="es">Auditoría inicial de procesos y sitio web</span><span class="en">Initial audit of processes and website</span> <span class="tier__val num">(<span class="es">valor </span><span class="en">value </span><span data-money="997"></span>)</span></span></li>
             <li class="plus"><svg><use href="#i-check"/></svg><span class="es">Todo lo de la opción 2, más:</span><span class="en">Everything in option 2, plus:</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">CRM y embudo de ventas con licitaciones</span><span class="en">CRM and sales pipeline with tenders</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Seguimiento de pedidos</span><span class="en">Order tracking</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Asignación por cercanía y avisos al cliente</span><span class="en">Closest-tech assignment and customer updates</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Conexión con facturación</span><span class="en">Invoicing hooks</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Web app para técnicos con firma</span><span class="en">Tech web app with signature</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">CRM y embudo comercial, incluida la gestión de licitaciones</span><span class="en">CRM and sales pipeline, including tender management</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Trazabilidad de pedidos: repuestos y despachos de máquinas, desde el origen hasta la entrega</span><span class="en">Order tracking: parts and machine shipments, from origin to delivery</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Web app de campo para técnicos: perfil por técnico (especialidad, zona e historial), órdenes de servicio asignadas y reportes con fotos y firma del cliente desde el celular</span><span class="en">Field web app for technicians: a profile per technician (specialty, zone and history), assigned work orders, and reports with photos and customer signature from their phone</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Asignación automática de cada solicitud al técnico más cercano y con la especialidad requerida, con seguimiento y avisos al cliente en tiempo real</span><span class="en">Automatic assignment of each request to the closest technician with the right specialty, with real-time tracking and customer notifications</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Indicadores por técnico: tiempos de respuesta y servicios cerrados</span><span class="en">Per-technician metrics: response times and jobs closed</span></li>
+            <li><svg><use href="#i-check"/></svg><span class="es">Integración con facturación</span><span class="en">Invoicing integration</span></li>
           </ul>
           <button class="btn btn--ghost" type="button" data-choose="3"><span class="es">Elegir opción 3</span><span class="en">Choose option 3</span></button>
         </article>
       </div>
       <div class="terms">
-        <div><b><span class="es">Pagos</span><span class="en">Payments</span></b><p><span class="es">50% de anticipo al firmar, 25% a mitad del proyecto y 25% al lanzar. En USD.</span><span class="en">50% deposit at signing, 25% at the project midpoint and 25% at launch. In USD.</span></p></div>
-        <div><b><span class="es">Sin mensualidades</span><span class="en">No monthly fees</span></b><p><span class="es">Un solo pago por el proyecto. Sin contratos de permanencia.</span><span class="en">One payment for the project. No retainer, no lock-in.</span></p></div>
-        <div><b><span class="es">Servicios de terceros</span><span class="en">Third-party services</span></b><p><span class="es">WhatsApp, IA y hosting los pagan directo al proveedor, sin margen nuestro.</span><span class="en">WhatsApp, AI and hosting are paid straight to the provider, with no markup from us.</span></p></div>
-        <div><b><span class="es">Fuera de alcance</span><span class="en">Out of scope</span></b><p><span class="es">Cualquier extra se cotiza aparte antes de hacerlo.</span><span class="en">Any extra is quoted separately before we do it.</span></p></div>
+        <div><b><span class="es">Pagos</span><span class="en">Payments</span></b><p><span class="es">50 % de anticipo a la firma, 25 % a mitad del proyecto y 25 % a la puesta en marcha. Pagos en USD.</span><span class="en">50% deposit at signing, 25% at the project midpoint and 25% at launch. Payments in USD.</span></p></div>
+        <div><b><span class="es">Soporte y mantenimiento</span><span class="en">Support and maintenance</span></b><p><span class="es">El plan mensual de soporte y mantenimiento se cotiza al cierre de la auditoría, según el sistema elegido.</span><span class="en">The monthly support and maintenance plan is quoted at the close of the audit, based on the system you choose.</span></p></div>
+        <div><b><span class="es">Servicios de terceros</span><span class="en">Third-party services</span></b><p><span class="es">WhatsApp, IA y hosting se pagan directamente al proveedor, sin margen de Neuromatic.</span><span class="en">WhatsApp, AI and hosting are paid straight to the provider, with no markup from Neuromatic.</span></p></div>
+        <div><b><span class="es">Fuera de alcance</span><span class="en">Out of scope</span></b><p><span class="es">Todo requerimiento adicional se cotiza por separado y se aprueba antes de ejecutarse.</span><span class="en">Any additional requirement is quoted separately and approved before work begins.</span></p></div>
       </div>
-      </div>
-
-      <div class="pane__intro">
-        <h3 class="h-sub"><span class="es">Tres etapas, en el orden que pidió Oscar. Cada una funciona sola y prepara la siguiente.</span><span class="en">Three stages, in the order Oscar asked for. Each one works on its own and sets up the next.</span></h3>
-        <p class="lead"><span class="es">Recomendamos empezar por el sitio y la mesa de servicio juntos, porque ahí es donde hoy se pierden solicitudes y horas. El CRM completo llega cuando la base ya esté funcionando.</span><span class="en">We recommend starting with the website and service desk together, since that's where requests and hours get lost today. The full CRM comes once the foundation is running.</span></p>
-      </div>
-      <div class="road">
-        <div class="road__step">
-          <p class="road__n"><svg><use href="#i-globe"/></svg><span class="es">Etapa 1 · Crecer</span><span class="en">Stage 1 · Grow</span></p>
-          <h3><span class="es">Un sitio web que trabaja.</span><span class="en">A website that works.</span></h3>
-          <p><span class="es">Bilingüe, con todas sus líneas de producto, y que ustedes actualizan solos.</span><span class="en">Bilingual, covering every product line you carry, and you update it yourselves.</span></p>
-          <ul>
-            <li><span class="es">Español e inglés con selector de idioma</span><span class="en">Spanish and English with a language toggle</span></li>
-            <li><span class="es">Máquinas por tecnología e industria (aviación, automotriz, moldes, médica, petróleo)</span><span class="en">Machines by technology and industry (aviation, automotive, molds, medical, oil)</span></li>
-            <li><span class="es">Panel de administración para promociones y novedades semanales</span><span class="en">Admin panel for weekly promotions and news</span></li>
-            <li><span class="es">Formularios de servicio, repuestos y cotización que sí llegan</span><span class="en">Service, parts and quote forms that actually arrive</span></li>
-            <li><span class="es">Abierto a Google y a buscadores con IA</span><span class="en">Open to Google and AI search</span></li>
-          </ul>
-        </div>
-        <div class="road__step road__step--lead">
-          <p class="road__n"><svg><use href="#i-phone"/></svg><span class="es">Etapa 2 · Atender</span><span class="en">Stage 2 · Answer</span></p>
-          <h3><span class="es">Una mesa de servicio que no pierde nada.</span><span class="en">A service desk that loses nothing.</span></h3>
-          <p><span class="es">Cada solicitud, de cualquier canal, se vuelve un ticket con dueño y estado.</span><span class="en">Every request, from any channel, becomes a ticket with an owner and a status.</span></p>
-          <ul>
-            <li><span class="es">WhatsApp y web con modelo, serie, alarma y fotos</span><span class="en">WhatsApp and web with model, serial, alarm and photos</span></li>
-            <li><span class="es">Estados: pendiente, en proceso, terminado, y qué espera</span><span class="en">Status: pending, in progress, done, and what it's waiting on</span></li>
-            <li><span class="es">Agente con IA bilingüe para fuera de horario</span><span class="en">Bilingual AI agent for after hours</span></li>
-            <li><span class="es">Reportes con fotos, video y PDF firmado</span><span class="en">Reports with photos, video and a signed PDF</span></li>
-            <li><span class="es">Biblioteca de soluciones y registro de máquinas</span><span class="en">Fix library and machine registry</span></li>
-          </ul>
-        </div>
-        <div class="road__step">
-          <p class="road__n"><svg><use href="#i-bolt"/></svg><span class="es">Etapa 3 · Automatizar</span><span class="en">Stage 3 · Automate</span></p>
-          <h3><span class="es">El CRM completo.</span><span class="en">The full CRM.</span></h3>
-          <p><span class="es">Ventas, pedidos y técnicos en el mismo sistema que el servicio.</span><span class="en">Sales, orders and techs in the same system as service.</span></p>
-          <ul>
-            <li><span class="es">Embudo: prospecto, calificado, cotización, licitación, ganado</span><span class="en">Pipeline: lead, qualified, quote, tender, won</span></li>
-            <li><span class="es">Seguimiento de pedidos para quien maneja las órdenes</span><span class="en">Order tracking for whoever runs orders</span></li>
-            <li><span class="es">Asignación al técnico más cercano y avisos al cliente</span><span class="en">Assignment to the closest tech and customer notifications</span></li>
-            <li><span class="es">Conexión con facturación</span><span class="en">Invoicing hooks</span></li>
-            <li><span class="es">Web app para técnicos con firma, sin instalar nada</span><span class="en">Tech web app with signature, nothing to install</span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="feat">
-        <div class="feat__card">
-          <h3><span class="es">Biblioteca de soluciones. Pruébela.</span><span class="en">The fix library. Try it.</span></h3>
-          <p><span class="es">Cada trabajo terminado queda etiquetado por cliente, máquina, modelo, serie, control y alarma. Escriba un control o un código. Los casos son de ejemplo.</span><span class="en">Every finished job gets tagged by customer, machine, model, serial, control and alarm. Type a control or a code. The cases are examples.</span></p>
-          <div class="lib">
-            <label class="lib__search"><svg><use href="#i-search"/></svg><input id="libq" type="text" value="LB 4000" aria-label="Buscar en la biblioteca"></label>
-            <div class="lib__tags" id="libtags"></div>
-            <div class="lib__res" id="libres"></div>
-          </div>
-        </div>
-        <div class="feat__card">
-          <p class="eyebrow"><span class="es">Un solo sistema</span><span class="en">One system</span></p>
-          <h3><span class="es">Hecho a la medida, no cinco suscripciones conectadas.</span><span class="en">Built to fit, not five subscriptions stitched together.</span></h3>
-          <ul class="one">
-            <li><svg><use href="#i-check"/></svg><span class="es">Reemplaza las cuatro hojas de cálculo con una sola base de datos.</span><span class="en">Replaces the four spreadsheets with one database.</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Sin plataformas genéricas que haya que mantener hablando entre sí.</span><span class="en">No generic platforms that have to be kept talking to each other.</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Dimensionado para un equipo de menos de 50 personas, listo para crecer.</span><span class="en">Sized for a team under 50, ready to grow.</span></li>
-            <li><svg><use href="#i-check"/></svg><span class="es">Empieza con avisos por mensaje de texto. La web app para técnicos llega con la opción 3.</span><span class="en">Starts with text notifications. The tech web app comes with option 3.</span></li>
-          </ul>
-        </div>
       </div>
     </div>
 
     <!-- TAB: VALUE -->
     <div class="pane" role="tabpanel" id="valor" aria-labelledby="t-valor" hidden>
       <div class="pane__intro">
-        <h3 class="h-sub"><span class="es">Cada solicitud perdida es un servicio que hace otro. Cada máquina sin preventivo es un ingreso que no llega.</span><span class="en">Every lost request is a job someone else does. Every machine without preventive maintenance is revenue that never arrives.</span></h3>
-        <p class="lead"><span class="es">No tenemos aún sus cifras, así que no inventamos ninguna. Mueva los controles con sus números reales y vea el resultado.</span><span class="en">We don't have your numbers yet, so we didn't make any up. Move the sliders to your real numbers and see the result.</span></p>
+        <h3 class="h-sub"><span class="es">Cada solicitud perdida es un servicio que realiza la competencia. Cada máquina sin preventivo es un ingreso que no se materializa.</span><span class="en">Every lost request is a job a competitor does. Every machine without preventive maintenance is revenue that never materializes.</span></h3>
+        <p class="lead"><span class="es">Aún no contamos con sus cifras, por lo que no hemos supuesto ninguna. Ajuste los controles con sus datos reales y observe el resultado.</span><span class="en">We don't have your figures yet, so we haven't assumed any. Set the sliders to your actual data and see the result.</span></p>
       </div>
       <div class="calc">
         <div class="calc__in">
-          <p class="calc__note"><svg><use href="#i-info"/></svg><span class="es">Los valores iniciales son de ejemplo. Ajústelos con sus datos.</span><span class="en">Starting values are examples. Adjust them to your data.</span></p>
-          <div class="field"><div class="field__top"><label for="c-req"><span class="es">Solicitudes de servicio al mes</span><span class="en">Service requests per month</span></label><output for="c-req" id="o-req" class="num"></output></div><input type="range" id="c-req" min="5" max="200" step="5" value="40"></div>
-          <div class="field"><div class="field__top"><label for="c-lost"><span class="es">Que se pierden o se demoran tanto que el cliente busca a otro</span><span class="en">Lost, or delayed so long the customer goes elsewhere</span></label><output for="c-lost" id="o-lost" class="num"></output></div><input type="range" id="c-lost" min="0" max="30" step="1" value="8"></div>
+          <p class="calc__note"><svg><use href="#i-info"/></svg><span class="es">Los valores iniciales son ilustrativos. Ajústelos con sus datos.</span><span class="en">Starting values are illustrative. Adjust them to your data.</span></p>
+          <div class="field"><div class="field__top"><label for="c-req"><span class="es">Solicitudes de servicio por mes</span><span class="en">Service requests per month</span></label><output for="c-req" id="o-req" class="num"></output></div><input type="range" id="c-req" min="5" max="200" step="5" value="40"></div>
+          <div class="field"><div class="field__top"><label for="c-lost"><span class="es">Solicitudes que se pierden o se demoran al punto de que el cliente acude a otro proveedor</span><span class="en">Requests lost or delayed until the customer turns to another provider</span></label><output for="c-lost" id="o-lost" class="num"></output></div><input type="range" id="c-lost" min="0" max="30" step="1" value="8"></div>
           <div class="field"><div class="field__top"><label for="c-val"><span class="es">Valor promedio de un servicio (USD)</span><span class="en">Average value of a service job (USD)</span></label><output for="c-val" id="o-val" class="num"></output></div><input type="range" id="c-val" min="100" max="5000" step="50" value="600"></div>
-          <div class="field"><div class="field__top"><label for="c-mach"><span class="es">Máquinas instaladas en el territorio</span><span class="en">Machines installed in your territory</span></label><output for="c-mach" id="o-mach" class="num"></output></div><input type="range" id="c-mach" min="10" max="1000" step="10" value="150"></div>
-          <div class="field"><div class="field__top"><label for="c-pm"><span class="es">Que firmarían un plan preventivo al año</span><span class="en">That would sign a preventive plan per year</span></label><output for="c-pm" id="o-pm" class="num"></output></div><input type="range" id="c-pm" min="0" max="60" step="1" value="15"></div>
-          <div class="field"><div class="field__top"><label for="c-pmv"><span class="es">Valor anual de un plan preventivo por máquina (USD)</span><span class="en">Annual preventive plan value per machine (USD)</span></label><output for="c-pmv" id="o-pmv" class="num"></output></div><input type="range" id="c-pmv" min="200" max="6000" step="100" value="1200"></div>
+          <div class="field"><div class="field__top"><label for="c-mach"><span class="es">Máquinas instaladas en su territorio</span><span class="en">Machines installed in your territory</span></label><output for="c-mach" id="o-mach" class="num"></output></div><input type="range" id="c-mach" min="10" max="1000" step="10" value="150"></div>
+          <div class="field"><div class="field__top"><label for="c-pm"><span class="es">Porcentaje que contrataría un plan preventivo anual</span><span class="en">Share that would sign an annual preventive plan</span></label><output for="c-pm" id="o-pm" class="num"></output></div><input type="range" id="c-pm" min="0" max="60" step="1" value="15"></div>
+          <div class="field"><div class="field__top"><label for="c-pmv"><span class="es">Valor anual del plan preventivo por máquina (USD)</span><span class="en">Annual preventive plan value per machine (USD)</span></label><output for="c-pmv" id="o-pmv" class="num"></output></div><input type="range" id="c-pmv" min="200" max="6000" step="100" value="1200"></div>
           <div class="field"><span class="field__top"><span class="es">Comparar con</span><span class="en">Compare with</span></span>
             <div class="seg" role="group" id="c-opt">
               <button type="button" data-opt="1" aria-pressed="false"><span class="es">Opción 1</span><span class="en">Option 1</span></button>
@@ -740,19 +758,19 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
           </div>
         </div>
         <div class="calc__out" aria-live="polite">
-          <div class="big"><small><span class="es">Ingreso que hoy se escapa, por mes</span><span class="en">Revenue slipping away today, per month</span></small><b class="num" id="r-total">$0</b></div>
+          <div class="big"><small><span class="es">Ingresos que hoy se pierden, por mes</span><span class="en">Revenue lost today, per month</span></small><b class="num" id="r-total">$0</b></div>
           <div class="lines">
             <div><span><span class="es">Servicios recuperados</span><span class="en">Recovered service jobs</span></span><b class="num" id="r-svc"></b></div>
-            <div><span><span class="es">Planes preventivos nuevos</span><span class="en">New preventive plans</span></span><b class="num" id="r-pm"></b></div>
+            <div><span><span class="es">Nuevos planes preventivos</span><span class="en">New preventive plans</span></span><b class="num" id="r-pm"></b></div>
             <div><span><span class="es">Inversión (pago único)</span><span class="en">Investment (one-time)</span></span><b class="num" id="r-setup"></b></div>
           </div>
           <p class="payback" id="r-pay"></p>
         </div>
       </div>
       <div class="why3">
-        <div><h4><span class="es">Menos tiempo resolviendo lo mismo</span><span class="en">Less time solving the same thing twice</span></h4><p><span class="es">Una alarma resuelta una vez queda documentada para siempre. El técnico nuevo llega con lo que sabía el técnico con más años.</span><span class="en">An alarm solved once stays documented for good. A new tech shows up knowing what your most senior tech knows.</span></p></div>
-        <div><h4><span class="es">Oscar recupera su semana</span><span class="en">Oscar gets his week back</span></h4><p><span class="es">Asignar, avisar y perseguir estados lo hace el sistema.</span><span class="en">The system assigns, notifies and chases statuses.</span></p></div>
-        <div><h4><span class="es">Una ventaja frente a sus fabricantes</span><span class="en">A stronger position with your manufacturers</span></h4><p><span class="es">Un distribuidor con registro de máquinas, tiempos de respuesta y reportes en inglés habla el idioma de cada fabricante que representa.</span><span class="en">A distributor with a machine registry, response times and English reports speaks the language of every manufacturer it represents.</span></p></div>
+        <div><h4><span class="es">Menos tiempo en fallas recurrentes</span><span class="en">Less time on recurring faults</span></h4><p><span class="es">Una alarma resuelta queda documentada de forma permanente. Un técnico nuevo cuenta desde el primer día con la experiencia de los más antiguos.</span><span class="en">An alarm resolved once stays documented permanently. A new technician starts on day one with the experience of your most senior staff.</span></p></div>
+        <div><h4><span class="es">La coordinación deja de depender de una persona</span><span class="en">Coordination no longer depends on one person</span></h4><p><span class="es">El sistema asigna, notifica y hace seguimiento a cada estado, y Oscar recupera tiempo para la gestión.</span><span class="en">The system assigns, notifies and tracks every status, giving Oscar his time back for management.</span></p></div>
+        <div><h4><span class="es">Mejor posición ante sus fabricantes</span><span class="en">A stronger position with your manufacturers</span></h4><p><span class="es">Un distribuidor con hoja de vida de cada máquina, indicadores de tiempo de respuesta y reportes en inglés habla el mismo idioma de los fabricantes que representa.</span><span class="en">A distributor with a service record for every machine, response-time metrics and English reports speaks the same language as the manufacturers it represents.</span></p></div>
       </div>
     </div>
 
@@ -765,7 +783,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
   <div class="confirm__box">
     <h3 id="confirmTitle"><span class="es">¿Confirmar esta opción?</span><span class="en">Confirm this option?</span></h3>
     <div class="confirm__sum"><b id="confirmName"></b><span id="confirmPrice" class="num"></span></div>
-    <p><span class="es">Le avisaremos al equipo de Neuromatic y empezaremos a preparar la propuesta formal con esta opción.</span><span class="en">We'll let the Neuromatic team know and start preparing the formal proposal around this option.</span></p>
+    <p><span class="es">Notificaremos al equipo de Neuromatic y comenzaremos a preparar la propuesta formal con esta opción.</span><span class="en">We'll notify the Neuromatic team and begin preparing the formal proposal around this option.</span></p>
     <div class="confirm__act">
       <button class="btn btn--primary" type="button" id="confirmYes"><span class="es">Confirmar</span><span class="en">Confirm</span></button>
       <button class="btn btn--ghost" type="button" id="confirmNo"><span class="es">Volver</span><span class="en">Go back</span></button>
@@ -776,13 +794,13 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 <section class="thanks" id="gracias" aria-labelledby="thanksTitle" hidden>
   <div class="wrap thanks__in">
     <div class="thanks__mark" aria-hidden="true"><svg><use href="#i-check"/></svg></div>
-    <h2 id="thanksTitle" tabindex="-1"><span class="es">Gracias. Recibimos su elección.</span><span class="en">Thank you. We received your choice.</span></h2>
+    <h2 id="thanksTitle" tabindex="-1"><span class="es">Gracias. Hemos recibido su elección.</span><span class="en">Thank you. We received your choice.</span></h2>
     <div class="thanks__choice">
       <small><span class="es">Opción elegida</span><span class="en">Chosen option</span></small>
       <b id="thanksName"></b>
       <span id="thanksPrice" class="num"></span>
     </div>
-    <p class="lead"><span class="es">Con esto en mente empezamos a preparar una propuesta formal con el alcance y el precio final. Les escribiremos muy pronto.</span><span class="en">With this in mind, we'll start preparing a formal proposal with the final scope and price. We'll be in touch very soon.</span></p>
+    <p class="lead"><span class="es">Con base en su elección, prepararemos una propuesta formal con el alcance y el valor definitivos. Nos pondremos en contacto a la brevedad.</span><span class="en">Based on your choice, we'll prepare a formal proposal with the final scope and price. We'll be in touch shortly.</span></p>
     <p class="thanks__fallback" id="thanksFallback" hidden><span class="es">Si no recibe noticias nuestras en un día hábil, escríbanos a </span><span class="en">If you don't hear from us within one business day, write to </span><b class="mono" id="thanksMail"></b></p>
     <button class="btn btn--ghost" type="button" id="thanksBack"><svg style="transform:scaleX(-1)"><use href="#i-arrow"/></svg><span class="es">Volver a la propuesta</span><span class="en">Back to the proposal</span></button>
   </div>
@@ -794,7 +812,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
     <div class="foot__links">
       <span id="footMail" class="mono"></span>
       <a href="https://neuromatic.agency" target="_blank" rel="noopener">neuromatic.agency</a>
-      <span><span class="es">Propuesta confidencial para Mecanizados Group · válida 30 días</span><span class="en">Confidential proposal for Mecanizados Group · valid 30 days</span></span>
+      <span><span class="es">Propuesta confidencial para Mecanizados Group · vigencia de 30 días</span><span class="en">Confidential proposal for Mecanizados Group · valid for 30 days</span></span>
     </div>
   </div>
 </footer>
@@ -805,8 +823,8 @@ const CONFIG = {
   email: "connect@neuromatic.agency",
   // where a confirmed choice is sent; FormSubmit relays it to the inbox above
   // (the first submission triggers a one-time activation email to that inbox)
-  formEndpoint: "https://formsubmit.co/ajax/connect@neuromatic.agency",
-  prices: { blueprint: 997 }               // tier prices live in data-money attributes
+  formEndpoint: "https://formsubmit.co/ajax/connect@neuromatic.agency"
+  // prices (options and the audit value) live in data-money attributes
 };
 /* ----------------------------------------------- */
 
@@ -969,11 +987,11 @@ function calc(){
   $('#r-setup').textContent = (o.from ? T('desde ','starting at ') : '') + money(o.setup);
   const net = total;
   const pay = $('#r-pay');
-  if(net <= 0){ pay.innerHTML = T('Con estas cifras la opción no se paga sola. Probemos otros números juntos el viernes.','With these numbers the option doesn\'t pay for itself. Let\'s try other numbers together on Friday.'); }
+  if(net <= 0){ pay.innerHTML = T('Con estas cifras, la opción no se recupera por sí sola. Revisemos sus datos en conjunto durante la auditoría.','With these figures, the option doesn\'t pay for itself. Let\'s review your data together during the audit.'); }
   else{
     const months = o.setup / net;
     const m = months < 1 ? T('menos de un mes','under a month') : (Math.ceil(months*10)/10).toLocaleString(lang==='es'?'es-CO':'en-US') + T(' meses',' months');
-    pay.innerHTML = T(`Con estos números, la inversión se recupera en <b>${m}</b>.`, `With these numbers, the investment pays back in <b>${m}</b>.`);
+    pay.innerHTML = T(`Con estas cifras, la inversión se recupera en <b>${m}</b>.`, `With these figures, the investment pays back in <b>${m}</b>.`);
   }
 }
 $$('.calc input[type=range]').forEach(r => r.addEventListener('input', calc));
