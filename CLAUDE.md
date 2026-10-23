@@ -47,7 +47,7 @@ Everything page-specific lives in `index.html`. It is built with the **scroll-cr
 - `assets/js/scrollcraft.js` + `assets/css/scrollcraft.css`: the scroll engine (copied from the skill, never edited per project). Sections opt in with `data-sc-*` attributes (`data-sc-act`, `data-sc-cue`, `data-sc-in`, `data-sc-reveal`, `data-sc-parallax`, `data-sc-pan`).
 - `assets/js/lenis.min.js`: smooth wheel scrolling (off under reduced motion).
 - The day log (signature move) is vanilla JS at the bottom of `index.html`: every scene carries `data-scene="HH:MM"`, the header clock runs between scenes with scroll, and `LOG` entries stamp in when their time passes. All entries are illustrative and labeled "Example day".
-- Photo planes for hero, problem, peak and close are commented blocks pointing at `assets/scenes/*.webp`. Uncomment once the file exists.
+- Photo planes for hero, problem, peak and close load `assets/scenes/*.webp` (Higgsfield stills, 2400px landscape, 1200px portrait for the mobile hero).
 
 Key conventions:
 - Fixed black header in two rows: brand row (logo, nav, CTA) and the day bar (clock, latest log line, clickable time ticks). Nav links collapse into a menu at 1024px; the CTA stays visible

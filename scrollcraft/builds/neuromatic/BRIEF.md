@@ -100,11 +100,7 @@ The 1:58 PM beat is deliberately near-empty: one line on black. Not dead scroll.
 
 ## Status (first build)
 
-- Six stills were generated on Higgsfield (dawn sky 16:9 and 9:16, technician on
-  a rooftop, hands on pipework, machine shop, night office). The cloud
-  environment's network policy blocks the image host
-  (`d8j0ntlcm91z4.cloudfront.net`), so none are in the repo yet.
-- The page ships type + motion only. Each photo plane is in `index.html` as a
-  commented block naming its file in `assets/scenes/`. Uncomment when the file
-  exists.
+- Five Higgsfield stills are live as webp in `assets/scenes/` (hero-sky,
+  hero-sky-p, hands, shop, night) and their photo planes are on. The rooftop
+  technician still is generated but unused until the hero cutout plane is built.
 - Not built yet: hero cutout plane (technician), the peak's scrub clip.
